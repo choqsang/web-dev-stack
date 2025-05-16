@@ -14,11 +14,11 @@
       height="150"
       loading="lazy"
     />
-    <!-- 이미지 불러오는 경로 (시작점에서부터) / 이미지에 대한 부가 설명 
+    <!-- src : 이미지 불러오는 경로 (시작점에서부터) / alt : 이미지에 대한 부가 설명 
      ../ : 상위 폴더로 이동 , ./ : 현재 위치한 폴더 
      *사이즈 조정 (px단위) : 너비/높이만 줄이면 세로/가로 또한 비율에 맞게 조정됨
      높이까지 기재할 경우 기존 비율과 무관하게 조정됨.(일반적으로 사용하지 않음)
-     *불러오기 : loading="lazy" - 사용자가 화면을 내릴 때 성능 최적화 (우선순위-낮음)
+     *불러오기 : loading="lazy" - 사용자가 화면을 내릴 때 성능 최적화 (우선순위-낮음) or "eager"
      -->
 
     <h3>고정 크기 (픽셀 단위)</h3>
@@ -53,13 +53,36 @@
 
     <h2>오디오 태그</h2>
     <audio src="assets/audio.mp3" controls loop>
+      <!-- 브라우저 별 지원 불가할 경우, "브라우저가 오디오를 지원하지 않습니다." 라고 적는 경우도 있음 -->
       <a href="assets/audio.mp3" download="">오디오 다운로드</a></audio
     ><br />
 
     <!-- 오디오/비디오 파일의 경우, 단순 경로 삽입 시에 페이지 내 노출되지 않음. -->
-    <!-- controls : 재생 컨트롤러 표시 / loop : 반복 재생 -->
+    <!-- controls : 재생 컨트롤러 표시 / loop : 반복 재생 
+         download : 다운로드 가능하도록 -->
 
     <h2>비디오 태그</h2>
-    <video src=""></video>
+    <!-- tag는 audio와 동일
+      poster : 썸네일 이미지 삽입
+    -->
+    <video
+      src="assets/video.mp4"
+      width="500"
+      controls
+      poster="assets/thumbnail.png"
+    ></video>
+
+    <!-- iframe : 외부 컨텐츠 삽입 (Youtube 영상 첨부 용도) 
+     영상 하단 공유 > 퍼가기 > 노출되는 코드 그대로 복사하여 붙여넣기 -->
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/BKU4eOWSthQ?si=EuLm-XY1Sj1_Bgco"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
   </body>
 </html>

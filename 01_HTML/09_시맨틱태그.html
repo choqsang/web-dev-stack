@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시맨틱태그</title>
+  </head>
+  <body>
+    <h2>레이아웃 1 : div 사용</h2>
+    <!-- 시맨틱 태그가 없던 시절 div로 구조 잡음 -->
+    <div id="header">
+      <h1>LOGO</h1>
+      <div>GNB</div>
+      <!-- Global Navigation Bar -->
+    </div>
+    <div id="main">Main</div>
+    <div id="section">
+      <div class="article">Article 1</div>
+      <div class="article">Article 2</div>
+      <!-- id로 명명 , class로 그룹화 -->
+    </div>
+    <div id="aside">Aside</div>
+    <div id="footer">Footer</div>
+
+    <h2>레이아웃 2 : 시맨틱 태그 사용</h2>
+    <!-- div와 병행 사용 -->
+    <!-- header
+        - 페이지 상단 영역 
+        - 보통 로고나 GNB 포함
+        - 모든 페이지에 공통적으로 존재
+    -->
+    <header>
+      <h1>LOGO</h1>
+      <nav></nav>
+      <!-- nav
+            - 메인 내비게이션(GNB) 또는 섹션 내 내비게이션(LNB:Local)
+        -->
+    </header>
+    <main></main>
+    <!-- main 
+            - 해당 문서의 주요 콘텐츠
+            - 페이지 내에 한 번 사용 
+        -->
+    <section>
+      <!-- section
+            - 컨텐츠 그룹 
+        -->
+      <article></article>
+      <article></article>
+    </section>
+    <aside></aside>
+    <!-- aside
+            - 본문과 간접적으로 관련된 콘텐츠 
+        -->
+    <footer></footer>
+    <!-- footer
+            - 페이지 하단 영역
+            - 회사 정보, 저작권, 이용 약관, 연락처 등.
+        -->
+  </body>
+</html>
