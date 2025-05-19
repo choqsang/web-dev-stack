@@ -37,3 +37,145 @@ p {
 
 /* 좀 더 세부 단위일수록, 
 나중에 적용할수록 우선순위가 높음 */
+
+/* 7. 속성 선택자 */
+div[name="name1"] {
+  /* ="" : 정확히 일치 */
+  background-color: pink;
+}
+div[name~="name1"] {
+  /* ~="" : "단어"가 포함되어 있을 경우 */
+  background: yellow;
+}
+div[class*="-c"] {
+  /* *="" : 부분 일치 */
+  color: red;
+}
+div[class^="cl"] {
+  /* ^="" : ""로 시작 일치 */
+  background: blue;
+}
+div[class|="div"] {
+  /* |="" : ""(단어)로 시작 일치 */
+  background: cyan;
+}
+div[class$="div"] {
+  /* $="" : ""로 끝 일치 */
+  background: pink;
+}
+
+/* 8. 형제 선택자 */
+#test2 ~ div {
+  /* ~ : 동일한 부모를 가진 요소 중에
+  #test2 이후에 등장하는 모든 형제 div를 선택한다.
+  */
+  background: beige;
+}
+#test2 + div {
+  /* + : #test2 바로 뒤에 있는 형제 div만 선택 */
+  background: yellow;
+}
+
+/* 9. 반응 선택자 */
+.area {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  /* 마우스 포인터 모양이 변경됨 (화살표>손) */
+}
+#active-test:active {
+  /* :active : 마우스로 눌렀을 때 */
+  background-color: yellow !important;
+  /* !important : 우선순위 최우선으로(강제) */
+  color: red;
+}
+#hover-test:hover {
+  /* :hover : 마우스 포인터를 올려놓았을 때 */
+  background-color: maroon;
+  color: white;
+}
+input[type="text"]:focus {
+  /* :focus : input 요소에 포커스가 갔을 때 
+   (값을 입력하기 위해 칸에 위치할 때) 적용 */
+  background-color: pink;
+}
+input[type="checkbox"]:checked {
+  /* :checked : 체크박스에 체크가 되어있을 때만 */
+  width: 20px;
+  height: 20px;
+}
+button:enabled {
+  /* button 클릭 가능한 경우 */
+  background-color: violet;
+}
+button:disabled {
+  background-color: yellowgreen;
+  color: gray;
+}
+
+/* 10. 구조 선택자 */
+#test3 li:first-child {
+  /* first-child : 리스트 중 첫 번째 항목 */
+  background-color: salmon;
+}
+#test3 li:last-child {
+  /* last-child : 리스트 중 마지막 항목 
+    선택자가 일치하지 않을 경우 값 출력 없음 */
+  background-color: skyblue;
+}
+#test3 li:nth-child(4) {
+  /* nth-child (숫자, odd-홀수, even-짝수)
+  ()에 들어가는 숫자 번째 항목 */
+  background-color: darkcyan;
+}
+#test3 li:nth-of-type(4) {
+  /* li:nth-of-type (숫자, odd-홀수, even-짝수)
+  ()에 들어가는 숫자 번째 같은 li 타입의 항목 */
+  color: white;
+}
+#test3 li:nth-last-child(4) {
+  /* nth-last-child (숫자, odd-홀수, even-짝수)
+  밑에서부터 ()에 들어가는 숫자 번째 항목 
+  순서에 맞는 항목 간 타입이 다르면 서식 적용되지 않음 */
+  background-color: hotpink;
+}
+#test3 li:nth-last-of-type(4) {
+  /* li:nth-last-of-type (숫자, odd-홀수, even-짝수)
+  밑에서부터 ()에 들어가는 숫자 번째 같은 li 타입의 항목 */
+  background-color: seagreen;
+}
+/* :only-child : 그룹 내 자식이 1개만 있는 경우 */
+
+/* 11. 가상 요소 선택자 */
+#test4 p::before {
+  content: "앞";
+  color: blue;
+  background-color: yellow;
+  /* (콜론 2개) html내 값을 입력하는 것이 아닌
+  css파일 내에서 데이터 값을 추가할 수 있음 */
+}
+#test4 p::after {
+  content: "뒤";
+  color: white;
+  background-color: black;
+}
+
+/* 12. 선택자 우선순위 */
+/* !important (우선순위 최상 / 권장하지 않음)
+    > 인라인 스타일 (style="")
+    > 아이디 선택자 (#id)
+    > 클래스 선택자 (.class)
+    > 태그 선택자
+*/
+#test5 {
+  width: 200px;
+  height: 200px;
+}
+div.class5 {
+  background-color: pink !important;
+}
+div#test5 {
+  background-color: skyblue;
+}
+/* [F12] Styles 탭 내 상단에 위치할수록 우선순위 높음 */
+/* https://flukeout.github.io/ : 선택자 찾기 연습 */
