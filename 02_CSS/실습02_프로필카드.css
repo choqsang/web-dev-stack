@@ -1,0 +1,113 @@
+/* * {
+  background-color: rgb(83, 23, 139);
+  margin: auto;
+}
+.profile {
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+#img {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-position: center;
+  padding-top: 0px;
+}
+#name {
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+  bottom: 40px;
+}
+#border {
+  width: 300px;
+  height: 420px;
+  border: 2px solid;
+  border-radius: 10px;
+  border-color: white;
+  padding: 20px;
+}
+#sns1,
+#sns2 {
+  width: 300px;
+  height: 60px;
+  line-height: 60px;
+  border: 2px solid;
+  background-color: rgb(83, 23, 139);
+  border-color: white;
+  font-size: large;
+  margin: auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  bottom: 60px;
+}
+#sns1:hover,
+#sns2:hover {
+  background-color: white;
+  color: black;
+} */
+
+/* 단계적 예제 풀이 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* margin과 padding 잘 구분할 것 */
+}
+body {
+  background: indigo;
+  background: linear-gradient(purple, pink);
+  /* 배경 그라데이션 효과 */
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+}
+#profile-card {
+  border: 2px white solid;
+  border-radius: 25px;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+.profile-image {
+  width: 200px;
+  height: 200px;
+  /* background-color: beige; */
+  margin: auto;
+  border-radius: 50%;
+  background-image: url(../01_HTML/assets/hui.png);
+  background-size: cover;
+  background-position: center;
+}
+/* .profile-card img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+} */
+
+/* 추후 이미지 관련 수정 시, css/javascript 보다는
+html로 변경하기가 쉽기 때문에 배경보다 태그형식으로 불러오는 게 좋을 수 있음 */
+
+#profile-card a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 2px white solid;
+  margin: 15px;
+  padding: 10px;
+}
+#profile-card a:hover {
+  background: white;
+  color: black;
+}

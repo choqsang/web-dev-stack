@@ -104,3 +104,146 @@
   border-radius: 50%;
   /* width,height 값의 50%인 60px과 동일 / 원형이 되어버렸다. */
 }
+/* box-sizing */
+.box {
+  width: 300px;
+  height: 200px;
+  border: 10px solid;
+  background-color: lightcoral;
+  padding: 20px;
+  margin: 10px;
+}
+.box-content {
+  box-sizing: content-box;
+  /* width, height 값에 padding과 border의 수치만큼 추가 (margin 제외)
+      300px + 20px*2 + 10px*2 = 총 360px 의 영역을 차지한다. */
+}
+.box-border {
+  box-sizing: border-box;
+  /* 영역 사이즈에 padding값과 border값이 포함되어 있음. (300px*200px) */
+}
+/* display */
+.display {
+  background-color: pink;
+  padding: 10px;
+  margin: 5px;
+  /* width, height 값 설정 이전 여백 설정 먼저하는 경우도 있음 */
+  width: 150px;
+  height: 70px;
+}
+.display-inline {
+  display: inline;
+  /* 영역 서식(width-height값) 별도 적용되지 않으며, 입력된 텍스트 값만 영역 차지 */
+}
+.display-block {
+  display: block;
+}
+.display-inline-block {
+  display: inline-block;
+}
+/* float */
+.float {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  background: skyblue;
+  text-align: center;
+  line-height: 80px;
+  /* float은 해당 영역이 '떠다니는' 개념으로
+  뒤에 오는 내용의 정렬이 망가지는 현상이 있음. 
+  따라서 clear를 이용하여 재정렬할 필요가 있다. */
+}
+/* position */
+#outer {
+  position: relative;
+  /* relative 값이 부모에 있을 경우, absolute값 기준이 변경됨. */
+  width: 400px;
+  height: 200px;
+  background: #f4f4f4;
+  overflow: auto;
+  /* height를 넘어서는 데이터가 있을 경우, 스크롤이 생김 */
+}
+.position-box {
+  width: 100px;
+  height: 100px;
+}
+#relative {
+  /* 본인 현재 위치에서부터 이동함 */
+  background: orange;
+  position: relative;
+  /* top, bottom, left, right가 속성 */
+  bottom: 100px;
+  right: -50px;
+}
+#absolute {
+  background: green;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  /* 시작점이 브라우저의 맨 위부터 or 
+  부모에 position:relative가 설정되어 있을 경우, 시작점을 부모로 변경 */
+}
+#fixed {
+  background: red;
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  /* 화면 상 지정된 위치에 고정되어 있음. ex) 사이드바, 상단 메뉴 등 */
+}
+#sticky {
+  background: blue;
+  position: sticky;
+  top: 0;
+  left: 0px;
+  /* overflow가 있을 경우, 스크롤을 내려도 영역에서 벗어나지 않도록 머무른다. 
+  ex) 쇼핑몰 상품정보/상품평/Q&A 메뉴 */
+}
+/* visibility */
+.visibility {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background: lightgrey;
+  display: inline-block;
+}
+#vis2 {
+  visibility: visible;
+}
+#vis1 {
+  visibility: hidden;
+  /* 박스는 없어졌으나, 공간 자체는 남아있음 */
+}
+#dis1 {
+  display: none;
+  /* 박스 영역 자체가 화면 단에서 지워짐 (원래 없었던 것처럼) */
+}
+/* z-index */
+#z-outer {
+  width: 200px;
+  height: 200px;
+  background: #ddd;
+  position: relative;
+}
+.z-index {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  opacity: 0.7;
+}
+#z-index1 {
+  background: red;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+}
+#z-index2 {
+  background: green;
+  z-index: 2;
+  top: 40px;
+  left: 40px;
+}
+#z-index3 {
+  background: blue;
+  z-index: 9999;
+}
