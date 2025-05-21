@@ -1,0 +1,182 @@
+/* * {
+  text-decoration: none;
+}
+.main {
+  height: 100vh;
+  text-align: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+#page1 {
+  background-color: rgba(126, 78, 123, 0.808);
+  color: white;
+}
+#page2 {
+  background-color: rgb(224, 101, 132);
+  color: white;
+}
+#page3 {
+  background-color: rgb(178, 156, 238);
+  color: white;
+}
+#page1,
+#page2,
+#page3 {
+  justify-content: center;
+}
+h2 {
+  font-size: larger;
+  font-weight: bolder;
+  height: 24px;
+  padding: 5px;
+}
+.container {
+  /* display: flex; */
+/* padding-right: 1rem; */
+/* padding-top: 10px; */
+/* text-decoration: none;} */
+/* #nav {
+  display: flex;
+  width: 100vw; */
+/* height: 50px; */
+/* background: white; */
+/* border: 1px gray solid; */
+/* justify-content: space-between; */
+/* align-items: center; */
+/* position: fixed;
+  top: 0px; */
+/* padding: 1rem; */
+/* gap: 10px;
+} */
+/* .blank {
+  flex: 3;
+} */
+/* .logo {
+  font-size: 30px;
+  font-weight: bolder; */
+/* position: fixed;
+  left: 15px;
+  top: 15px; */
+/* text-shadow: 0px 0px 4px gray; */
+
+/* .nav1 {
+  position: fixed;
+  right: 180px;
+  top: 25px;
+}
+.nav2 {
+  position: fixed;
+  right: 100px;
+  top: 25px;
+}
+.nav3 {
+  position: fixed;
+  right: 20px;
+  top: 25px;
+} */
+
+/* #top {
+  color: white;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  background: black;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+} */
+
+/* 실습 예제 단계적 풀이 */
+
+header {
+  position: fixed;
+  background: white;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+/* 스타일 중복 방지를 위해 세부 선택자 지정 */
+header h1 {
+  /* background-color: aqua; */
+  font-size: 2rem;
+  padding: 10px;
+  font-weight: bold;
+}
+header nav {
+  /* background-color: navajowhite; */
+  display: flex;
+  /* 기본값이 stretch 형태 */
+  /* align-items: center; */
+  /* 컨테이너에 align-items 하게 될 경우, 박스 형태가 깨진다. 
+    개별 태그에 flex를 걸어보자. */
+  /* gap: 10px; */
+}
+header nav a {
+  /* background-color: cyan; */
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  /* flex를 쓰지 않을 경우, 아래처럼 설정하는 것도 가능하다. */
+  /* display: inline-block;
+  height: 52px;
+  line-height: 52px;
+  padding: 5px; */
+}
+nav a:hover {
+  background-color: black;
+  color: white;
+}
+/* fixed된 부분으로 기존 컨텐츠가 가려지는 경우, 아래와 같이
+   해당 태그를 별도로 padding으로 (방향 설정하여) 밀어낼 수 있다.
+   (margin으로는 불가: 고정된 부분까지 같이 따라온다.) */
+/* #section1 { padding-top: 52px; } */
+
+section {
+  height: 100vh;
+  display: flex;
+  /* text-align: center; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* 정렬 방향 변경으로 수직 및 수평 맞출 수 있음. */
+}
+#section1 {
+  background-color: rgb(75, 6, 187);
+  color: white;
+}
+#section2 {
+  background-color: blueviolet;
+  color: white;
+}
+#section3 {
+  background-color: rgb(236, 117, 137);
+  color: white;
+}
+section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+section p {
+  line-height: 1.5;
+  text-align: center;
+  width: 75%;
+  /* background-color: pink; */
+}
+.top {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  /* line-height: 50px; */
+  border-radius: 50%;
+  text-align: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

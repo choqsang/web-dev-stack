@@ -1,0 +1,95 @@
+.container {
+  background-color: darkgray;
+  display: grid;
+  /* flex와 동일하게 디스플레이모드를 변경하여야 사용 가능함. */
+  gap: 10px;
+}
+.item {
+  color: white;
+  background-color: blueviolet;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#grid-basic {
+  grid-template-columns: 100px 180px 100px;
+  /* columns에 원하는 행-렬 만큼 사이즈 지정 */
+  grid-template-rows: 50px 30px;
+  /* row 순서대로 사이즈 조정, 값 없을 경우 auto */
+}
+#grid-gap {
+  grid-template-columns: repeat(2, 150px);
+  /* repeat(반복 횟수, 원하는 설정값) */
+  grid-template-rows: repeat(2, 80px);
+  row-gap: 50px;
+  /* 행간 설정 */
+  column-gap: 30px;
+}
+#grid-span {
+  grid-template-columns: 100px 1fr 2fr;
+  /* 1번: 100px, 2번: 1번대로, 3번: 1번의 2배 크기 */
+  grid-template-rows: repeat(4, 50px);
+  /* 미리 판 크기 조정해둘 수 있음. */
+}
+#grid-span .span1 {
+  grid-column: 1 / 3;
+  /* 1번부터 3번까지 그리드 차지함 
+    [F12]에 보이는 [grid] 버튼을 통해 상세 확인 가능 */
+}
+#grid-span .span2 {
+  grid-row: 2 / 4;
+  /* 2번부터 4번까지 병합*/
+}
+#grid-area {
+  grid-template-areas:
+    "header header"
+    "nav main"
+    "nav sidebar"
+    "footbar footbar";
+  /* 실제로 구성되는 영역값을 ""형태로 칸에 맞게 미리 적어둔다. */
+}
+.header {
+  grid-area: header;
+  background-color: aliceblue;
+}
+.nav {
+  grid-area: nav;
+  background-color: aqua;
+}
+.main {
+  grid-area: main;
+  background-color: burlywood;
+}
+.sidebar {
+  grid-area: sidebar;
+  background-color: coral;
+}
+.footbar {
+  grid-area: footbar;
+  background-color: cornflowerblue;
+}
+#auto-fit {
+  /* auto-fit : 가능한 공간만큼 채우고, 남은 칸은 collapse */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+#auto-fill {
+  /* auto-fill : 가능한 칸 수만큼 채우고, 빈 칸도 자리 확보(남아있음) */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+.item i {
+  font-size: 2rem;
+  color: cornsilk;
+}
+#items {
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: 100px;
+  align-items: flex-end;
+  justify-items: flex-start;
+}
+#content {
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(2, 80px);
+  height: 300px;
+  align-content: space-evenly;
+  justify-content: center;
+}

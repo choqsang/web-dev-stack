@@ -90,10 +90,10 @@
   /* gap은 margin과는 달리 단순 아이템간 간격 조정에만 쓰임 
     간격 이외 나머지 영역에는 영향을 끼치지 않는다. */
 }
-#gap .item {
-  /* margin: 2rem; */
-  /* margin-right: 50px; */
-}
+/* #gap .item { */
+/* margin: 2rem; */
+/* margin-right: 50px; } */
+
 /* flex-grow */
 /* 컨테이너보다 아이템이 작을 때,
 flex-grow 값이 클수록 남은 공간을 더 많이 차지 */

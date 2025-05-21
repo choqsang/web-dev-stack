@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1단레이아웃</title>
     <link rel="stylesheet" href="./reset.css" />
+    <!-- 위 리셋 CSS(선적용-아래에 두면 안된다!)를 통해서 초기화하는 작업이 필요하다. -->
     <link rel="stylesheet" href="./실습03_1단레이아웃.css" />
   </head>
   <body>
-    <div class="main" id="page1">
+    <!-- <div class="main" id="page1">
       <h2>Heading1</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia officia
@@ -42,6 +43,45 @@
       <div class="nav2"><a href="#page2">Heading2</a></div>
       <div class="nav3"><a href="#page3">Heading3</a></div>
     </div>
-    <div id="top"><a href="">TOP</a></div>
+    <div id="top"><a href="">TOP</a></div> -->
+
+    <!-- ※ 구조를 먼저 짜는 게 편함 (되도록 시맨틱태그 활용) -->
+
+    <header>
+      <h1>LOGO</h1>
+      <nav>
+        <a href="#section1">Heading 1</a>
+        <a href="#section2">Heading 2</a>
+        <a href="#section3">Heading 3</a>
+      </nav>
+    </header>
+    <section id="section1">
+      <h2>Heading 1</h2>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores quidem
+        fugiat enim cum cupiditate voluptatum incidunt neque distinctio, culpa
+        in perspiciatis, nam veritatis quam numquam quis, officiis tenetur sit?
+        Amet.
+      </p>
+    </section>
+    <section id="section2">
+      <h2>Heading 2</h2>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores quidem
+        fugiat enim cum cupiditate voluptatum incidunt neque distinctio, culpa
+        in perspiciatis, nam veritatis quam numquam quis, officiis tenetur sit?
+        Amet.
+      </p>
+    </section>
+    <section id="section3">
+      <h2>Heading 3</h2>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores quidem
+        fugiat enim cum cupiditate voluptatum incidunt neque distinctio, culpa
+        in perspiciatis, nam veritatis quam numquam quis, officiis tenetur sit?
+        Amet.
+      </p>
+    </section>
+    <a href="#" class="top">TOP</a>
   </body>
 </html>

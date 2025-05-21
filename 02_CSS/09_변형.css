@@ -1,0 +1,129 @@
+section {
+  display: flex;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  color: white;
+  background-color: black;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: auto;
+}
+.transition {
+  background-color: cadetblue;
+  /* property : 속성 명시, duration : 전환 시간
+     timing-function : 전환 속도 곡선
+     delay : 전환 시간 지연 시간 */
+  transition-property: background-color, font-size;
+  transition-duration: 3s;
+  transition-timing-function: ease-in-out;
+  /* linear : 일정하게, ease-in-out : 변속 
+    개발자 도구 Styles탭에서 보라색 버튼 cubic-bezier을 통해 세부조정 가능함 */
+  transition-delay: 0.5s;
+  transition: all 3s ease-in-out 0.5s;
+  /* 위의 항목 순서대로 입력한 것과 동일 효과 (prop-dur-tf-delay) 
+    = 기재된 모든 항목을 0.5초 대기시간 이후 3초간 변속하여 전환한다. */
+}
+.transition:hover {
+  background-color: coral;
+  font-size: 2rem;
+  transform: scale(1.5) rotate(15deg);
+  border-radius: 50%;
+}
+/* transform */
+.transform-scale {
+  background-color: coral;
+}
+.transform-scale:hover {
+  /* scale : 크기 확대 */
+  transform: scale(1.2);
+}
+.transform-rotate {
+  background-color: orange;
+}
+.transform-rotate:hover {
+  /* rotate : 회전(각도=deg) */
+  transform: rotate(45deg);
+}
+.transform-translate {
+  background-color: mediumaquamarine;
+}
+.transform-translate:hover {
+  /* translate : 축 이동(x 오른쪽으로, y 아래로) */
+  transform: translate(40px, 20px);
+}
+.transform-skew {
+  background-color: dodgerblue;
+}
+.transform-skew:hover {
+  /* skew : 기울이기 (x각도, y각도) */
+  transform: skew(10deg, 20deg);
+}
+/* animation */
+@keyframes bounce {
+  /* 0%(현재)에서 100%(종결)까지 진행 */
+  0% {
+    transform: translate(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: translate(25px, 50px);
+  }
+}
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.animation-once {
+  background-color: crimson;
+  /* animation : (사전에 keyframes 정의가 필요) 
+        애니메이션명 지속시간 속도곡선 재생횟수를 입력 */
+  animation: bounce 2s ease-in-out 1;
+}
+.animation-alternate {
+  background-color: indigo;
+  animation: rotate 1s linear infinite alternate;
+  /* infinite: 무한 재생, alternate: 처음으로 되돌아감 */
+}
+.animation-reverse {
+  background-color: darkslateblue;
+  animation: bounce 3s ease-in-out reverse;
+  /* reverse: 100%에서 0%으로 역순 재생 */
+}
+.animation-paused {
+  background-color: mediumorchid;
+  animation: bounce2 2s linear infinite;
+}
+.animation-paused:active {
+  cursor: pointer;
+  animation-play-state: paused;
+}
+/* 3D */
+.perspective-container {
+  perspective: 600px;
+}
+.perspective-container .box {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.perspective-container .box:hover {
+  transform: rotateY(180deg);
+}
