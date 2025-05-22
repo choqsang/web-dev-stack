@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <!-- CSS 라이브러리 (템플릿 제공)
+    tailwindcss / bootstrap
+
+    JavaScript의 확장성
+    웹 기반 프로그래밍 언어로 제작하였으나, 현재 여러 방면으로 활용 가능함.
+    Node.js (자바스크립트 활용 도구=JRE)
+
+    Add the Play CDN script tag to the <head> of your HTML file,
+    and start using Tailwind’s utility classes to style your content.
+    > 스크립트를 불러와서 설치 없이 만들어진 서식 사용 가능 -->
+  <body>
+    <h1 class="text-3xl font-bold bg-gray-200 text-gray-500">Hello world!</h1>
+    <button
+      class="bg-blue-500 rounded text-white py-2 px-4 font-bold hover:bg-blue-600"
+    >
+      버튼
+    </button>
+    <div class="shadow-lg bg-white max-w-sm p-4">
+      <h2>타이틀</h2>
+      <p>이건 카드 형식</p>
+    </div>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-4">
+      <div class="font-bold text-lg mb-2">타이틀</div>
+      <p class="text-gray-700 text-base">카드 본문</p>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div>01</div>
+      <div>02</div>
+      <div>03</div>
+      <div>04</div>
+      <div>05</div>
+      <div class="col-span-3 grid grid-cols-subgrid gap-4">
+        <div class="col-start-2">06</div>
+      </div>
+    </div>
+  </body>
+</html>

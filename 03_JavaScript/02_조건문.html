@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조건문</title>
+  </head>
+  <body>
+    <h1>조건문</h1>
+    <h2>1. if / else</h2>
+    <script>
+      /*
+            if(조건) {
+                조건이 true인 경우
+            } else {
+                조건이 false인 경우 
+            }
+                else는 생략 가능!
+        */
+      let age = 18;
+      // 나이가 19세 초과이면 '성인', 그렇지 않다면 '미성년자' 표시하기
+      if (age > 19) {
+        console.log("성인");
+      } else {
+        console.log("미성년자");
+      }
+
+      // 삼항 연산자 : 조건 ? 조건이 "true" : 조건이 "false";
+      age = 20;
+      const result = age > 19 ? "성인" : "미성년자";
+      console.log(result);
+    </script>
+
+    <h2>2. else if</h2>
+    <script>
+      /*
+            if(조건 A) {
+                조건 A가 true인 경우
+            } else if(조건 B) {
+                (조건 A가 false면서) 조건 B가 true인 경우
+            } else {
+                모든 조건이 false일 경우
+            }
+        */
+      // 20세 이상이면 성인, 14세 이상이면 청소년, 8세 이상이면 어린이, 그 외에는 유아
+      let age2 = 15;
+      //   age = prompt("나이를 입력해주세요");
+
+      let result2;
+      result2 = "성인";
+
+      if (age2 >= 20) {
+        console.log("성인"); // result2="성인";
+      } else if (age2 >= 14) {
+        // 20세 미만이면서 14세 이상인 경우,
+        console.log("청소년"); // result2="청소년";
+      } else if (age2 >= 8) {
+        // 14세 미만이면서 8세 이상인 경우,
+        console.log("어린이"); // result2="어린이";
+      } else {
+        console.log("유아");
+      }
+      // 8세 미만인 경우, result2="유아";
+
+      console.log(result2);
+      console.log(
+        age2 >= 20
+          ? "성인"
+          : age2 >= 14
+          ? "청소년"
+          : age2 >= 10
+          ? "어린이"
+          : "유아"
+      );
+    </script>
+
+    <h2>3. switch</h2>
+    <script>
+      /*
+                  switch(데이터값) {
+                      case 조건A(값):
+                          조건A가 true인 경우
+                          break;
+                      case 조건B(값):
+                          조건B가 true
+                          break;
+                      default: 모든 조건이 false
+                  }
+              */
+
+      const number = 2;
+      //   prompt("숫자를 입력하세요"); // prompt : 데이터를 입력받을 수 있는 창을 띄운다.
+      // number 값이 짝수이면 '짝수', 홀수이면 '홀수', 그게 아니면 '숫자가 아닙니다'
+
+      switch (number % 2) {
+        case 0:
+          console.log("짝수");
+          break;
+        case 1:
+          console.log("홀수");
+          break;
+        default:
+          console.log("숫자가 아닙니다");
+      }
+
+      const number2 = 1;
+      //   prompt("숫자를 입력하세요");
+
+      if (number2 % 2 === 0) {
+        console.log("짝수");
+      } else if (number2 % 2 === 1) {
+        console.log("홀수");
+      } else {
+        console.log("숫자가 아닙니다");
+      }
+
+      /*  조건문의 경우, 주어진 내용에 대해 천천히 적어본 이후
+      공식으로 전환하는 식으로 천천히 풀어보는 것이 도움이 된다.
+            if (number값이 짝수이면) {
+           "짝수"
+         } else if (number값이 홀수이면) {
+           "홀수"
+         } else {
+           "숫자가 아닙니다"
+         }
+
+            switch(데이터) {
+            case 값1:
+                값이 일치한 경우
+                break;
+            case 값2:
+                값이 일치한 경우
+                break;      // break가 없을 경우, 멈추지 않고 아래 명령어도 수행하게 됨.
+            <...>
+            default:
+                case가 아닐 경우
+            }
+      */
+    </script>
+    <h2>4. 중첩 if</h2>
+    <script>
+      // 조건문 안에 조건문을 넣은 형태
+      // 아이디가 user1, 비밀번호가 1234인 경우만 "로그인 성공"
+      // 비밀번호가 틀리면 "비밀번호 오류"
+      // 아이디가 틀리면 "아이디 오류"
+
+      const userid = "user1";
+      const userpw = "1234";
+      const pushid = prompt("아이디를 입력해주세요.");
+      let pushpw = "";
+
+      //   if (userid == pushid && userpw == pushpw) {
+      //     console.log("로그인 성공");
+      //   } else if (userid !== pushid && userpw == pushpw) {
+      //     console.log("아이디 오류");
+      //   } else if (userid == pushid && userpw !== pushpw) {
+      //     console.log("비밀번호 오류");
+      //   } else {
+      //     console.log("로그인 실패");
+      //   }
+
+      if (userid == pushid) {
+        pushpw = prompt("비밀번호를 입력해주세요.");
+        if (userpw == pushpw) {
+          alert("로그인 성공");
+        } else if (pushpw == "") {
+          alert("비밀번호를 입력해주세요.");
+        } else {
+          alert("비밀번호 오류");
+        }
+      } else if (pushid == "") {
+        alert("아이디를 입력해주세요.");
+      } else alert("아이디 오류");
+    </script>
+
+    <h2>5. break가 없는 switch</h2>
+    <script>
+      const fruit = "banana";
+
+      switch (fruit) {
+        case "apple":
+          console.log("사과");
+        case "orange":
+          console.log("오렌지");
+        case "banana":
+          console.log("바나나");
+        case "kiwi":
+          console.log("키위");
+        // default나 else는 생략 가능함.
+      }
+    </script>
+  </body>
+  <!-- 절차지향 vs 객체지향(부품화)     -->
+</html>

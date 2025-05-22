@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>변수와 연산자</title>
+  </head>
+  <body>
+    <h1>변수와 연산자</h1>
+    <h2>1. var, let, const</h2>
+    <!-- CSS의 style 태그와 동일하게 js도 script 태그를 활용할 수 있다. -->
+
+    <script>
+      // 변수 : 값을 담는 공간 (var 변수명 = 값;) 형태
+      // var는 예전 버전에서 사용하던 변수의 이름이나 가급적 사용 지양할 것. (let이나 const로 변경됨)
+      // 스크립트 내 각주는 // (한 줄), /**/ (여러 줄)로 지정 (= 단축키 ctrl + / 동일)
+
+      var oldVar = 1;
+      // '오른쪽 값을 왼쪽 변수에 담았다' 라는 개념
+      oldVar = "변경";
+      //   재할당이 가능하다. (최종 담겨진 값이 출력됨)
+      console.log(oldVar);
+      //   ("Hello, World!");
+      //   ㄴ chrome 검사 탭 내 Elements 옆 Console 부분에서 확인 가능.
+
+      let nickname = "성예찬";
+      // let : 일반 변수 선언 (가끔)
+      nickname = "이상엽";
+      console.log(nickname);
+
+      const name = "조규상";
+      // const : 상수 선언 (자주 사용 - 외부 조작 가능성 등 위험 요소 배제)
+      // 재할당이 불가능하다. (최초 부여된 값이 고정)
+      // name = "최다인"; → Uncaught TypeError: Assignment to constant variable.
+      console.log(name);
+    </script>
+
+    <h2>2. 자료형과 typeof</h2>
+    <script>
+      // console.log(name); → 위에서 입력한 값이 출력됨.
+      // 동일한 페이지 내 스크립트에서 사용되는 변수 등은 공유가 된다.
+      const userID = "최다인"; // 문자(열) - string
+      const age = 15; // 숫자 - number (큰따옴표 필요 없음)
+      // 오류가 있을 경우, console 화면에서 어느 지점에서 error가 발생했는 지 사유와 함께 출력됨.
+      const check = true; // true, false : 논리형(참/거짓) - boolean
+      let unknown; // 변수를 선언 이후 별도 값을 입력하지 않을 경우, 'undefined'(값이 정의되지 않음) 형태로 출력됨.
+      let isNone = null; // null : 값이 없음
+      // 0, null, undefined, NaN의 차이점 (NaN: 주어진 타입에 맞지 않는 값이 입력되었을 경우)
+      console.log(userID);
+      console.log(age);
+      console.log(check);
+      console.log(unknown);
+      console.log(isNone);
+
+      // typeof 변수 : 변수의 타입을 확인
+      // console 화면에서 문자열은 검정색(BK), 숫자는(BL) 파란색으로 표기된다.
+      let test = "test";
+      console.log(typeof test);
+      test = 123; // js의 경우, 자유도가 높기에 최초 부여된 타입값과 다르더라도 입력 및 재할당이 가능하다.
+      test = false;
+      console.log(typeof test);
+    </script>
+
+    <h2>3. 문자열 & 템플릿 리터럴</h2>
+    <script>
+      const hobby = "게임";
+      console.log("내 취미는 " + hobby + "입니다.");
+      console.log(`내 취미는 ${hobby}입니다.`); // 숫자1 왼쪽에 위치한 `${}` 템플릿 사용
+
+      const escape = '내 이름은\n "문채은"\t입니다.'; // = "내 이름은 \"문채은\"입니다.";
+      // 엔터 키 위에 위치한 \ 사용하여 범위 지정, \n : 문장 내 줄바꿈, \t : 간격 띄움 (tab키와 동일)
+      console.log(escape);
+    </script>
+
+    <h2>4. 숫자</h2>
+    <script>
+      const num1 = 10;
+      const num2 = 3;
+      console.log("더하기 : ", num1 + num2); // 13
+      console.log("빼기 : ", num1 - num2); // 7
+      console.log("곱하기 : ", num1 * num2); // 30
+      console.log("나누기 : ", num1 / num2); // 3.33..
+      console.log("나머지 : ", num1 % num2); // 1
+      console.log("제곱 : ", num1 ** num2); // 1000
+
+      // 문자열 → 숫자 (js에서는 문자열로 표기된 숫자라도 계산식 자체는 굴러간다.)
+      console.log(Number("100")); // 100
+      console.log(Number("100" * "5")); // 500
+      console.log(Number("Hello")); // NaN
+
+      // 숫자 → 문자열
+      console.log(String(300)); // "300"
+
+      // 소수 제거 → 정수
+      console.log(parseInt(3.9)); // 3 - parseInt : 정수화 (소숫점 이하 제거)
+
+      // 문자열 → 실수
+      console.log(parseFloat("4.2")); // 4.2
+    </script>
+
+    <h2>5. Boolean과 비교 연산자</h2>
+    <script>
+      console.log(true);
+      console.log(false);
+
+      // Boolean 변환
+      console.log(Boolean("World")); // true
+      console.log(Boolean("")); // false : 문자가 비어있는 경우에만
+      console.log(Boolean(0)); // false : 숫자 0일때만
+      console.log(Boolean(1)); // true
+
+      const a = 100;
+      const b = "100";
+
+      console.log(a == b); // true : =*2 : 100이랑 100이랑 비교 > 같은 값
+      console.log(a === b); // false : =*3 : (타입까지) 숫자 100이랑 문자 100이랑 비교 > 다른 값
+      console.log(a === Number(b)); // true : 타입 변환 이후 같다고 인식될 수 있음
+
+      // !=, !== : 같지 않음 (부정/반대)
+      console.log(a != b); // false : != : 같은 값이라 false로 처리
+      console.log(a !== b); // true : !== : 다른 값이기에 true 출력
+
+      const c = 200;
+      console.log(a < c); // true
+      console.log(a > c); // false
+      console.log(a >= c); // false
+      console.log(a <= c); // true (a값이 c값과 비교하였을 때 같거나 작습니까?)
+
+      // 연습문제
+      console.log("0" == 0); // true
+      console.log("0" === 0); // false
+      console.log(Boolean("")); // false
+      console.log(Boolean("0")); // true
+      console.log(Boolean(0)); // false
+    </script>
+
+    <h2>6. 논리 연산자</h2>
+    <script>
+      const x = 10,
+        y = 20;
+      // and 연산자(&&) : 둘 다 true인 경우 (하나라도 아닐 경우, false)
+      console.log(x < 15 && y > 10); // true
+      console.log(x > 15 && y > 10); // false
+      // or 연산자(||) : A 또는 B 하나만 true여도 true (엔터 키 위에 위치한 shift + \ 사용)
+      console.log(x < 15 || y > 10); // true
+      // not : 부정
+      console.log(!false); // true
+      console.log(!!true); // true : 반대의 반대는 참!
+      console.log("JavaScript" && 12345); // true + 12345 = 12345
+      console.log("" && 12345); // false + 12345 = 빈 칸(blank)
+      console.log(null || "JS");
+      // ex) 로그인 방식 중 하나만 해도 될 경우, OR연산자를 이용할 수 있음.
+      console.log(Boolean(null)); // false
+    </script>
+  </body>
+</html>

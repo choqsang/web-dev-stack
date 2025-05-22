@@ -100,20 +100,24 @@ section {
 }
 .animation-alternate {
   background-color: indigo;
-  animation: rotate 1s linear infinite alternate;
+  animation: rotate 0.5s linear infinite;
   /* infinite: 무한 재생, alternate: 처음으로 되돌아감 */
 }
+.animation-alternate:active {
+  cursor: pointer;
+  animation-play-state: paused;
+}
+
 .animation-reverse {
   background-color: darkslateblue;
-  animation: bounce 3s ease-in-out reverse;
+  animation: bounce 3s ease-in-out reverse alternate;
   /* reverse: 100%에서 0%으로 역순 재생 */
 }
 .animation-paused {
   background-color: mediumorchid;
   animation: bounce2 2s linear infinite;
 }
-.animation-paused:active {
-  cursor: pointer;
+.animation-paused:hover {
   animation-play-state: paused;
 }
 /* 3D */
