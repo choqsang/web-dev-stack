@@ -64,6 +64,7 @@
         console.log(movies[i]);
       }
 
+      // 아래 2개(인덱스, 값 기반) for문은 '배열'형태에만 적용 가능하니 참고(js)
       // for ... in : 인덱스 기반 / 위와 동일한 문법
       // for(const 인덱스 in 배열) {}
       for (const index in movies) {
@@ -71,8 +72,85 @@
       }
       // for ... of : 값 기반
       // for(const 값 of 배열) {}
-      for (const ___ of movies) {
-        console.log(___);
+      for (const value of movies) {
+        console.log(value);
+      }
+    </script>
+
+    <h2>4. while문</h2>
+    <script>
+      /*
+          while(조건) {
+              조건이 true면 계속
+          } → 무한루프를 위해 사용! JAVA에서 확인!
+      */
+      // 1 ~ 10까지 출력
+      // for (let i = 1; i <= 10; i++) {}
+      let i = 1;
+      while (i <= 10) {
+        console.log(i);
+        i++; // <- 이 연산자가 없다면 동일한 값이 계속 출력되기 때문에 무한으로 loop
+      }
+      // 일부러 무한 루프 사용 시,
+      lwhile (true) {
+        const input = prompt("종료하시려면 Q를 입력해주세요.");
+        // 조건문 필수 - 반복문을 빠져나가야 하는
+        if (input === "Q") break; // 조건문 안에 실행 부분이 1줄인 경우 중괄호 생략 가능함.
+        console.log("입력한 값 : ", input);
+      }
+    </script>
+
+    <h2>5. break / continue</h2>
+    <script>
+      // 1, 3, 5, 7, 9
+      // for (let j = 1; j < 10; j += 2)
+      for (let j = 1; j < 10; j++) {
+        // 반복문 내 조건문 사용 가능 - 홀수인 경우만!
+        // if (j % 2 !== 0) console.log(j);
+
+        // continue 사용 : 홀수가 아닌 경우는 건너뛰기! = 짝수인 경우 수행하지 않고 넘어간다.
+        if (j % 2 == 0) continue;
+        // console.log(j);
+
+        // break : 멈춰! 7 일때 반복 종료
+        console.log(j);
+        if (j == 7) break; // 브레이크 순서에 따라 출력 여부가 달라질 수 있음.
+      }
+    </script>
+
+    <h2>6. 2차원 배열 + 중첩 for문</h2>
+    <!-- 배열 안에 배열, for문 안에 for문 -->
+    <script>
+      const arr = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+      // 1,2,3,4,5,6,7,8,9
+      //   const arrToStr = arr.join(",");
+      //   console.log(arrToStr);
+      console.log(arr[0]); // [1,2,3]
+      console.log(arr[0][0]); // 1
+      console.log(arr[0][1]); // 2
+      console.log(arr[0][2]); // 3
+      console.log(arr[1]); // [4,5,6]
+      console.log(arr[1][0]); // 4
+      console.log(arr[1][1]); // 5
+      console.log(arr[1][2]); // 6
+      console.log(arr[2]); // [7,8,9]
+      console.log(arr[2][0]); // 7
+      console.log(arr[2][1]); // 8
+      console.log(arr[2][2]); // 9 // arr뒤 반복문 2개가 중첩되어 있음.
+
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) console.log(arr[i][j]);
+      }
+      // for ... of
+      for (const i of arr) {
+        // console.log(i);
+        for (const j of i) {
+          console.log(j);
+        }
       }
     </script>
   </body>
