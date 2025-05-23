@@ -6,6 +6,22 @@
     <title>변수 & 연산자 연습문제</title>
   </head>
   <body>
+    <!-- 
+      *변수 명명 규칙 (자바스크립트)
+      1) 문자, 숫자, 기호($,_)만 사용
+      2) 첫 글자에는 숫자 금지
+      3) 예약어 (기존 함수 명령어 : const, if, switch.. 등) 금지
+      4) 표기법대로 사용 - camelCase(낙타표기법 : 구분하는 구간에 대문자 표시 ex: userId)
+      5) 상수(const로 표시한 것 말고)는 대문자로 표기 + SNAKE_CASE(언더바 표기법)
+     -->
+
+    <!-- 
+     *코딩 테스트 사이트
+      프로그래머스 : school.programmers.co.kr
+      백준 : acmicpc.net/problem/tags 
+      솔브드 : solved.ac/problems/level
+     -->
+
     <h1>변수 & 연산자 연습문제</h1>
     <ol style="line-height: 2">
       <li>
@@ -13,7 +29,9 @@
         <script>
           const kg = 60;
           // Q1: 여기에 코드를 작성하세요
-          console.log(kg + "킬로그램은 " + kg * 2.2 + "파운드 입니다.");
+          const lb = kg * 2.2;
+          // 기본적으로 제시된 변수에 대해서는 각각 선언 후에 값을 할당할 수 있도록 명심할 것.
+          console.log(kg + "킬로그램은 " + lb + "파운드 입니다.");
         </script>
       </li>
 
@@ -22,7 +40,8 @@
         <script>
           const m2 = 99;
           // Q2: 여기에 코드를 작성하세요
-          console.log(m2 + "제곱미터는 " + m2 * 0.3 + "평 입니다.");
+          const pyeong = m2 * 0.3;
+          console.log(m2 + "제곱미터는 " + pyeong + "평 입니다.");
         </script>
       </li>
 
@@ -43,9 +62,9 @@
         예금 12,000,000원을 연이율 4%로 정기예금했을 때 월 이자를 구하시오.
         <script>
           // Q4: 여기에 코드를 작성하세요
-          const save = 12000000;
+          const depo = 12000000;
           const rate = 4;
-          console.log("월 이자는 " + (save * (rate / 100)) / 12 + "원 입니다.");
+          console.log("월 이자는 " + (depo * (rate / 100)) / 12 + "원 입니다.");
         </script>
       </li>
 
@@ -64,12 +83,12 @@
         잔돈은 얼마?
         <script>
           // Q6: 여기에 코드를 작성하세요
-          const cost_Ame = 5500;
+          const costAme = 5500;
           const money = 15000;
           console.log(
-            parseInt(money / cost_Ame) +
+            parseInt(money / costAme) +
               "잔 구입가능하며, 잔돈은 " +
-              (money % cost_Ame) +
+              (money % costAme) +
               "원 입니다."
           );
         </script>
@@ -80,15 +99,16 @@
         10인분마다 음료 1개 서비스. 총 지불 금액?
         <script>
           // Q7: 여기에 코드를 작성하세요
-          const cost_Yang = 12000;
-          const cost_Bev = 2000;
-          const howMany_Yang = 64;
-          const howMany_Bev = 6;
+          const costYang = 12000;
+          const costBev = 2000;
+          const howManyYangs = 64;
+          const howManyBevs = 6;
+          const serv = 10;
 
           console.log(
             "총 지불금액은 " +
-              cost_Yang * howMany_Yang +
-              (parseInt(howMany_Yang / 10) - howMany_Bev) * cost_Bev +
+              costYang * howManyYangs +
+              (howManyBevs - parseInt(howManyYangs / serv)) * costBev +
               "원 입니다."
           );
         </script>
@@ -98,10 +118,16 @@
         두 자리 정수(예: 73)의 각 자릿수를 더한 값을 구하시오. (7 + 3 = 10)
         <script>
           // Q8: 여기에 코드를 작성하세요
-          const AB = 73; // "A"+"B"
-          const A = parseInt(AB / 10);
-          const B = AB - A * 10; // AB%10 = 나머지 값과 동일
-          console.log("각 자릿수를 더한 값은 " + (A + B) + "입니다.");
+          // const AB = 73; // "A"+"B"
+          // const A = parseInt(AB / 10);
+          // const B = AB - A * 10; // AB%10 = 나머지 값과 동일
+          // console.log("각 자릿수를 더한 값은 " + (A + B) + "입니다.");
+
+          const numb = 73;
+          const ten = parseInt(numb / 10);
+          const one = numb % 10;
+          const sum = ten + one;
+          console.log("각 자릿수를 더한 값은 " + sum + "입니다.");
         </script>
       </li>
 
@@ -117,7 +143,7 @@
               myName +
               "이고, " +
               myAge +
-              "살 입니다. 취미는 " +
+              "살 입니다. \n취미는 " +
               myHobby +
               "입니다. 잘 부탁드립니다!"
           );
@@ -131,8 +157,8 @@
           // Q10: 여기에 코드를 작성하세요
           const s = "100";
           const i = 100;
-          console.log(s == i);
-          console.log(s === i);
+          console.log(s == i); // 단순 입력 값만 비교
+          console.log(s === i); // 데이터 타입까지 비교
         </script>
       </li>
     </ol>

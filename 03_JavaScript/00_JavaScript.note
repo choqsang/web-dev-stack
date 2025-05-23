@@ -1,0 +1,16 @@
+
+
+
+*****배열
+
+const arr = [];
+.push / 맨뒤추	.pop / 맨뒤삭
+.unshift / 맨앞추	.shift / 맨앞삭
+.splice(인덱스, 삭제개수, 추가값)
+indexOf("값") / 인덱스확인
+.sort(함수) / 함수값에 맞게 정렬
+.split("") / 값에 맞게 나눔
+.join("") / 값을 넣어 합침
+.slice(시작,종료 원하는 인덱스+1) / 원본유지 일부 잘라내기
+const 클래스 = new Set(Array);
+const 배열 = [...Class1, ...Class2];
