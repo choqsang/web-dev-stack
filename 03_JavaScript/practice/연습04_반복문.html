@@ -102,7 +102,24 @@
         - 정답을 맞추면 시도 횟수와 함께 종료 메시지를 출력하시오.
         <script>
           const target = Math.floor(Math.random() * 100) + 1; // 1~100 랜덤 숫자
-          // console.log(target); // 위 함수로 target이라는 변수에 랜덤 숫자가 부여된다.
+          console.log(target); // 위 함수로 target이라는 변수에 랜덤 숫자가 부여된다.
+          
+          let count = 0;
+          let i = 1;
+          while (i<=100) {
+            const input = Number(prompt("1부터 100까지 숫자 중 하나를 입력해주세요."));
+            const count = i;
+            i++; 
+            if (input > target) {
+              console.log("너무 큽니다");
+              continue;
+            } else if (input  < target) {
+              console.log("너무 작습니다");
+              continue;
+            } else if (input == target) {
+                console.log("숫자 " + target + " 정답입니다.\n" + count + "번 시도만에 맞추셨습니다!");
+                break; }
+            }
         </script>
       </li>
     </ol>
