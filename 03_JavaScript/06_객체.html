@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체</title>
+  </head>
+  <body>
+    <h1>객체</h1>
+    <script>
+      /*
+            사람 {
+                // 특징들 => 변수
+                이름,
+                나이,
+                사는곳,
+
+                // 행동들 => 함수(기능)
+                일어난다
+                밥먹는다
+                씻는다
+                옷입는다
+                나간다
+            }
+        */
+      // 단순 나열 시, 서로 관련있다는 게 보이지 않음
+      const name = "박기민";
+      const age = 10;
+      const addr = "서울";
+
+      // 배열 - 하나의 묶음으로 표시, 서로 관련 있어보이나 의미 파악 불가
+      const personArr = ["박기민", 10, "서울"];
+
+      // 객체 : 키 - 값 구조
+      const personObj = {
+        name: "박기민",
+        age: 10,
+        addr: "서울",
+        hello() {
+          console.log(`안녕하세요, ${this.name}입니다.`);
+        },
+      };
+      console.log(personObj);
+      personObj.hello();
+    </script>
+  </body>
+</html>

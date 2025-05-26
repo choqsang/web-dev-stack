@@ -29,8 +29,8 @@
           // Q2: 여기에 코드를 작성하세요
           let pil = "";
           let sil = "";
-          const pil_score = prompt("필기 점수를 입력해주세요.");
-          const sil_score = prompt("실기 점수를 입력해주세요.");
+          const pil_score = prompt("당신의 필기 점수를 입력해주세요.");
+          const sil_score = prompt("당신의 실기 점수를 입력해주세요.");
 
           if (pil_score >= 80 && sil_score >= 80) {
             console.log("합격");
@@ -44,7 +44,7 @@
         정수가 10과 20 사이인지 판별하시오.
         <script>
           // Q3: 여기에 코드를 작성하세요
-          const int = prompt("정수를 입력해주세요.");
+          const int = prompt("임의의 정수를 입력해주세요.");
           if (int >= 10 && int <= 20) {
             console.log("해당 숫자는 10과 20사이에 있습니다.");
           } else {
@@ -72,7 +72,9 @@
         겨울)
         <script>
           // Q5: 여기에 코드를 작성하세요
-          const month = prompt("원하시는 월을 입력해주세요.");
+          const month = prompt("원하시는 월을 숫자(1~12)로만 입력해주세요.");
+          // prompt로 입력받는 경우, 변수 타입은 string으로 고정되기 때문에 타입을 잘 맞춰서 조건문을 걸어주어야 한다.
+          // ex: Number(prompt("")) 형태로 받아 숫자 형태로 대입
           if (month >= 3 && month <= 5) {
             console.log("봄");
           } else if (month >= 6 && month <= 8) {
@@ -81,6 +83,32 @@
             console.log("가을");
           } else if (month == 12 || month == 1 || month == 2) {
             console.log("겨울");
+          }
+          // switch를 이용하는 경우,
+          switch (month) {
+            case "3":
+            case "4":
+            case "5":
+              console.log("봄");
+              break;
+
+            case "6":
+            case "7":
+            case "8":
+              console.log("여름");
+              break;
+
+            case "9":
+            case "10":
+            case "11":
+              console.log("가을");
+              break;
+
+            case "12":
+            case "1":
+            case "2":
+              console.log("겨울");
+              break;
           }
         </script>
       </li>
@@ -109,7 +137,7 @@
         숫자를 입력받아 요일을 출력하시오. (1: 월요일 ~ 7: 일요일)
         <script>
           // Q7: 여기에 코드를 작성하세요
-          const day = prompt("원하시는 숫자를 입력해주세요.");
+          const day = prompt("원하시는 숫자(1~7)를 입력해주세요.");
           switch (day) {
             case "1":
               console.log("월요일");
@@ -133,6 +161,27 @@
               console.log("일요일");
               break;
           }
+          // if문으로 작성해보기
+          let day2;
+          if (day == 1) day2 = "월";
+          else if (day == 2) day2 = "화";
+          else if (day == 3) day2 = "수";
+          else if (day == 4) day2 = "목";
+          else if (day == 5) day2 = "금";
+          else if (day == 6) day2 = "토";
+          else if (day == 7) day2 = "일";
+          if (day2 !== undefined) console.log(day2 + "요일");
+          else
+            alert("숫자를 잘못 입력하셨습니다. 1~7까지 숫자 중 입력해주세요.");
+
+          // 배열 응용
+          const days = ["월", "화", "수", "목", "금", "토", "일"];
+          // days[0] : 월, day==1
+          console.log(
+            days[day - 1] !== undefined
+              ? days[day - 1] + "요일"
+              : "숫자를 잘못 입력하셨습니다."
+          );
         </script>
       </li>
 
@@ -152,6 +201,24 @@
           } else if (icon == "/") {
             console.log("결과는 " + num1 / num2 + "입니다.");
           }
+
+          // switch 활용
+          let result2 = 0;
+          switch (icon) {
+            case "+":
+              result2 = num1 + num2;
+              break;
+            case "-":
+              result2 = num1 - num2;
+              break;
+            case "*":
+              result2 = num1 * num2;
+              break;
+            case "/":
+              result2 = num1 / num2;
+              break;
+          }
+          console.log(num1 + icon + num2 + " = " + result2);
         </script>
       </li>
 
@@ -194,6 +261,11 @@
           } else if (cha2 > cha1 && cha2 > cha1) {
             console.log(cha2);
           }
+
+          let max = cha1;
+          if (max < cha2) max = cha2;
+          if (max < cha3) max = cha3;
+          console.log("최대값은 " + max + "입니다.");
         </script>
       </li>
 
@@ -204,10 +276,14 @@
           // Q11: 여기에 코드를 작성하세요
           const int2 = prompt("원하시는 정수를 입력해주세요.");
           if (int2 % 3 == 0 && int2 % 5 == 0) {
-            console.log("입력하신 숫자는 3과 5의 배수가 맞습니다.");
+            console.log("입력하신 숫자는 3과 5의 공배수입니다.");
           } else if (int2 % 3 == 0 && int2 % 5 !== 0) {
+            /*  => else if (int2 % 3 == 0)
+            else if 자체가 위의 조건을 제외한 나머지 조건에서 충족하는 부분이기 때문에, 
+            별도로 제외 조건을 적지 않더라도 같은 의미로 받아들여진다. */
             console.log("입력하신 숫자는 3의 배수입니다.");
           } else if (int2 % 3 !== 0 && int2 % 5 == 0) {
+            //  => else if (int2 % 5 == 0) : 3의 배수는 아니나, 5의 배수인 것.
             console.log("입력하신 숫자는 5의 배수입니다.");
           } else {
             console.log("입력하시는 숫자는 3과 5의 배수가 아닙니다.");
@@ -239,6 +315,8 @@
           } else if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9) {
             console.log("입력하신 숫자의 첫 번째 자리수는 홀수 입니다.");
           }
+          if (i % 2 == 0) console.log("짝수");
+          else console.log("홀수");
         </script>
       </li>
     </ol>

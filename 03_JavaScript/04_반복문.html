@@ -92,8 +92,9 @@
         i++; // <- 이 연산자가 없다면 동일한 값이 계속 출력되기 때문에 무한으로 loop
       }
       // 일부러 무한 루프 사용 시,
-      lwhile (true) {
-        const input = prompt("종료하시려면 Q를 입력해주세요.");
+      while (true) {
+        const input = "Q";
+        // prompt("종료하시려면 Q를 입력해주세요.");
         // 조건문 필수 - 반복문을 빠져나가야 하는
         if (input === "Q") break; // 조건문 안에 실행 부분이 1줄인 경우 중괄호 생략 가능함.
         console.log("입력한 값 : ", input);
