@@ -38,9 +38,10 @@
           // [팝송, 클래식, 재즈]
           const musl = music.slice(1, 4);
           console.log(musl);
-          const musl2 = music.slice(4, 5);
+          const musl2 = music.slice(4, 5); // 마지막 순번이기 때문에 slice(4)만 써도 동일하다.
           console.log(musl2);
           // console.log(music[music.indexOf("OST")]);
+          // console.log(music[music.length-1]);
           // const [m1, m2, m3, m4, m5] = music;
           // console.log(m5);
         </script>
@@ -79,7 +80,7 @@
         <script>
           const dupArr = [1, 2, 2, 3, 3, 3];
           // [1, 2, 3]
-          const dupArr2 = new Set(dupArr);
+          const dupArr2 = new Set(dupArr); // = [...new Set(dupArr)];
           const dupArr3 = [...dupArr2];
           console.log(dupArr3);
         </script>

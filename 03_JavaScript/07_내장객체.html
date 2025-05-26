@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내장객체</title>
+  </head>
+  <body>
+    <h1>내장 객체</h1>
+    <p>자바스크립트에서 제공하는 기본 내장 객체들</p>
+    <h2>1. Math 객체</h2>
+    <script>
+      console.log("최소값 : ", Math.min(5, 7, -1, -8)); // -8
+      console.log("최대값 : ", Math.max(5, 7, -1, -8)); // 7
+      console.log("절대값 : ", Math.abs(-7.57455646));
+      console.log("반올림 : ", Math.round(2.897)); // 3
+      console.log("버림 : ", Math.floor(2.897)); // 2
+      console.log("올림 : ", Math.ceil(2.897)); // 3
+      console.log("0~1 랜덤 : ", Math.random()); // 0 <= Math.random() < 1;
+      // 1부터 10까지의 랜덤 (*10)
+      // 0 <= Math.random() < 1;
+      // 0*10 <= Math.random()*10 < 1*10;
+      // 1 <= Math.random()*10+1 < 11
+      console.log(Math.floor(Math.random() * 10) + 1);
+      // 5~15 까지
+      console.log(Math.floor(Math.random() * 10) + 5);
+
+      //   console.log("1부터 45까지의 랜덤 수 " + Math.floor(Math.random() * 45));
+      const random1 = Math.round(Math.random() * 45);
+      const random2 = Math.round(Math.random() * 45);
+      const random3 = Math.round(Math.random() * 45);
+
+      console.log(random1);
+      console.log(random2);
+      console.log(random3);
+      if (random1 !== random2 && random2 !== random3 && random1 !== random3) {
+        console.log(`${random1}, ${random2}, ${random3}번 당첨!`);
+      }
+    </script>
+
+    <h2>2. Date 객체</h2>
+    <script>
+      const now = new Date();
+      console.log("현재 : ", now); // date : 현재 시각 표시
+      console.log(
+        `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`
+      ); // month만 '0'부터 시작해서 하나씩 밀리기 때문에 +1을 추가해준다.
+      const date = new Date(2025, 12 - 1, 16, 17, 50, 0); // 월(month)이 하나 늘어나서 불편하니 쓰지 말고,
+      console.log("특정날짜 : ", date);
+
+      const date2 = new Date("2025-12-16");
+      console.log("특정날짜2 : ", date2); // 원하는 날짜를 문자열로 입력 가능
+      const date3 = new Date("2025-12-16T17:50:00");
+      console.log("특정날짜3 : ", date3); // 시간까지 지정 가능
+    </script>
+
+    <h2>3. Timer</h2>
+    <script>
+      // setTimeout : 일정 시간 후 1회 동작
+      setTimeout(() => {
+        console.log("3초 후!");
+      }, 3000); // 1초당 1,000
+
+      // setInterval : 일정 시간마다 동작
+      let sec = 0;
+      setInterval(() => {
+        console.log(`${++sec}초`);
+      }, 1000);
+    </script>
+
+    <h2>4. String 객체</h2>
+    <script>
+      const str = "Hello, JavaScript!";
+      console.log("길이 : ", str.length); // ""제외, 공백도 포함됨.
+      console.log("포함여부 : ", str.includes("Java")); //
+      console.log("위치 : ", str.indexOf("Script")); // 해당 단어가 어디서부터 시작되는 지
+      console.log("일부 : ", str.slice(7, 17)); // 시작과 끝 바로 앞을 잘라낸다.
+      console.log("대문자 : ", str.toUpperCase()); // 모든 글자를 대문자로 변경
+    </script>
+
+    <h2>5. JSON 객체</h2>
+    <script>
+      // 데이터를 문자열로 변환 및 파싱
+      const obj = {
+        name: "김주현",
+        age: 12,
+      };
+      const jsonStr = JSON.stringify(obj); // 종종 문자열을 만들기 위해 사용됨.
+      console.log(obj.name);
+      console.log(jsonStr);
+      const parsed = JSON.parse(jsonStr);
+      console.log(parsed);
+    </script>
+  </body>
+</html>

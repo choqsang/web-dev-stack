@@ -41,7 +41,89 @@
         },
       };
       console.log(personObj);
-      personObj.hello();
+      personObj.hello(); // 객체.함수
+      console.log(personObj.name); // 객체.변수
+    </script>
+
+    <h2>1. 객체 생성과 속성/함수 추가</h2>
+    <script>
+      const person1 = {};
+      person1.name = "우규빈";
+      person1["age"] = 9;
+      person1.hello = function () {
+        console.log(`안녕? 나는 ${this.name}이야, 나이는 ${this.age}살이지!`);
+      };
+      person1.hello();
+
+      const person2 = new Object(); // 이렇게도 생성 가능하나 거의 사용하지 않음 (new Object = {})
+      person2.name = "김은진";
+      person2.age = 7;
+      person2.hello = function () {
+        // 익명함수를 쓰는 이유
+        console.log(`안녕? 나는 ${this.name}이야, 나이는 ${this.age}살이지!`);
+      };
+      person2.hello();
+    </script>
+
+    <h2>2. this</h2>
+    <script>
+      const objFunc = {
+        name: "서지은",
+        func: function () {
+          console.log(this); // 해당 지역 개체
+          console.log(`익명 함수 : ${this.name}`);
+        },
+      };
+      objFunc.func();
+      const objArrow = {
+        name: "박지연",
+        func: () => {
+          console.log(this); // 외부의 'this' (전역 개체 - Window)
+          console.log(`화살표 함수 : ${this.name}`);
+        },
+      };
+      objArrow.func();
+
+      // 메서드 축약형 (Method Shorthand) - .func(함수명)(){}
+      const objMethod = {
+        name: "이승민",
+        func() {
+          console.log(`메서드 축약형 : ${this.name}`);
+        },
+      };
+      objMethod.func();
+
+      // 머리로 이해하기보다 손으로 한 번 더 코드를 써보는 것이 익히는 데 유리하다.
+    </script>
+
+    <h2>3. 생성자 함수 & 클래스</h2>
+    <script>
+      // 생성자 함수 - 시작은 대문자 / 똑같이 생긴 공통의 틀 하나를 만들어 두는 것
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.hello = function () {
+          console.log(`안녕? 나는 ${this.name}이야, 나이는 ${this.age}살이지!`);
+        };
+      }
+      const p1 = new Person("오재덕", 5);
+      const p2 = new Person("장효준", 3);
+      p1.hello();
+      p2.hello();
+
+      // 클래스
+      class Person2 {
+        // constructor(){} : 클래스 객체를 생성할 때 호출되는 함수 / 변수 초기값 지정 + 함수식 별도 지정
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        hello() {
+          console.log(`안녕? 나는 ${this.name}이야, 나이는 ${this.age}살이지!`);
+        }
+      }
+      const p3 = new Person2("전영현", 2);
+      p3.hello();
     </script>
   </body>
 </html>

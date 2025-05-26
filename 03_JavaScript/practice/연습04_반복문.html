@@ -22,9 +22,9 @@
           // Q2
           const multi = 2;
           for (let i = 1; i < 10; i++)
-            console.log(
-              multi + " 곱하기 " + i + "은(는) " + i * multi + "이다."
-            );
+            // console.log(
+            //   multi + " 곱하기 " + i + "은(는) " + i * multi + "이다." );
+            console.log(`2 x ${i} = ${i * 2}`);
         </script>
       </li>
 
@@ -37,6 +37,11 @@
             plus = Number(plus + i);
           }
           console.log(plus);
+
+          // const input = Number(prompt("숫자를 입력해주세요."));
+          // let total = 0;
+          // for (let i = 1; i <= input; i++) { total += i; }
+          // console.log("total : " + total);
         </script>
       </li>
 
@@ -45,6 +50,7 @@
         <script>
           // Q4
           for (let i = 3; i <= 100; i += 3) console.log(i);
+          // for (let i = 1; i <= 100; i++) { if(i % 3 === 0) console.log(i);}
         </script>
       </li>
 
@@ -56,6 +62,8 @@
           for (let i = 0; i <= 5; i++) {
             if (numbers[i] % 2 !== 0) continue;
             console.log(numbers[i]);
+            // for(let i = 0; i < numbers.length; i++) {
+            // if (numbers[i] % 2 === 0) console.log(numbers[i])};
           }
         </script>
       </li>
@@ -65,8 +73,10 @@
         <script>
           const words = ["오므라이스", "라면", "불고기", "된장찌개", "김밥"];
           // Q6
-          for (i = 0; i < words.length; i++)
+          for (i = 0; i < words.length; i++) {
+            // console.log(words[i], words[i].length);
             if (words[i].split("").length >= 3) console.log(words[i]);
+          }
         </script>
       </li>
 
@@ -75,8 +85,14 @@
         <script>
           const nums = [3, 45, 21, 99, 18, 77];
           // Q7
-          nums.sort((a, b) => b - a);
-          console.log(nums[0]);
+          let max = 0;
+          // nums.sort((a, b) => b - a);
+          // console.log(nums[0]);
+          for (let i = 0; i < nums.length; i++) {
+            if (nums[i] > max) max = nums[i];
+          }
+          console.log("가장 큰 숫자 : ", max);
+          // console.log(Math.max(...nums));
         </script>
       </li>
 
@@ -122,11 +138,11 @@
               continue;
             } else if (input == target) {
               console.log(
-                "숫자 " +
+                "게임 종료! 정답 " +
                   target +
-                  " 정답입니다.\n" +
+                  " 입니다.\n" +
                   count +
-                  "번 시도만에 맞추셨습니다!"
+                  "번 만에 맞추셨습니다!"
               );
               break;
             }
