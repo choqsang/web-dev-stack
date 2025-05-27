@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+    <!-- script 경로를 어디에 두어도 동작하나,
+     DOM 진행을 원활하게 하기 위해 BODY태그 맨 아래쪽으로 둠.
+     그에 따라 js파일 내에서는 선언함수로 지정한다. -->
+  </head>
+  <body>
+    <h1>DOM(Document Object Model)</h1>
+    <!-- 돔은 html이라고 볼 수 있다. -->
+    <h2>문서 객체 가져오기</h2>
+    <h3>태그로 가져오기</h3>
+    <button onclick="btn1()">확인</button>
+    <!-- 버튼 클릭 시 상호작용(함수 호출)을 할 수 있도록 버튼 생성 -->
+
+    <h3>ID로 가져오기</h3>
+    <button onclick="btn2()">확인</button>
+
+    <h3>class로 가져오기</h3>
+    <button onclick="btn3()">확인</button>
+
+    <h3>name으로 가져오기</h3>
+    <button onclick="btn4()">확인</button>
+
+    <h3>선택자로 가져오기(querySelector)</h3>
+    <!-- CSS에서 사용하듯 선택자 그대로 불러올 수 있음 (통일성) -->
+    <button onclick="btn5()">확인</button>
+
+    <h2>문서 객체 조작하기</h2>
+    <h3>내용 조작하기</h3>
+    <button onclick="btn6()">확인</button>
+
+    <h3>속성 조작하기</h3>
+    <button onclick="btn7()">확인</button>
+
+    <h3>스타일 조작하기</h3>
+    <button onclick="btn8()">확인</button>
+
+    <h3>classList 사용하기</h3>
+    <button onclick="btn9()">add</button>
+    <button onclick="btn10()">remove</button>
+    <button onclick="btn11()">contains</button>
+    <button onclick="btn12()">toggle</button>
+
+    <style>
+      .black {
+        background-color: black;
+        color: white;
+      }
+    </style>
+
+    <h2>문서 객체 추가하기</h2>
+    <button onclick="btn13()">확인</button>
+
+    <h2>문서 객체 삭제하기</h2>
+    <button onclick="btn14()">삭제</button>
+
+    <div id="testId" class="testClass" name="testName">Hello, World!</div>
+    <div id="testId2" class="testClass" name="testName">Hello, JavaScript!</div>
+    <div id="testId3"></div>
+
+    <script src="./08_DOM.js"></script>
+    <!-- 특정 이벤트 조건 외 DOM의 경우,
+     최하단에 두어 본문 인식 이후 스크립트 적용될 수 있게끔 -->
+  </body>
+</html>
