@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        justify-content: left;
+      }
+      section {
+        border: 1px rgba(172, 168, 168, 0.445) solid;
+        border-radius: 3px;
+        width: 60%;
+        height: 70%;
+        padding: 20px;
+      }
+      section input {
+        border: 1px rgba(172, 168, 168, 0.445) solid;
+        width: 80%;
+        height: 2rem;
+        margin-left: 10px;
+      }
+      p {
+        font-size: 0.8rem;
+        color: gray;
+      }
+      button {
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        width: 5rem;
+        height: 2rem;
+      }
+      #buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        color: white;
+        background-color: lightgray;
+        cursor: pointer;
+      }
+      #cancel {
+        color: white;
+        background-color: darkcyan;
+        width: 3rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- [정규표현식]
+    아이디 : /^[a-zA-Z][a-zA-Z0-9]{3,11}$/
+    비밀번호 : /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/
+    이름 : /^[가-힣]{2,}$/
+    이메일 : /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/
+    전화번호 : /^010-\d{4}-\d{4}$/ -->
+
+    <!-- 아닐 경우 아래 문구 빨간색 진하게 / 양식에 맞을 경우, 초록색 OK! / 
+        전체 맞게 입력했을 경우에만 회원가입 버튼 활성화 / 취소 눌렀을 경우 전체 값 초기화 
+    -->
+    <h1><b>회원가입</b></h1>
+
+    <section>
+      <input type="text" id="inputId" placeholder="아이디를 입력해주세요" />
+      <p id="result1">영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내</p>
+      <!-- <script>
+        inputId.addEventListener("input", (e) => {
+          let regExp = /^[a-zA-Z][a-zA-Z0-9]{3,11}$/;
+          if (regExp.test(e.target.value)) {
+            // console.log("ok!");
+            result1.innerHTML = "OK!";
+            result1.style.color = "green";
+          } else {
+            // console.log("no!");
+            result1.style.fontWeight = "bold";
+            result1.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <input type="text" id="inputPw" placeholder="비밀번호를 입력해주세요" />
+      <p id="result2">영문자, 숫자, 특수문자 조합으로 8~15자 이내</p>
+      <!-- <script>
+        inputPw.addEventListener("input", (e2) => {
+          let regExp =
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+          if (regExp.test(e2.target.value)) {
+            result2.innerHTML = "OK!";
+            result2.style.color = "green";
+          } else {
+            result2.style.fontWeight = "bold";
+            result2.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <input
+        type="text"
+        id="rewritePw"
+        placeholder="비밀번호를 다시 한 번 입력해주세요"
+      />
+      <p id="result3">위 비밀번호와 동일하게</p>
+      <!-- <script>
+        rewritePw.addEventListener("input", (e3) => {
+          // 위와 동일한 값을 나타내도록 세팅
+          if (e3.target.value == e2.target.value) {
+            result3.innerHTML = "OK!";
+            result3.style.color = "green";
+          } else {
+            result3.style.fontWeight = "bold";
+            result3.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <input type="text" id="inputName" placeholder="이름을 입력해주세요" />
+      <p id="result4">한글 2자 이상</p>
+      <!-- <script>
+        inputName.addEventListener("input", (e) => {
+          let regExp = /^[가-힣]{2,}$/;
+          if (regExp.test(e.target.value)) {
+            result4.innerHTML = "OK!";
+            result4.style.color = "green";
+          } else {
+            result4.style.fontWeight = "bold";
+            result4.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <input type="text" id="inputMail" placeholder="이메일을 입력해주세요" />
+      <p id="result5">이메일 형식</p>
+      <!-- <script>
+        inputMail.addEventListener("input", (e) => {
+          let regExp = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
+          if (regExp.test(e.target.value)) {
+            result5.innerHTML = "OK!";
+            result5.style.color = "green";
+          } else {
+            result5.style.fontWeight = "bold";
+            result5.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <input type="text" id="inputTel" placeholder="전화번호를 입력해주세요" />
+      <p id="result6">전화번호 형식</p>
+      <!-- <script>
+        inputTel.addEventListener("input", (e) => {
+          let regExp = /^010-\d{4}-\d{4}$/;
+          if (regExp.test(e.target.value)) {
+            result6.innerHTML = "OK!";
+            result6.style.color = "green";
+          } else {
+            result6.style.fontWeight = "bold";
+            result6.style.color = "red";
+          }
+        });
+      </script> -->
+
+      <div id="buttons">
+        <button id="register" disabled>회원가입</button>
+        <!-- <script>
+          if (
+            result1 == "OK!" &&
+            result2 == "OK!" &&
+            result3 == "OK!" &&
+            result4 == "OK!" &&
+            result5 == "OK!" &&
+            result6 == "OK!"
+          ) {
+            register.disabled = "false";
+            register.style.background = "darkcyan";
+          }
+          register.addEventListener("click", () => {});
+        </script> -->
+        <button id="cancel">취소</button>
+      </div>
+    </section>
+
+    <script src="./실습07_회원가입.js"></script>
+  </body>
+</html>
