@@ -195,5 +195,34 @@ register.addEventListener("click", () => {
 });
 
 cancel.addEventListener("click", (e) => {
-  location.reload();
+  // location.reload();
+  inputId.value = "";
+  result1.innerHTML = "영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내";
+  result1.style.fontWeight = "normal";
+  result1.style.color = "gray";
+
+  inputPw.value = "";
+  result2.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
+  result2.style.fontWeight = "normal";
+  result2.style.color = "gray";
+
+  rewritePw.value = "";
+  result3.innerHTML = "위 비밀번호와 동일하게";
+  result3.style.fontWeight = "normal";
+  result3.style.color = "gray";
+
+  inputName.value = "";
+  result4.innerHTML = "한글 2자 이상";
+  result4.style.fontWeight = "normal";
+  result4.style.color = "gray";
+
+  inputMail.value = "";
+  result5.innerHTML = "이메일 형식";
+  result5.style.fontWeight = "normal";
+  result5.style.color = "gray";
+
+  inputTel.value = "";
+  result6.innerHTML = "전화번호 형식";
+  result6.style.fontWeight = "normal";
+  result6.style.color = "gray";
 });

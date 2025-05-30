@@ -97,7 +97,7 @@ restart.addEventListener("click", reset);
 // restart.addEventListener("click", () => {location.reload();});
 
 /* 위 리셋 이벤트와 유사한 개념으로
-실제 페이지를 리셋하는 location.reload() 함수가 존재한다. (클릭 시 점멸)
+실제 페이지를 리셋하는 location.reload() 함수가 존재한다. (클릭 시 점멸하며 refresh)
 react나 vue와 같은 프레임워크에서 작성된 코드는
 one page 방식이라 별도 새로고침 없이 화면전환할 수 있으나,
 location.reload() 방식은 새로고침과 동일하게 해당 리소스를 다시 불러오게 되어
