@@ -111,9 +111,141 @@ SELECT DISTINCT(MBTI) FROM USER_INFO;
     !=, <> : 같지 않음
     >,<,>=,<= : 대소 비교
 */
--- USER_INFO에서 나이가 30이상인 이름(NAME), 나이(AGE), 생년월일(BIRTHDATE) WHGHL
+-- USER_INFO에서 나이가 30이상인 이름(NAME), 나이(AGE), 생년월일(BIRTHDATE) 조회
 SELECT NAME, AGE, BIRTHDATE FROM USER_INFO WHERE AGE>=30;
 
 -- EMPLOYEE에서 부서코드(DEPT_CODE)가 'D9'인 사원들 (모든 컬럼) 조회
 SELECT * FROM EMPLOYEE WHERE DEPT_CODE='D9';
 
+/*
+    OR(또는), AND(그리고), BETWEEN(사이)
+*/
+-- 테이블 : USER_INFO
+-- 성별(GENDER)이 여자이거나 나이(AGE)가 25살 이하인 사람들 조회
+SELECT * FROM USER_INFO WHERE GENDER='여' OR AGE<=25;
+
+-- 테이블 : EMPLOYEE
+-- 급여(SALARY)가 350만원 이상 600만원 이하를 받는 사원들 조회
+SELECT * FROM EMPLOYEE WHERE SALARY>=3500000 AND SALARY<=6000000;
+
+-- 특정 범위 내의 조건일 경우, BETWEEN A AND B 을 사용하여도 좋다.
+-- 조건식에서 사용되는 구문 / 몇 이상 몇 이하인 범위에 대한 조건을 제시할 때 사용
+-- 컬럼 BETWEEN 하한값 AND 상한값
+SELECT * FROM EMPLOYEE WHERE SALARY BETWEEN 3500000 AND 6000000;
+
+-- USER_INFO에서 나이가 25~30 사이인 사람들 조회
+SELECT * FROM USER_INFO WHERE AGE BETWEEN 25 AND 30;
+
+/*
+    LIKE
+    - 비교하고자 하는 컬럼값이 특정 패턴에 만족할 경우 조회
+    
+    컬럼 LIKE '특정패턴'
+    - 특정 패턴에는 '%', '_'를 와일드카드로 사용 (각자의 의미가 부여되어 있음)
+
+    '_'(언더바) : 1글자
+    '_문자' : 앞에 1글자 + 문자
+    '__문자' : 앞에 2글자 + 문자
+    '_문자_' : 앞뒤로 1글자씩 + 문자
+    
+    '%'(퍼센트) : 0글자 이상
+    '문자%' : 문자로 시작
+    '%문자' : 문자로 끝남
+    '%문자%' : 문자가 포함되어 있음 (키워드 검색)
+*/
+-- 테이블 : USER_INFO
+-- 이름이 '은'으로 끝나는 경우 조회
+SELECT * FROM USER_INFO WHERE NAME LIKE '%은';
+-- 성이 '성'씨인 경우 조회
+SELECT * FROM USER_INFO WHERE NAME LIKE '성%';
+-- MBTI가 'E'면서 'T'인 경우 조회
+SELECT * FROM USER_INFO WHERE MBTI LIKE '%E%' AND MBTI LIKE '%T%'; -- 'E_T_'라고 조회해도 동일한 결과(알파벳의 자리가 정해져 있는 컬럼)
+-- 전화번호가 010-2XXX-XXXX인 경우 조회
+SELECT * FROM USER_INFO WHERE CONTACT LIKE '010-2%';
+-- 나이가 25 이하면서, 경기도에 사는 사람이거나 MBTI가 INTP인 경우
+SELECT * FROM USER_INFO
+WHERE AGE<=25 AND ADDRESS LIKE '%경기%'
+OR AGE<=25 AND MBTI='INTP';
+
+-- 테이블 : EMPLOYEE
+-- 이메일 중 _앞글자가 3글자인 사원들 조회
+SELECT * FROM EMPLOYEE WHERE EMAIL LIKE '______@%';
+-- ESCAPE OPTION : 나만의 와일드카드 만들어서 사용!
+-- 조건 뒤에 지정한 와일드카드를 명시하고(종류는 크게 상관없음), 구분할 수 있도록 중간에 삽입
+SELECT * FROM EMPLOYEE WHERE EMAIL LIKE '___$_%' ESCAPE '$';
+-- 위 사원들 이외의 사원들 조회
+-- 부정연산자 : NOT (컬럼 앞뒤 중 한 군데에 사용할 수 있음)
+SELECT * FROM EMPLOYEE WHERE EMAIL NOT LIKE '___$_%' ESCAPE '$';
+SELECT * FROM EMPLOYEE WHERE NOT EMAIL LIKE '___$_%' ESCAPE '$';
+
+/*
+    IS NULL / IS NOT NULL
+    - 컬럼 값에 NULL이 있을 경우 NULL값 비교에 사용되는 연산자 ('=NULL'은 불가)
+*/
+-- USER_INFO 중 MBTI가 NULL(값이 없음)인 사람들 조회
+SELECT * FROM USER_INFO WHERE MBTI IS NULL;
+-- EMPLOYEE에서 보너스(BONUS)를 받지 않는 사원들 조회
+SELECT * FROM EMPLOYEE WHERE BONUS IS NULL;
+-- EMPLOYEE에서 부서배치를 아직 받지 않고(DEPT_CODE) 보너스는 받는 사원들 조회
+SELECT * FROM EMPLOYEE WHERE DEPT_CODE IS NULL AND BONUS IS NOT NULL;
+
+/*
+    IN()
+    - 컬럼값이 내가 제시한 목록 중에 일치하는 값이 있는 지
+    - 컬럼 IN ('값1', '값2', ...) => 검색 필터에서 사용
+
+    연산자 우선순위
+    0. ()
+    1. 산술연산자 : *,/,+,-
+    2. 문자열 연결 : ||
+    3. 비교연산자 : =, !=, <>, <, >, <=, >=
+    4. IS NULL / LIKE / IN / BETWEEN
+    5. NOT
+    6. AND
+    7. OR
+*/
+-- USER_INFO 중 MBTI가 INFP 또는 INTJ인 사용자 조회
+SELECT * FROM USER_INFO WHERE MBTI='INFP' OR MBTI='INTJ';
+SELECT * FROM USER_INFO WHERE MBTI IN ('INFP', 'INTJ');
+
+-- EMPLOYEE에서 부서코드(DEPT_CODE)가 D5, D6, D8인 사원들 조회
+SELECT * FROM EMPLOYEE
+WHERE DEPT_CODE='D5' OR DEPT_CODE='D6' OR DEPT_CODE='D8';
+SELECT * FROM EMPLOYEE WHERE DEPT_CODE IN ('D5', 'D6', 'D8');
+-- EMPLOYEE에서 직급코드(JOB_CODE)가 J7이거나 J2인 사원들 중 급여가 200만원 이상인 사원들 조회 (IN/OR사용)
+SELECT * FROM EMPLOYEE WHERE JOB_CODE='J7' AND SALARY>=2000000 OR JOB_CODE='J2' AND SALARY>=2000000;
+-- 위를 축약하려면 아래와 같이 표기 (우선순위는 괄호로 묶어줄 수 있음)
+SELECT * FROM EMPLOYEE WHERE (JOB_CODE='J7' OR JOB_CODE='J2') AND SALARY>=2000000;
+SELECT * FROM EMPLOYEE WHERE JOB_CODE IN ('J7', 'J2') AND SALARY>=2000000;
+
+/*
+    ORDER BY
+    - SELECT문 가장 마지막 줄에 작성, 뿐만 아니라 실행 순서 또한 마지막
+
+    3순위 SELECT 컬럼, 컬럼...
+    1순위 FROM 테이블명
+    2순위 WHERE 조건식
+    4순위 ORDER BY 정렬하고자 하는 컬럼값 [ASC|DESC];
+    - ASC : 오름차순 정렬 (생략 시 기본값)
+    - DESC : 내림차순 정렬
+*/
+-- USER_INFO에서 나이를 오름차순 정렬 (어린 순)
+SELECT * FROM USER_INFO ORDER BY AGE;
+-- MBTI는 (I인 분들 중에) 오름차순, 나이는 내림차순 정렬
+SELECT NAME, AGE, GENDER, MBTI
+FROM USER_INFO 
+-- WHERE MBTI LIKE 'I%' 
+-- ORDER BY MBTI ASC, AGE DESC;
+-- ORDER BY 4 ASC, 2 DESC;
+ORDER BY MBTI DESC NULLS LAST;
+-- 먼저 오는 정렬 조건에 따라(쉼표로 구분) 전체 정렬 이후 추가 조건에 따라 재배치된다.
+-- SELECT 이후 컬럼값은 정렬 시 위와 같이 숫자로 표현이 가능하다. (NAME=1, AGE=2, GENDER=3, MBTI=4)
+
+-- 오라클에서만 사용할 수 있는 기능으로 NULLS를 묶어 위치 지정 가능 (FIRST, LAST)
+-- NULL의 경우, 기본적으로 내림차순은 상단(맨앞)에 오름차순은 하단(맨뒤)에 위치한다.
+
+-- EMPLOYEE에서 전체 사원의 사원명, 보너스 조회 + 보너스 기준 오름차순 정렬
+SELECT EMP_NAME, BONUS
+FROM EMPLOYEE
+WHERE BONUS IS NOT NULL
+ORDER BY BONUS;
