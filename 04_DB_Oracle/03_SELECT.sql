@@ -249,3 +249,68 @@ SELECT EMP_NAME, BONUS
 FROM EMPLOYEE
 WHERE BONUS IS NOT NULL
 ORDER BY BONUS;
+
+/*
+    GROUP BY
+    - 그룹 기준을 제시할 수 있는 구문
+    - 여러 개의 값들을 하나의 그룹으로 묶어서 처리할 목적으로 사용
+    - 그룹을 지어주는 컬럼의 기본 컬럼만 불러올 수가 있다. + 함수는 가능
+*/
+-- MBTI별 평균 나이
+SELECT MBTI, AVG(AGE), SUM(AGE), COUNT(*)
+FROM USER_INFO
+GROUP BY MBTI;
+
+-- USER_INFO / EMPLOYEE : 성별 인원수 조회
+SELECT GENDER, COUNT(*)
+FROM USER_INFO
+GROUP BY GENDER;
+
+SELECT CASE WHEN SUBSTR(EMP_NO,8,1) = 1 THEN '남' ELSE '여' END "성별", COUNT(*)
+FROM EMPLOYEE
+GROUP BY CASE WHEN SUBSTR(EMP_NO,8,1) = 1 THEN '남' ELSE '여' END;
+
+/*
+    HAVING
+    - 그룹에 대한 조건을 제시할 때 사용하는 구문
+
+    **SELECT 실행 순서**
+    5)SELECT   *(전체) | 컬럼 | 함수
+    1)FROM     테이블명
+    2)WHERE    조건식   -- 기준 데이터에 대한 필터링
+    3)GROUP BY 그룹 기준에 해당하는 컬럼 | 함수
+    4)HAVING   조건식 (그룹 함수)   -- 그룹에 대한 필터링
+    6)ORDER BY 컬럼 | 별칭 | 컬럼순번(숫자)
+*/
+-- EMPLOYEE에서 부서별 평균 급여가 300만원 이상인 직원의 평균급여(SALARY)를 조회(부서코드 : DEPT_CODE)
+SELECT DEPT_CODE, TO_CHAR(FLOOR(AVG(NVL(SALARY,0))),'9,999,999')||'원'"평균 급여"
+FROM EMPLOYEE
+WHERE DEPT_CODE IS NOT NULL
+GROUP BY DEPT_CODE
+HAVING AVG(NVL(SALARY,0))>=3000000;
+
+-- 직급별(JOB_CODE) 총 급여의 합이 1000만원 이상인 직급만 조회
+SELECT JOB_CODE, SUM(SALARY)
+FROM EMPLOYEE
+GROUP BY JOB_CODE
+HAVING SUM(SALARY)>=10000000;
+
+-- 부서별 보너스를 받는 사원이 없는 부서만 조회
+SELECT DEPT_CODE, COUNT(BONUS)
+FROM EMPLOYEE
+-- WHERE BONUS IS NULL
+GROUP BY DEPT_CODE
+HAVING COUNT(BONUS) = 0;
+-- HAVING DEPT_CODE IS NOT NULL;
+
+SELECT *
+FROM EMPLOYEE
+ORDER BY BONUS;
+
+-- USER_INFO에서 MBTI별 평균 나이를 계산하는데 평균 나이가 30 이하인 MBTI만 조회
+-- 단, 나이가 100살 이상인 경우는 제외
+SELECT MBTI, AVG(AGE)
+FROM USER_INFO
+WHERE AGE<100
+GROUP BY MBTI
+HAVING AVG(AGE)<=30;
