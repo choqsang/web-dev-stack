@@ -41,8 +41,20 @@
         ---> 실제로는 이미지나 동영상은 따로 관리 (URL만 문자형으로 저장)
 */
 
-/* CREATE TABLE USER_INFO (
+/* 
+	외부 공용협업툴과 실시간 연동(API사용)되는 사내 ERP 시스템 만들기 (전사적 자원관리 시스템)
+	공통 : 사용자/사원에 대한 테이블
+	프로젝트관리 : SlackAPI (선택)
+	일정관리 : Google Calendar API (선택)
+	고객관계관리 : Notion API (선택)
+	인적자원관리 :
+	재무관리 : Notion API (선택)
+	품질보증관리 :
+
+	
+    CREATE TABLE USER_INFO (
     USER_ID INT AUTO_INCREMENT PRIMARY KEY, -- 직원코드
+    USER_PW VARCHAR(30) NOT NULL, -- 비밀번호
     NAME VARCHAR(30) NOT NULL, -- 이름
     AGE INT, -- 나이
     GENDER VARCHAR(10), -- 성별
@@ -52,7 +64,43 @@
     ENT_DATE DATETIME DEFAULT NOW(), -- 입사일자
     DEPT_CODE VARCHAR(20), -- 부서명
     POSITION VARCHAR(20) -- 직급
-); */ -- MySQL에서만 구동 가능 (오라클과 명령어가 다름)
+); 
+-- MySQL에서만 구동 가능 (오라클과 명령어가 다름)
+*/
 
 SELECT * FROM USER_INFO;
 DROP TABLE USER_INFO;
+
+CREATE TABLE USER_INFO (
+    -- USER_NO INT PRIMARY KEY AUTO_INCREMENT, (MySQL에서만 적용가능하여 에러 방지 임시 비활성화)
+    ID VARCHAR(50) UNIQUE NOT NULL,
+    PASSWORD VARCHAR(300) NOT NULL,
+    EMAIL VARCHAR(100) UNIQUE,
+    NAME VARCHAR(50) NOT NULL,
+    PHONE VARCHAR(50) UNIQUE,
+    ADDR VARCHAR(200),
+	GENDER VARCHAR(10) CHECK (GENDER IN ('남','여')),
+    BIRTH_DATE DATE,
+    HIRE_DATE DATE DEFAULT (CURRENT_DATE),
+    QUIT_DATE DATE,
+    DEPT_NO INT,
+    GRADE_NO INT    
+); 
+CREATE TABLE DEPARTMENT(
+	-- DEPT_NO INT PRIMARY KEY AUTO_INCREMENT,
+	DEPT_NAME VARCHAR(100) NOT NULL -- 개발팀
+);
+CREATE TABLE GRADE(
+	-- GRADE_NO INT PRIMARY KEY AUTO_INCREMENT,
+	GRADE_NAME VARCHAR(100) NOT NULL -- 사원
+);
+-- DEPT_NO, GRADE_NO
+ALTER TABLE USER_INFO ADD
+FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO);
+ALTER TABLE USER_INFO ADD
+FOREIGN KEY (GRADE_NO) REFERENCES DEPARTMENT(GRADE_NO);
+
+-- (~6/11까지 제출하기)
+-- 프로젝트 관리 : 테이블 몇개든 상관없이 짜보시고 FOREIGN KEY까지 걸어보는 것까지!
+-- 테이블 필요한 컬럼 짜기 힘드시다면 어떤 기능이 있어야 되는 지 정도로 제출해도 괜찮아요!
+
