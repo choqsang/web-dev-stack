@@ -242,8 +242,7 @@ FROM EMPLOYEE
 -- OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY; -- 10개를 건너뛰고 11부터 10개의 행 불러옴 (11~20)
 OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY; -- 20개를 건너뛰고 21부터 10개의 행 불러옴 (21~30)
 
-
-
+-- // 연습 문제 //
 SELECT * FROM USER_INFO;
 SELECT * FROM REVIEW; -- REVIEW_ID, MOVIE_ID, USER_ID, RATING, "COMMENT", REVIEW_DATE
 SELECT * FROM MOVIE; -- MOVIE_ID, TITLE, RELEASE_DATE, GENRE, DIRECTOR
@@ -254,7 +253,7 @@ SELECT * FROM MOVIE_ACTOR; -- MOVIE_ID, ACTOR_ID, ROLE
 SELECT TITLE FROM MOVIE
 WHERE DIRECTOR = (SELECT DIRECTOR
                     FROM MOVIE
-                    WHERE TITLE = '국제시장');
+                    WHERE TITLE = '국제시장') AND TITLE != '국제시장';
 
 -- 2. 서울에 사는 사용자들이 리뷰를 남긴 영화 조회
 SELECT TITLE FROM MOVIE
@@ -264,13 +263,18 @@ WHERE MOVIE_ID IN (
             WHERE USER_ID IN(SELECT USER_ID
                             FROM USER_INFO
                             WHERE ADDRESS LIKE '서울%'));
+-- 서브쿼리 아닌 JOIN으로 할 경우,
+SELECT DISTINCT TITLE FROM REVIEW
+JOIN MOVIE USING(MOVIE_ID)
+JOIN USER_INFO USING(USER_ID)
+WHERE ADDRESS LIKE '서울%';
 
 -- 3. 봉준호 감독 영화 중 평균 평점이 3.0 이상인 영화 조회
 SELECT TITLE FROM MOVIE
-WHERE MOVIE_ID IN (
-SELECT MOVIE_ID FROM REVIEW
-GROUP BY MOVIE_ID
-HAVING AVG(RATING) >= 3) AND DIRECTOR = '봉준호';
+WHERE MOVIE_ID IN ( SELECT MOVIE_ID FROM REVIEW
+                    GROUP BY MOVIE_ID
+                    HAVING AVG(RATING) >= 3) 
+                    AND DIRECTOR = '봉준호';
 
 -- 4. 가장 리뷰 수가 많은 영화 조회
 SELECT TITLE FROM MOVIE
@@ -283,9 +287,24 @@ WHERE MOVIE_ID = (SELECT MOVIE_ID
                                 ORDER BY COUNT(MOVIE_ID) DESC)
                             WHERE ROWNUM =1));
 
+-- 두 번째로 리뷰 수가 많은 영화 조회
+SELECT TITLE
+FROM MOVIE
+WHERE MOVIE_ID IN (SELECT MOVIE_ID
+                    FROM (SELECT *
+                            FROM(
+                            SELECT DENSE_RANK() OVER(ORDER BY COUNT(MOVIE_ID) DESC) RANK, MOVIE_ID, COUNT(MOVIE_ID)
+                                FROM REVIEW
+                                GROUP BY MOVIE_ID)
+                            WHERE RANK =2));
+
 -- 5. 전체 리뷰 평균 평점보다 높은 순으로 3위까지 영화 조회
-SELECT AVG(RATING) FROM REVIEW; -- 리뷰 평균 값
-SELECT ROWNUM 순위, TITLE 제목 FROM MOVIE
-WHERE MOVIE_ID IN (SELECT MOVIE_ID FROM (SELECT *
-                                        FROM (SELECT MOVIE_ID, RANK() OVER(ORDER BY RATING DESC) 순위, RATING FROM REVIEW)
-                                        WHERE 순위 <=3));
+(SELECT AVG(RATING) FROM REVIEW); -- 전체 리뷰 평균 평점
+
+SELECT * FROM (SELECT TITLE, AVG(RATING) FROM REVIEW
+JOIN MOVIE USING(MOVIE_ID)
+GROUP BY TITLE
+HAVING AVG(RATING) > (SELECT AVG(RATING) FROM REVIEW)
+ORDER BY AVG(RATING) DESC)
+WHERE ROWNUM <=3;
+-- 위와 같이 DENSE_RANK를 활용하는 것이 더 유용하다.
