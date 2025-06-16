@@ -79,10 +79,10 @@ END;
 
 -- ROW 타입 변수
 DECLARE
-    EMP EMPLOYEE%ROWTYPE
+    EMP EMPLOYEE%ROWTYPE;
 BEGIN
     SELECT *
-    INTO 
+    INTO EMP
     FROM EMPLOYEE
     WHERE EMP_ID = '&사번';
 
@@ -112,7 +112,7 @@ BEGIN
     IF BONUS IS NULL
         THEN DBMS_OUTPUT.PUT_LINE('보너스를 지급받지 않는 사원입니다.');
     ENDIF;
-        DBMS_OUTPUT.PUT_LINE('보너스는 '|| EMP.BONUS'');    
+        DBMS_OUTPUT.PUT_LINE('보너스는 '|| EMP.BONUS||'입니다.');    
 END;
 /
 /*
@@ -182,7 +182,7 @@ END;
     END CASE;
 */
 -- 사번을 입력 받은 후 부서코드에 따라
--- D1인 경우는 개발팀, D2인 경우는 디자인팀, D3인 경우는 기획팀, 그 외엔는 서비스팀
+-- D1인 경우는 개발팀, D2인 경우는 디자인팀, D3인 경우는 기획팀, 그 외엔 서비스팀
 -- 출력: 해당 사원 이름 'ㅇㅇㅇ는 개발팀입니다'.
 
 DECLARE 
@@ -200,7 +200,7 @@ CASE DEPT_CODE
     ELSE '서비스팀'
     END;
 
-DBMS_OUTPUT.PUT_LINE(EMP.EMP_NAME||'는 ||DNAME||입니다')
+DBMS_OUTPUT.PUT_LINE(EMP.EMP_NAME||'는 '||DNAME||'입니다')
 END;
 /
 /*
