@@ -107,8 +107,8 @@ public class VariablePractice {
 		char words = word.charAt(word.length()-1);
 			
 		System.out.println("첫 번째 문자 : " + word0 +
-						   "\n두 번째 문자 : " + 	word1 +
-						   "\n마지막 문자 : "	 + words);
+						   "\n두 번째 문자 : " + word1 +
+						   "\n마지막 문자 : " + words);
 	}
 
 	/*
@@ -120,9 +120,9 @@ public class VariablePractice {
 	 * */
 	public void method6() {
 		System.out.println("문자 하나를 입력해주세요.");
-		String uni = sc.next();
-		char aa = (int)uni;
-		System.out.println(aa);
+		char uni = sc.next().charAt(0);
+        int code = (int) uni;
+        System.out.println("해당 문자의 유니코드는 " + code + "이며, 다음 문자는 " + (char)(code+1) + " : " + (code+1)+ "입니다.");  
 	}
 	
 	/*
@@ -141,7 +141,10 @@ public class VariablePractice {
 		int eng = sc.nextInt();
 		System.out.println("수학 점수를 입력해주세요.");		
 		int math = sc.nextInt();
-		System.out.println("총점 평균.");
+		
+		int sum = kor + eng + math;
+		int avr = sum/3;
+		System.out.println("총점은 " + sum + "점 이고, 전체 평균 점수는 " + avr + "점 입니다!");
 	}
 
 }
