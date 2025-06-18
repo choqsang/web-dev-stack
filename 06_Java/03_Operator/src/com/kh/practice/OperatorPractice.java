@@ -66,7 +66,7 @@ public class OperatorPractice {
 
 	//주민번호(-포함)를 입력받아 남자인지 여자인지 구분하여 출력하세요
 	public void method5() {
-		System.out.println("주민번호를 입력해주세요. (-포함/13자리)");
+		System.out.println("주민번호를 입력해주세요. (-포함/숫자 13자리)");
 		char code = sc.nextLine().charAt(7);
 		if (code == '1' || code == '3') System.out.println("남자");
 		else if (code == '2' || code == '4') System.out.println("여자");
@@ -78,6 +78,8 @@ public class OperatorPractice {
 	public void method6() {
 		System.out.println("나이를 입력해주세요.(숫자로만)");
 		int age = sc.nextInt();
+		// int age = Integer.parseInt(sc.nextLine());
+		// System.out.println(age > 19 ? "성인" : age > 13 ? "청소년" : "어린이");
 		if (age<=13) System.out.println("어린이");
 		else if (age<=19) System.out.println("청소년");
 		else System.out.println("성인");
@@ -93,15 +95,17 @@ public class OperatorPractice {
 
 		if (app%bas==0) System.out.println("바구니는 총 "+(app/bas)+"개가 필요합니다.");
 		else System.out.println("바구니는 총 "+(app/bas+1)+"개가 필요합니다.");
-		
 	}
 	
 	//초 단위 시간을 입력받아 1시간 1분 1초 형식으로 출력
 	public void method8() {
 		System.out.println("초 단위로 시간을 입력해주세요.");
 		int time = sc.nextInt();
-		
-		System.out.println(time/3600 + "시간 "+ (time%3600)/60 + "분 "+ ((time%3600)%60) +"초");
+//		System.out.println(time/3600 + "시간 "+ (time%3600)/60 + "분 "+ ((time%3600)%60) +"초");
+		int hour = time/3600;
+		int min = (time%3600)/60;
+		int sec = (time%3600)%60;
+		System.out.printf("%d시간 %d분 %d초",hour ,min ,sec);
 	}
 	
 }

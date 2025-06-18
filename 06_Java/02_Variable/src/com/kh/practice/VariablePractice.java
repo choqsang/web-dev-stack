@@ -25,10 +25,16 @@ public class VariablePractice {
 	 * 성인 2명과 청소년 3명이 영화를 보려고 할 때 지불해야 할 금액을 계산 후 출력하세요.
 	 * */
 	public void method1() {
-		int adult = 10000;
-		int teenager = 7000;
-		int ticket = adult * 2 + teenager * 3;
-		System.out.println(ticket+"원");
+//		int adult = 10000;
+//		int teenager = 7000;
+//		int ticket = adult * 2 + teenager * 3;
+//		System.out.println(ticket+"원");
+		
+		int adultPrice = 10000;
+		int teenPrice = 7000;
+		int adultCount = 2;
+		int teenCount = 3;
+		System.out.println(adultPrice*adultCount + teenPrice*teenCount);
 	}
 	
 	/*
@@ -46,9 +52,15 @@ public class VariablePractice {
 		int z = 9;
 		
 		// 코드 적어주세요!
-
-		System.out.println("x=" + y + "\ny=" + z + "\nz=" + x);
-
+//		System.out.println("x=" + y + "\ny=" + z + "\nz=" + x);
+		
+		int temp = x;
+		x = y;
+		y = z;
+		z = temp;
+		System.out.println(x);
+		System.out.println(y);
+		System.out.println(z);
 	}
 	
 
@@ -62,6 +74,8 @@ public class VariablePractice {
 	 * 곱하기 : 161
 	 * 나누기 몫 : 3
 	 * */
+	
+		// 코드 정렬 : 내가 정렬하고자 하는 부분 선택하시고 Ctrl + Shift + F
 	public void method3() {
 		System.out.println("첫 번째 숫자를 입력해주세요.");
 		int a = sc.nextInt();
@@ -86,6 +100,9 @@ public class VariablePractice {
 		double garo = sc.nextDouble();
 		System.out.println("세로 길이를 입력해주세요.");		
 		double sero = sc.nextDouble();
+		double size = garo*2 + sero*2;
+		
+		System.out.println("둘레 : " + String.format("%.1f", size));
 		System.out.println("도형의 면적은 " + (garo * sero) + 
 				"이며, 둘레는 " + ((garo + sero) * 2) +"입니다.");
 	}
@@ -122,7 +139,8 @@ public class VariablePractice {
 		System.out.println("문자 하나를 입력해주세요.");
 		char uni = sc.next().charAt(0);
         int code = (int) uni;
-        System.out.println("해당 문자의 유니코드는 " + code + "이며, 다음 문자는 " + (char)(code+1) + " : " + (code+1)+ "입니다.");  
+        System.out.println("해당 문자의 유니코드는 " + code + "이며, 다음 문자는 " 
+        				+ (char)(code+1) + " : " + (code+1)+ "입니다.");  
 	}
 	
 	/*
@@ -143,7 +161,7 @@ public class VariablePractice {
 		int math = sc.nextInt();
 		
 		int sum = kor + eng + math;
-		int avr = sum/3;
+		double avr = sum/3; // 변수 선언 이외 나눗셈 수식에 정수(3)가 아닌 실수(3.0)을 대입할 경우, 실제로 유형값은 실수 형태로 맞춰진다.
 		System.out.println("총점은 " + sum + "점 이고, 전체 평균 점수는 " + avr + "점 입니다!");
 	}
 
