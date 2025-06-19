@@ -32,8 +32,13 @@ public class ConditionPractice {
     	System.out.println("숫자를 한 개 입력하세요.");
     	int i = sc.nextInt();
     	if (i<=0) System.out.println("양수만 입력해주세요.");
-    	else if (i>0 && i%2==0) System.out.println("짝수다");
+    	else if (i%2==0) System.out.println("짝수다");
     	else System.out.println("홀수다");
+    	
+//    	if(i>0) {
+//    		if(i%2==0) System.out.println("짝수다");
+//    		else if(i%2!=0) System.out.println("홀수다");
+//    	} else System.out.println("양수만 입력해주세요.");
     }	
 
     /*
@@ -51,8 +56,15 @@ public class ConditionPractice {
     	System.out.print("피자 먹는 사람의 수 : ");
     	int per = sc.nextInt();
     	
-    	if (per%pcs == 0) System.out.println(per/pcs);
-    	else if(per%pcs != 0) System.out.println(per/pcs+1);
+//    	if (per%pcs == 0) System.out.println(per/pcs);
+//    	else if(per%pcs != 0) System.out.println(per/pcs+1);
+    	
+    	int result = per/pcs;
+    	
+    	if(per%pcs!=0) {
+    		result++;
+    	}
+    	System.out.println(result);
     }
 
     /*
@@ -81,11 +93,11 @@ public class ConditionPractice {
     	int eng = sc.nextInt();
     	
     	int sum = kor + math + eng;
-    	double avg = sum/3;
+    	double avg = (double)sum/3;
     	
     	if(kor>=40 && math>=40 && eng>=40 && avg>=60) {
     		System.out.println("합계 : " + sum);
-    		System.out.println("평균 : " + avg);
+    		System.out.println("평균 : " + String.format("%.1f", avg));
     		System.out.println("축하합니다, 합격입니다!");
     	} else System.out.println("불합격입니다.");
     }
@@ -100,16 +112,16 @@ public class ConditionPractice {
     public void method4() {
     	System.out.print("구매한 옷 가격 : ");
     	int cost = sc.nextInt();
-    	
     	if (cost>=500000) {
-    		System.out.println(cost*0.8);
+    		cost*=0.8;
     	} else if (cost>=300000) {
-    		System.out.println(cost*0.9);
+    		cost*=0.9;
     	} else if (cost>=100000) {
-    		System.out.println(cost*0.95);
-    	} else System.out.println(cost);
+    		cost*=0.95;
+    	}	
+    	DecimalFormat df = new DecimalFormat("###,###");
+    	System.out.println(df.format(cost)+"원");
     }
-
 
     /*
         각에서 0도 초과 90도 미만은 예각, 90도는 직각, 90도 초과 180도 미만은 둔각 180도는 평각으로 분류한다.
@@ -147,7 +159,7 @@ public class ConditionPractice {
        비밀번호 : 23467
        비밀번호가 틀렸습니다.
 
-       아이디 : happy222
+       아이디 : happy222 
        비밀번호 : 1234
        아이디가 틀렸습니다.
 
@@ -161,11 +173,14 @@ public class ConditionPractice {
     	System.out.print("비밀번호 : ");
     	String pw = sc.nextLine();
     	
-    	if (id.equals("happy")&&pw.equals("1234")) {
+    	String idCheck = "happy";
+    	String pwCheck = "1234";
+    	    	
+    	if (id.equals(idCheck)&&pw.equals(pwCheck)) {
     		System.out.println("로그인 성공!");
-    	} else if (id.equals("happy")&&!pw.equals("1234")) {
+    	} else if (id.equals(idCheck)&&!pw.equals(pwCheck)) {
     		System.out.println("비밀번호가 틀렸습니다.");
-    	} else if (!id.equals("happy")&&pw.equals("1234")) {
+    	} else if (!id.equals(idCheck)&&pw.equals(pwCheck)) {
     		System.out.println("아이디가 틀렸습니다.");
     	} else System.out.println("로그인 실패");
     }
@@ -190,11 +205,24 @@ public class ConditionPractice {
     	double wei = sc.nextDouble();
     	double bmi = wei / (hei * hei) * 10000;
     	
-    	if (bmi < 18.5) System.out.println("BMI 지수 : "+ bmi + "\n저체중");
-    	else if (18.5<=bmi && bmi<23) System.out.println("BMI 지수 : "+ bmi + "\n정상체중");
-    	else if (23<=bmi && bmi<25) System.out.println("BMI 지수 : "+ bmi + "\n과체중");
-    	else if (25<=bmi && bmi<30) System.out.println("BMI 지수 : "+ bmi + "\n비만");
-    	else if (30<=bmi) System.out.println("BMI 지수 : "+ bmi + "\n고도 비만");
+//    	if (bmi < 18.5) System.out.println("BMI 지수 : "+ bmi + "\n저체중");
+//    	else if (18.5<=bmi && bmi<23) System.out.println("BMI 지수 : "+ bmi + "\n정상체중");
+//    	else if (23<=bmi && bmi<25) System.out.println("BMI 지수 : "+ bmi + "\n과체중");
+//    	else if (25<=bmi && bmi<30) System.out.println("BMI 지수 : "+ bmi + "\n비만");
+//    	else if (30<=bmi) System.out.println("BMI 지수 : "+ bmi + "\n고도 비만");
+    
+    	String result = "저체중";
+    		if (bmi>=30) result = "고도 비만";
+    			else if (bmi>=25) {
+    				result = "비만";
+    			}
+    			else if (bmi>=23) {
+    				result = "과체중";
+    			}
+    			else if (bmi>=18.5) {
+    				result = "정상체중";
+    			} 
+    		System.out.println(result);
     }
 
     /*
@@ -215,13 +243,39 @@ public class ConditionPractice {
     	int num2 = sc.nextInt();
     	System.out.print("연산자를 입력(+,-,*,/,%) : ");
     	String ari = sc.next();
+    	char at = ari.charAt(0);
     	
-    	if (ari.equals("+")) System.out.println(num1 + ari + num2 + " = " + (num1+num2));
-    	else if (ari.equals("-")) System.out.println(num1 + ari + num2 + " = " + (num1-num2));
-    	else if (ari.equals("*")) System.out.println(num1 + ari + num2 + " = " + (num1*num2));
-    	else if (ari.equals("/")) System.out.println(num1 + ari + num2 + " = " + (num1/num2));
-    	else if (ari.equals("%")) System.out.println(num1 + ari + num2 + " = " + (num1%num2));
-    	else System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+//    	if (ari.equals("+")) System.out.println(num1 + ari + num2 + " = " + (num1+num2));
+//    	else if (ari.equals("-")) System.out.println(num1 + ari + num2 + " = " + (num1-num2));
+//    	else if (ari.equals("*")) System.out.println(num1 + ari + num2 + " = " + (num1*num2));
+//    	else if (ari.equals("/")) System.out.println(num1 + ari + num2 + " = " + (num1/num2));
+//    	else if (ari.equals("%")) System.out.println(num1 + ari + num2 + " = " + (num1%num2));
+//    	else System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+    	
+    	int result = 0;
+    	if (num1 <=0 || num2 <=0) {
+    		System.out.println("잘못 입력하셨습니다. 프로그램을 종료합니다.");
+    		return;
+    	}
+    	
+    	switch(at) {
+    	case '+' :
+    		result = num1 + num2;
+    		break;
+    	case '-' :
+    		result = num1 - num2;
+    		break;
+    	case '*' :
+    		result = num1 * num2;
+    		break;
+    	case '/' :
+    		result = num1 / num2;
+    		break;
+    	case '%' :
+    		result = num1 % num2;
+    		break;
+    	}
+    	System.out.printf("%d %s %d = %d", num1, at, num2, result);
     }
 
     /*

@@ -11,8 +11,8 @@ class LoopPractice {
 
 		LoopPractice l = new LoopPractice();
 //		l.method1();
-//		l.method2();	***
-//		l.method3();	***	
+//		l.method2();
+//		l.method3();	
 //		l.method4();
 //		l.method5();
 		l.method6();
@@ -38,14 +38,33 @@ class LoopPractice {
 
     // 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
-    	for(int i=1; i<200; i+=2) {
-    		for(int j=-2; j>-400; j-=2) {
-    			if(i+j>=100) 
-    			return;
-    			
-    		} 
-    	}	System.out.println();
-    }    		
+    	
+    	int oddeven = 0;
+    	int sum = 0;
+    	int count = 0;
+    	
+//    	for(int i=1; i<200; i+=2) {
+//    		count++;
+//    		for(int j=-2; j>-400; j-=2) {
+//    			if(i+j>=100) {
+//    				System.out.println(count);
+//    				return;    				}
+//    		} 
+//    	}
+    	while (true) {
+    		oddeven++;
+    		count++;
+    		if (oddeven%2 == 1) {
+    			sum += oddeven;
+    	}
+    		else if (oddeven%2 == 0) {
+    			sum -= oddeven;
+    	}
+//    		System.out.println(sum);
+    		if (sum>=100) break;
+    	} 	System.out.println(count+"까지 더하면 총합이 100 이상 도달한다.");
+    	
+    }
 
 
     /*
@@ -61,9 +80,14 @@ class LoopPractice {
 		String str = sc.nextLine();
 		System.out.println("검색하실 문자를 입력해주세요.");
 		char ch = sc.nextLine().charAt(0);
+		int count = 0;		
 		
-		System.out.println(str.toCharArray()); 
-		
+		for (int i=0; i<str.length(); i++) {
+//			System.out.println(str.charAt(i));
+			if (ch==str.charAt(i)) {
+				count++;
+				} 
+		} 	System.out.println(str + " 안에 포함된 "+ ch + " 개수 : " + count);			
     }	
 
     /*
@@ -147,7 +171,52 @@ class LoopPractice {
 	    비긴 횟수 : 1, 진 횟수 : 1, 이긴 횟수 : 1
     */
     public void method6() {
-    
+    	
+    	System.out.print("당신의 이름을 입력해주세요 : ");
+    	String name = sc.nextLine();
+    	
+    	int countWin = 0;
+    	int countLose = 0;
+    	int countDraw = 0;
+    	
+    while (true) {
+    	int rsp = (int)(Math.random() * 3);
+    	// 가위: 0, 바위: 1, 보: 2
+    	String rspstr = "";
+    	switch (rsp) {
+    	case 0 : rspstr = "가위"; break;
+    	case 1 : rspstr = "바위"; break;
+    	case 2 : rspstr = "보"; break;
+    	}
+    	    	
+    	System.out.print("가위바위보 : ");
+    	String player = sc.nextLine();
+    	int pint = 0;
+    	switch (player) {
+    	case "가위" : pint = 0; break;
+    	case "바위" : pint = 1; break;
+    	case "보" : pint = 2; break;
+    	}    	
+    	
+    	System.out.println("컴퓨터 : " + rspstr);
+    	System.out.println(name + " : " + player);
+    	   	
+    	if (pint-rsp==1||pint-rsp==-2) {
+    		countWin++;
+    		System.out.println("이겼습니다!");
+    		break;
+    	}
+    	else if(rsp==pint) {
+    		countDraw++;
+    		System.out.println("비겼습니다.");
+    		continue;
+    	} else {
+    		countLose++;
+    		System.out.println("졌습니다 ㅠㅠ");
+    		continue;
+    	} 
+    }	
+    System.out.println("비긴 횟수 : " + countDraw + ", 진 횟수 : " + countLose + ", 이긴 횟수 : " + countWin);
     }
 
 }
