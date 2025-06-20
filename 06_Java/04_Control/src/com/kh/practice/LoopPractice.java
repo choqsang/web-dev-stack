@@ -3,6 +3,10 @@ package com.kh.practice;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.kh.practice.controller.RockPaperScissorController;
+import com.kh.practice.model.RockPaperScissor;
+import com.kh.practice.view.RockPaperScissorView;
+
 class LoopPractice {
 	
 	Scanner sc = new Scanner(System.in);
@@ -15,7 +19,8 @@ class LoopPractice {
 //		l.method3();	
 //		l.method4();
 //		l.method5();
-		l.method6();
+//		l.method6();
+		l.method6_3();
 		
 	}
  
@@ -43,15 +48,7 @@ class LoopPractice {
     	int sum = 0;
     	int count = 0;
     	
-//    	for(int i=1; i<200; i+=2) {
-//    		count++;
-//    		for(int j=-2; j>-400; j-=2) {
-//    			if(i+j>=100) {
-//    				System.out.println(count);
-//    				return;    				}
-//    		} 
-//    	}
-    	while (true) {
+    	while (true) { // while(sum<100) 으로도 반복 조건을 제한할 수 있음.
     		oddeven++;
     		count++;
     		if (oddeven%2 == 1) {
@@ -63,9 +60,7 @@ class LoopPractice {
 //    		System.out.println(sum);
     		if (sum>=100) break;
     	} 	System.out.println(count+"까지 더하면 총합이 100 이상 도달한다.");
-    	
     }
-
 
     /*
         사용자로부터 문자열을 입력 받고 문자열에서 검색될 문자를 입력 받아 해당 문자열에 그 문자가 몇 개 있는지 개수를 출력하세요. 
@@ -146,8 +141,16 @@ class LoopPractice {
     	}
     		System.out.println("1 : "+count1+"\n2 : "+count2+"\n3 : "
     				+count3+"\n4 : "+count4+"\n5 : "+count5+"\n6 : "+count6);
+    		
+		int[] dice = new int[6]; // dice[0] : 1, ... dice[5] : 6
+		
+		for(int i = 1; i <= 10; i++) {
+    		int random = (int) (Math.random() * 6); // 1 ~ 6 -> 0 ~ 5
+    		dice[random]++;
+    	}
+    	for(int i = 0; i < dice.length; i++) System.out.println((i + 1) + ": " + dice[i]);
     }
-
+    
     /*
         사용자의 이름을 입력하고 컴퓨터와 가위바위보를 하세요. 
         컴퓨터가 가위인지 보인지 주먹인지는 랜덤한 수를 통해서 결정하도록 하고, 사용자에게는 직접 가위바위보를 받으세요.
@@ -219,6 +222,129 @@ class LoopPractice {
     System.out.println("비긴 횟수 : " + countDraw + ", 진 횟수 : " + countLose + ", 이긴 횟수 : " + countWin);
     }
 
+    /*
+     * 
+     * public void method6() {
+    	int win = 0;
+    	int lose = 0;
+    	int draw = 0;
+    	
+    	System.out.print("당신의 이름을 입력해주세요 : ");
+    	String name = sc.nextLine();
+    	
+    	while(true) {
+    		System.out.print("가위바위보 : ");
+    		String input = sc.nextLine();
+    		
+    		// 컴퓨터 - 0 : 가위, 1 : 바위, 2 : 보
+    		int computer = (int)(Math.random() * 3);
+    		String computerName = "";
+    		switch(computer) {
+	    		case 0:
+	    			computerName = "가위";
+	    			break;
+	    		case 1:
+	    			computerName = "바위";
+	    			break;
+	    		case 2:
+	    			computerName = "보";
+	    			break;
+    		}
+    		System.out.println("컴퓨터 : " + computerName);
+    		System.out.println(name + " : " + input);
+    		
+    		
+    		if(input.equals(computerName)) { // 비겼을 경우
+    			System.out.println("비겼습니다.");
+    			draw++;
+    		} else if(
+    				input.equals("가위") && computerName.equals("보")
+    				|| input.equals("바위") && computerName.equals("가위")
+    				|| input.equals("보") && computerName.equals("바위")
+    				) { // 이겼을 경우
+    			System.out.println("이겼습니다!!");
+    			win++;
+    			System.out.println("비긴 횟수 : " + draw
+    								+ ", 진 횟수 : " + lose
+    								+ ", 이긴 횟수 : " + win);
+    			break;
+    		} else { // 졌을 경우
+    			System.out.println("졌습니다 ㅠㅠ");
+    			lose++;
+    		}
+    	}
+    	
+    	
+    	String[] rps = {"가위", "바위", "보"};
+   		// 컴퓨터 - 0 : 가위, 1 : 바위, 2 : 보
+    		int computer = (int)(Math.random() * 3);
+    		
+    	// 사용자는 값으로 인덱스를 찾으면 어떨까?
+    	// 배열에서 값으로 인덱스 찾기
+    }
+		// MVC패턴에 맞게 (객체지향적으로/ 별도클래스생성)
+		// ALT + SHIFT + S : 
+		//새로운 모델에서 Generate Constructors from Superclass 눌러서 적용
+		// Generate Constructors using fields
+
+ */
+    public void method6_3() {
+    	
+    	RockPaperScissorView view = new RockPaperScissorView();
+    	view.gameStart();
+    	
+//    	RockPaperScissor rpsModel = new RockPaperScissor();
+//    	String[] rps = rpsModel.getRps();
+//    	int win = rpsModel.getWin();
+//    	int lose = rpsModel.getLose();
+//    	int draw = rpsModel.getDraw();
+    	
+//    	RockPaperScissorController controller = new RockPaperScissorController();
+//    	private int computer;
+//    	
+//    	System.out.print("당신의 이름을 입력해주세요 : ");
+//    	String name = sc.nextLine();
+//    	
+//    	while(true) {
+//    		System.out.print("가위바위보 : ");
+//    		String input = sc.nextLine();
+//    		
+//    		// 컴퓨터 - 0 : 가위, 1 : 바위, 2 : 보
+//    		computer = (int)(Math.random() * 3);
+//    		
+//    		// 컴퓨터는 인덱스로 값을 찾음!
+//    		System.out.println("컴퓨터 : " + controller.randomComputer());    		
+//    		System.out.println(name + " : " + input);
+//    		
+//    		// 컴퓨터 랜덤값
+//    		public int computer() {
+//    			return computer;
+//    		}
+//    		
+//    		// 사용자가 입력한 값으로 인덱스 찾기
+//    		// 배열에서 값으로 인덱스 찾기 -> 사용자가 입력한 값을 숫자로!
+//    		int inputResult = controller.userIndex(input); 
+//    				Arrays.asList(rpsModel.getRps()).indexOf(input);
+//    		
+//    		public void rpsDraw() { // 비겼을 경우
+//    			rpsModel.setDraw(rpsModel.getDraw()+1);
+//    		} else if(
+//    				inputResult == 0 && computer == 2
+//    				|| inputResult == 1 && computer == 0
+//    				|| inputResult == 2 && computer == 1
+//    				) { // 이겼을 경우
+//    			System.out.println("이겼습니다!!");
+//    			controller.rpsWin();
+//    			System.out.println(controller.rpsResult());
+//    			break;
+//    		} else { // 졌을 경우
+//    			System.out.println("졌습니다 ㅠㅠ");
+//    			rpsModel.setWin(rpsModel.getLose() + 1);
+//    		}
+//    	}
+//    	
+    }
+    
 }
 
 

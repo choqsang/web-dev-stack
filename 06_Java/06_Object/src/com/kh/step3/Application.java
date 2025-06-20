@@ -30,6 +30,8 @@ public class Application {
 		System.out.println("빼기 : " + c.minus());
 		System.out.println("곱하기 : " + c.multiply(20,35));
 		System.out.println("나누기 : " + Calculator.divide(51, 4));
+		c.factorial(6);
+		System.out.println("팩토리얼 : " + c.factorial2(5));
 		
 		
 	}
