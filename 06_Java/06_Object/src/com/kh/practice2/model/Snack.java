@@ -19,8 +19,11 @@ public class Snack {
 }
 
 	public String toString() {
-		return "종류 : " + kind + "\n이름 : " + name + "\n맛 : " + flavor + "\n개수 : "
-				+ numOf + "\n가격 : " + price;
+//		return "종류 : " + kind + "\n이름 : " + name + "\n맛 : " + flavor + "\n개수 : "
+//				+ numOf + "\n가격 : " + price;
+		
+		return kind + "(" + name + " - "
+		+ flavor + ") " + numOf + "개 " + price + "원";
 }
 	public String getkind() {
 		return kind; 	}
