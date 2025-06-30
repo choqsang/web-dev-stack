@@ -94,7 +94,7 @@ public class A_HashMap {
 
 	public static void main(String[] args) {
 		A_HashMap a = new A_HashMap();
-		//a.method1();
+//		a.method1();
 		a.method2();
 	}
 
