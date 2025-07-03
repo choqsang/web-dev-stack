@@ -55,10 +55,9 @@ public class PersonView {
 					case 3:
 						// person 테이블에서 데이터 한 개만 가져오기 - SELECT + id로 조회
 						System.out.print("아이디를 입력해주세요 : ");
-						String search = sc.nextLine();
+						int id = Integer.parseInt(sc.nextLine());
 						System.out.println("======== 사용자 정보 ========");
-//						if(search.equals(id)||search.equals(name)) {}
-						pc.searchPerson(search);
+						pc.searchPerson(id);
 						break;
 						
 					case 4:

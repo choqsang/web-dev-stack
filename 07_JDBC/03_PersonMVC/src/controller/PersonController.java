@@ -79,13 +79,13 @@ public class PersonController {
 	}
 	
 	// person 테이블에서 데이터 한 개만 가져오기 - SELECT + id로 조회
-	public void searchPerson(String search) throws SQLException {
+	public void searchPerson(int id) throws SQLException {
 		Connection connect = getConnect();
 		PersonView pv = new PersonView();
 		
 			String query = "SELECT * FROM person WHERE id = ?";
 			PreparedStatement ps = connect.prepareStatement(query);
-			ps.setString(1, search);
+			ps.setInt(1, id);
 			ps.executeQuery();
 			ResultSet rs = ps.executeQuery();
 			

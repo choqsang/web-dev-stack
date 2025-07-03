@@ -60,7 +60,7 @@ public class TransactionTest2 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-			// 스프링에서는 @Modify @Transaction 어노테이션 활용함
+			// 스프링에서는 @Modifying @Transactional 어노테이션 활용함
 	}
 
 }	

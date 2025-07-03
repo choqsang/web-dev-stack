@@ -1,4 +1,5 @@
-package model;
+package vo;
+// VO(Value Object) : 값만 담는 객체
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

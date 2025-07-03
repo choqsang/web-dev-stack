@@ -1,0 +1,143 @@
+package view;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+import config.ServerInfo;
+import controller.BookController;
+import controller.MemberController;
+import controller.RentController;
+import vo.Member;
+
+public class BookRentApp {
+
+	private Scanner sc = new Scanner(System.in);
+	
+	// 로그인 했을 시 사용자 정보 담을 객체!
+	private Member member = new Member();
+	
+	private BookController bc = new BookController();
+	private MemberController mc = new MemberController();
+	private RentController rc = new RentController();
+	
+	
+	
+	public static void main(String[] args) throws Exception {
+		BookRentApp app = new BookRentApp();
+		app.menu();
+	}
+	
+	public void menu() {
+		// 최초 비로그인 상태일 때
+				// 1. 전체 책 조회 - 로그인 X
+				// 2. 회원가입 - 로그인 X
+				// 3. 로그인 - 로그인 X
+				
+		// 관리자로 로그인 했을 때 (관리자 : admin, 1234)
+				// 1. 책 등록 - 로그인 O 
+				// 2. 책 삭제 - 로그인 O
+				// 3. 로그아웃 - 로그인 O
+					
+		// 일반회원이 들어왔을 때
+				// 1. 회원탈퇴 - 로그인 O (관리자 X)
+				// 2. 로그아웃 - 로그인 O
+				// 3. 책 대여 - 로그인 O
+				// 4. 내가 대여한 책 조회 - 로그인 O
+				// 5. 대여 취소 - 로그인 O
+		
+		
+		boolean check = true;
+		while(check) {
+			
+		System.out.println("-----------------");
+		System.out.println("1. 전체 책 조회");
+		System.out.println("2. 책 신규 등록");
+		System.out.println("3. 책 삭제");
+		System.out.println("4. 회원 가입");
+		System.out.println("5. 로그인");
+		System.out.println("6. 회원 탈퇴");
+		System.out.println("7. 책 대여");
+		System.out.println("8. 내가 대여한 책 조회");
+		System.out.println("9. 대여 취소");
+		System.out.println("-----------------");
+		System.out.print("메뉴 번호를 선택해주세요 : ");
+		int menu = Integer.parseInt(sc.nextLine());
+		
+		switch(menu) {
+			case 1:
+			try {
+				System.out.println(printBookAll());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				break;
+			case 2:
+				System.out.print("제목을 입력해주세요 : ");
+				String title = sc.nextLine();
+				System.out.print("저자를 입력해주세요 : ");
+				String author = sc.nextLine();
+				System.out.print("연령 제한을 입력해주세요 : ");
+				int accessAge = Integer.parseInt(sc.nextLine());
+				bc.registerBook(title, author, accessAge);
+				break;
+			case 3:
+				System.out.print("삭제를 원하시는 도서의 번호를 입력해주세요 : ");
+				int bookNo = Integer.parseInt(sc.nextLine());
+				bc.sellBook(bookNo);
+				break;
+			case 4:
+				Member member = new Member();
+				System.out.print("아이디를 입력해주세요 : ");
+				String id = sc.nextLine();
+				member.setId(id);
+				System.out.print("이름을 입력해주세요 : ");
+				String name = sc.nextLine();
+				member.setName(name);
+				System.out.print("비밀번호를 입력해주세요 : ");
+				String pwd = sc.nextLine();
+				member.setPwd(pwd);
+				System.out.print("나이를 입력해주세요 : ");
+				int age = Integer.parseInt(sc.nextLine());
+				member.setAge(age);
+				mc.register(member);
+				break;
+			case 5:
+				System.out.print("아이디를 입력해주세요 : ");
+				String lId = sc.nextLine();
+				System.out.print("비밀번호를 입력해주세요 : ");
+				String lPwd = sc.nextLine();
+				mc.login(lId, lPwd);
+				break;
+			case 6:
+				System.out.print("아이디를 입력해주세요 : ");
+				String dId = sc.nextLine();
+				mc.delete(dId);
+				break;
+			case 7:
+				System.out.print("아이디를 입력해주세요 : ");
+				String rId = sc.nextLine();
+				System.out.print("대여를 원하시는 도서의 번호를 입력해주세요 : ");
+				int rBookNo = Integer.parseInt(sc.nextLine());
+				rc.rentBook(rId, rBookNo);
+				break;
+			case 8:
+				System.out.print("아이디를 입력해주세요 : ");
+				String bId = sc.nextLine();
+				rc.printRentBook(bId);
+				break;
+			case 9:
+				System.out.print("취소를 원하시는 대여 번호를 입력하세요 : ");
+				int rentNo = Integer.parseInt(sc.nextLine());
+				rc.deleteRent(rentNo);
+				break;
+			default:
+				System.out.println("다시 입력해주세요.");
+		}
+		}
+		
+	} 
+	}
+
+
