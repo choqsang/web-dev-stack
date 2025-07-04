@@ -25,7 +25,7 @@ public class FileTest {
 		System.out.println("파일 용량 : " + file.length());
 		System.out.println("파일 존재 여부 : " + file.exists());
 		System.out.println("디렉터리 여부 : " + file.isDirectory());
-		
+		try {
 		System.out.println("파일명 : " + path.getFileName());
 		System.out.println("절대 경로 : " + path.toAbsolutePath());
 		System.out.println("상대 경로 : " + path);
@@ -36,7 +36,7 @@ public class FileTest {
 		File newFile = new File("src/temp/test.txt");
 		File tempDir = new File("src/temp");
 		// 파일이 존재하지 않는다면 생성!
-			try {
+			
 				// 디렉터리가 존재하지 않다면 폴더부터 생성!
 				if(!tempDir.isDirectory()) {
 					tempDir.mkdir();
@@ -64,7 +64,7 @@ public class FileTest {
 				e.printStackTrace();
 			}
 		
-		System.out.println(newFile.exists());
+//		System.out.println(newFile.exists());
 		
 	}
 

@@ -11,20 +11,19 @@ import vo.Member;
 
 public class MemberDAO {
 	
-	
 	private static MemberDAO instance = new MemberDAO();
 	public static MemberDAO getInstance() {
 		return instance;
 	}
 	
 	private MemberDAO() {
-		
 		try {
 			Class.forName(ServerInfo.DRIVER);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public Connection connect() throws SQLException {
 		return DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
 	}
@@ -32,7 +31,7 @@ public class MemberDAO {
 	// 4. 회원가입
 	public void register(Member member) throws SQLException {
 		Connection connect = connect();
-		String query = "INSERT INTO member(id, name, pwd, age) VALUES(?, ?, ?, ?)";
+		String query = "INSERT INTO member VALUES(?, ?, ?, ?)";
 		PreparedStatement ps = connect.prepareStatement(query);
 		ps.setString(1, member.getId());
 		ps.setString(2, member.getName());
@@ -41,7 +40,7 @@ public class MemberDAO {
 		ps.executeUpdate();
 	}
 	
-	// 5. 로그인/로그아웃
+	// 5. 로그인
 	public Member login(String id, String pwd) throws SQLException {
 		Connection connect = connect();
 		String query = "SELECT * FROM member WHERE id = ? AND pwd = ?";
@@ -50,19 +49,23 @@ public class MemberDAO {
 		ps.setString(2, pwd);
 		ResultSet rs = ps.executeQuery();
 		if(rs.next()) {
-			return new Member(rs.getString("id"), rs.getString("name"), rs.getNString("pwd"), rs.getInt("age"));
+			return new Member(rs.getString("id"), rs.getString("name"), 
+								rs.getString("pwd"), rs.getInt("age"));
 		}
 		return null;
 	}
 	
-	public void logout() {
-		Member member = new Member();
-		member = null;
-	}
-	
 	// 6. 회원탈퇴
-	public void delete(String id) {
-		
+	public void delete(String id) throws SQLException {
+		Connection connect = connect();
+		String query = "DELETE FROM member WHERE id = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		ps.setString(1, id);
+		ps.executeUpdate();
 	}
-	
 }
+
+
+
+
+

@@ -11,6 +11,9 @@ import vo.Rent;
 public class RentDAO {
 	
 	private static RentDAO instance = new RentDAO();
+	public static RentDAO getInstance() {
+		return instance;
+	}
 	
 	private RentDAO() {
 		try {
