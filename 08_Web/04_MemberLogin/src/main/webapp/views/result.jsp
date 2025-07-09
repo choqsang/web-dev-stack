@@ -18,7 +18,8 @@
 	<li>이름 : <%=member.getName() %></li>	
 	<li>나이 : <%=member.getAge() %></li>	
 	</ul>
-									
+	<a href="/">메인 페이지로 이동</a>
+										
 	<% } else { %>
 		<h3>'<%=id %>' 회원 검색에 실패했습니다!</h3>
 	<% } %>	
