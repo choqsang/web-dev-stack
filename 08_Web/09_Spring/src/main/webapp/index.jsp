@@ -1,7 +1,6 @@
 <%@page import="vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,28 +25,23 @@ ex) views 폴더에 위치한 index.jsp에서
 --%>
 
 	<h1>회원 관리</h1>
-	<c:if test="${empty member}">
+	<c:choose>
+	<c:when test="${empty member}">
 	<ul>
-		<%-- 로그인 되어 있지 않은 경우 --%>
 		<li><a href ="/views/register.jsp">회원가입</a></li>
-		
 		<li><a href ="/views/login.jsp">로그인</a></li>
 	</ul>
-	</c:if>
-	
-	<c:if test="${not empty member}">
+	</c:when>
+	<c:otherwise>
 	<ul>
-		<%-- 로그인 된 경우 --%>
-		<h3>${member.getId()}님 안녕하세요!</h3>
-		
 		<li><a href="/views/search.jsp">회원검색</a></li>
-	
-		<li><a href="/front?command=allMember">전체 회원 보기</a></li>
-						
-		<li><a href="/front?command=logout">로그아웃</a></li>
+		<li><a href="/allMember.do">전체 회원 보기</a></li>
+		<li><a href="/logout.do">로그아웃</a></li>
+		
 		<%-- /url 페이지 경로 뒤에 오는 쿼리 문자열
 		?key1=value1&key2=value2('&'로 여러 파라미터를 구분)에 익숙해질 것! --%>
 	</ul>
-	</c:if>
+	</c:otherwise>
+	</c:choose>
 </body>
 </html>
