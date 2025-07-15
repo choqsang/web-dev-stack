@@ -1,0 +1,27 @@
+:root {
+  --side-width: 250px;
+  --header-height: 60px;
+}
+.side {
+  position: fixed;
+  background-color: navy;
+  color: white;
+  height: 100%;
+  width: var(--side-width);
+  overflow-y: auto;
+}
+
+.main {
+  padding-left: var(--side-width);
+}
+
+.main header {
+  position: fixed;
+  background-color: beige;
+  height: var(--header-height);
+  width: 100%;
+}
+
+.main section {
+  padding-top: var(--header-height);
+}

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kh.mybatis.model.dto.SearchDTO;
 import com.kh.mybatis.model.vo.Member;
 import com.kh.mybatis.service.MemberService;
 
@@ -25,6 +26,19 @@ public class MemberController {
 		// List<Member> list = service.allMember();
 		model.addAttribute("list", service.allMember());
 		return "index";
+	}
+	
+	@GetMapping("/search")
+	public String search(SearchDTO dto, Model model) {
+		model.addAttribute("list", service.search(dto));
+		return "index";
+	}
+	
+	@GetMapping("/home")
+	public String home(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	@GetMapping("/register")
@@ -55,10 +69,23 @@ public class MemberController {
 	public String update(Member vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("member");
+		//if(vo.getName()==null) vo.setName(member.getName());
+		//if(vo.getAge()==0) vo.setAge(member.getAge());
 		vo.setId(member.getId());
 		service.update(vo);
-		session.setAttribute("member", vo);
+		
+		Member result = service.login(vo);
+		session.setAttribute("member", result);
 		return "redirect:/";
 	}
 	
+	@GetMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("member");
+		service.delete(member.getId());
+		session.invalidate();
+		return "redirect:/";
+	}
+
 }
