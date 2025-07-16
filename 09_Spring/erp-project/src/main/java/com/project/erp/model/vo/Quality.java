@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Quality {
-
+	private int userNo;
 }

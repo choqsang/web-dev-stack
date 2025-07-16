@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class FinancialSalary {
-
+	private int salary;
 }

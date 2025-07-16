@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Schedule {
-
+	private int userNo;
 }

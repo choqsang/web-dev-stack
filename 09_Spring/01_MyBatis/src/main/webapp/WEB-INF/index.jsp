@@ -53,6 +53,7 @@
 		아이디 : ${list.id} / 이름 : ${list.name} / 나이 : ${list.age} <br>
 	</c:forEach> -->
 	
+	<form action="/delete" method="post">
 		<table border="1">
 		<tr>
 			<th>번호</th>
@@ -60,6 +61,7 @@
 			<th>이름</th>
 			<th>비밀번호</th>
 			<th>나이</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach items="${list}" var="member" varStatus="status">
 		<tr>
@@ -68,9 +70,13 @@
 			<td>${member.name}</td>
 			<td>${member.pwd}</td>
 			<td>${member.age}</td>
+			<td><input type="checkbox" name="idList" value="${member.id}"></td>
 		<tr>
 		</c:forEach>  
 		</table>
+		<input type="submit" value="삭제">
+	</form>
+		
 		<a href="/home"><i><b>Home</b></i></a>
 	</body>
 </html>

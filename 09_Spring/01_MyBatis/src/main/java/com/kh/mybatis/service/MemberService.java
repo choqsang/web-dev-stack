@@ -39,4 +39,7 @@ public class MemberService {
 		mapper.delete(id);
 	}
 	
+	public void selectDelete(List<String> idList) {
+		mapper.selectDelete(idList);
+	}
 }
