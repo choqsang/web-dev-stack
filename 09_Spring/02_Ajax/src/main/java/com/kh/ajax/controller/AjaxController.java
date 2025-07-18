@@ -54,10 +54,10 @@ public class AjaxController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/signup")
-	public void signup(Member vo) {
-		 System.out.println(vo.getId());
-		 System.out.println(vo.getPwd());
+	@PostMapping("/register")
+	public Member register(Member vo) {
+		 service.register(vo);
+		 return vo;
 	}
 	
 }

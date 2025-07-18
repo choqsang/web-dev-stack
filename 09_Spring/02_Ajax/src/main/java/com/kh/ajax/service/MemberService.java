@@ -23,7 +23,9 @@ public class MemberService implements MemberMapper{
 	}
 
 	@Override
-	public Member signup(String id, String pwd) {
-		return null;
+	public void register(Member vo) {
+		mapper.register(vo);
 	}
+
+	
 }

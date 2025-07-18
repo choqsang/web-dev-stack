@@ -8,5 +8,5 @@ import com.kh.ajax.model.vo.Member;
 public interface MemberMapper {
 	Member idCheck(String id);
 	boolean idBoolCheck(String id);
-	Member signup(String id, String pwd);
+	void register(Member vo);
 }

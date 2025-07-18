@@ -11,4 +11,9 @@
 		select exists(select * from member where id = #{id})
 	</select>
 	
+	<insert id="register" parameterType="Member">
+		INSERT INTO member
+		VALUES(#{id}, #{name}, #{pwd}, #{age})
+	</insert>
+	
 </mapper>

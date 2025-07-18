@@ -19,15 +19,15 @@ public class PageController {
 		model.addAttribute("component", "../component/main.jsp");
 		return "/common/layout";
 	}
-		
-	@GetMapping("/example")
-	public String example(Model model) {
-		model.addAttribute("component", "../component/example.jsp");
-		return "/common/layout";
-	}
-	
+			
 	@GetMapping("/login")
 	public String login() {
 		return "/page/login";
 	}
+	
+	@GetMapping("/register")
+	public String register() {
+		return "/page/register";
+	}
+	
 }
