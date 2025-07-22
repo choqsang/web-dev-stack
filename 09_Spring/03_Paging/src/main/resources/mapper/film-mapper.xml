@@ -3,14 +3,17 @@
 
 <!--  <select id="showFilm"> <resultMap> 사용 가능 -->
 
-	<resultMap id="FilmMap" type="Film">
+	<resultMap id="filmMap" type="Film">
 		<id property="id" column="film_id" />
 		<result property="title" column="title"/>		
 		<result property="desc" column="description"/>	
 	</resultMap>
 	
-	<select id="showFilm" resultMap="FilmMap">
-		SELECT * FROM film_text
+	<select id="showFilm" parameterType="PagingDTO" resultMap="filmMap">
+		SELECT * FROM film_text LIMIT #{offset}, #{limit}
+	</select>
+	<select id="total" resultType="int">
+		SELECT count(*) FROM film_text
 	</select>
 
 </mapper>
