@@ -100,7 +100,7 @@ section {
 }
 .animation-alternate {
   background-color: indigo;
-  animation: rotate 0.5s linear infinite;
+  animation: rotate 5s linear infinite;
   /* infinite: 무한 재생, alternate: 처음으로 되돌아감 */
 }
 .animation-alternate:active {
