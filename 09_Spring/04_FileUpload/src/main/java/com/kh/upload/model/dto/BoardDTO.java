@@ -1,18 +1,16 @@
-package com.kh.upload.model.vo;
+package com.kh.upload.model.dto;
 
-import java.time.LocalDateTime;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class Board {
+public class BoardDTO {
 
-	private int no;
 	private String title;
 	private String content;
 	private String url;
-	private LocalDateTime createdAt;
-	
+	private MultipartFile file;
 }

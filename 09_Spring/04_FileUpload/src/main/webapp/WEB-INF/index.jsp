@@ -5,7 +5,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<style>
+	<title>파일 업로드</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- <style>
   /* --- CSS 시작 --- */
   body {
     font-family: Arial, sans-serif;
@@ -74,9 +76,12 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   /* --- CSS 끝 --- */
-</style>
+</style> -->
 </head>
 <body>
+	
+	<!-- list.jsp -->
+	<a href="list">게시판 글 목록</a>
 	
 	<h2>File Upload Test</h2>
 	<form action="/upload" method="post" enctype="multipart/form-data">
@@ -91,10 +96,63 @@
 	</form>
 	
 	<h2>File 정보 등록</h2>
-	<form action="/addBoard" method="post" enctype="multipart/form-data">
+	<form action="/insert" method="post" enctype="multipart/form-data">
 		<input type="file" name="file"><br>
 		<input type="submit" value="파일 등록">
 	</form>
+	
+	<button id="open">모달 열기</button>
+	<div class="modal-bg">
+		<div class="modal">
+			<button id="close">X</button>
+			<h3>파일 업로드</h3>
+			<form action="/upload" method="post" enctype="multipart/form-data">
+				<input type="file" name="file"><br>
+				<input type="submit" value="파일 업로드">
+			</form>
+		</div>
+	</div>
+	
+	<style>
+		.modal-bg {
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background: #3337;
+			z-index: 1000;
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+		.modal {
+			background: white;
+			position: relative;
+			width: 350px;
+			padding: 20px;
+		}
+		.modal #close {
+			position: absolute;
+			top: 10px; right: 10px;
+			cursor: pointer;
+			font-size: 15px;
+			border: none;
+			background: none;
+		}
+	</style>
+	<script>
+	$("#open").click(() => {
+         $(".modal-bg").css("display", "flex");       
+      });
+	
+	$("#close").click(() => {
+        $(".modal-bg").css("display", "none");       
+     });
+	
+	$(".modal-bg").click((e) => {
+        if(e.target === e.currentTarget) {
+			$(".modal-bg").css("display", "none");
+        }
+     });
+	</script>
 
 </body>
 </html>
