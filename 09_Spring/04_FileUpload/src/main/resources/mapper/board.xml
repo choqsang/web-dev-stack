@@ -2,17 +2,21 @@
 <mapper namespace="com.kh.upload.mapper.BoardMapper">
 	
 	<resultMap id="boardMap" type="Board">
-    <id property="no" column="no"/>
+     <id property="no" column="no"/>
     <result property="title" column="title"/>
     <result property="content" column="content"/>
-    <result property="url" column="url"/>
-    <result property="createdAt" column="created_at"/></resultMap>
+    <result property="url" column="url"/> 
+    <!--
+     : (최신버전 기준) resultMap에서 컬럼명과 변수명이 일치하는 경우에 굳이 명시하지 않아도 값을 불러올 수 있다!  
+    -->
+    <result property="createdAt" column="created_at"/> 
+    </resultMap>
     
-	<insert id="insert" parameterType="Board">
+	<insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
 		INSERT INTO board (title, content, url)
 		VALUES(#{title}, #{content}, #{url})
 	</insert>
-	
+
 	<insert id="write" parameterType="BoardDTO">
 		INSERT INTO board (title, content, url)
 		VALUES(#{title}, #{content}, #{url})
@@ -22,12 +26,16 @@
 		SELECT * FROM board
 	</select>
 	
-	<select id="select" parameterType="int" resultType="Board">
+	<select id="select" parameterType="int" resultMap="boardMap">
 		SELECT * FROM board WHERE no = #{no}
 	</select>
 	
-	<update id="update" parameterType="int">
-		UPDATE board SET title=#{title}, content=#{content}, url=#{url} WHERE no = #{no}
+	<select id="view" parameterType="int" resultMap="boardMap">
+		SELECT * FROM board WHERE no = #{no}
+	</select>
+	
+	<update id="update" parameterType="Board">
+		UPDATE board SET title= #{title}, content= #{content}, url= #{url} WHERE no = #{no}
 	</update>
 	
 	<delete id="delete" parameterType="int">

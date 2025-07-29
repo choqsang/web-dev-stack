@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <title>파일 업로드</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container">
@@ -25,41 +19,30 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>내용</th>		
-				<th>파일명</th>		
+				<!-- <th>파일명</th> -->		
 				<th>작성시간</th>
 				<th>삭제</th>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="item">
+				<!-- list 가져와서 표로 만들기! -->
+				<c:forEach items="${list}" var="board">
 						<tr>
-							<td>${item.no}</td>
-							<td>${item.title}</td>
-							<td>${item.content}</td>
-							<td>${item.url}</td>
-							<td>${item.createdAt}</td>
-							<td><div class="form-check">
-							<input class="form-check-input" type="checkbox" id="checkDefault" data-no="${item.no}"></div></td>
+							<td>${board.no}</td>
+							<td><a href="/view?no=${board.no}">${board.title}</a></td>
+							<td>${board.content}</td>
+							<!-- <td>${board.url}</td>  -->
+							<td><fmt:formatDate value="${board.formatDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+							<td>
+							<div class="form-check">
+                                <input class="form-check-input delete-checkbox" type="checkbox" value="${board.no}">
+                            </div>
+								<!-- <div class="form-check">
+								<input class="form-check-input" type="checkbox" id="checkDefault" data-no="${item.no}"></div></td>  -->
 						</tr>
 					</c:forEach>
 			</tbody>
-		</table>
-	<script>
-	$("#deletelist").click((e) => {
-        const no = $(e.target).data('no');
-        //console.log(no);
-        $.ajax({
-            // 요청
-            type: "post",
-            url: "/delete",
-            data: "no=" + no,
-            // 응답
-            success: function (result) {
-				location.reload();
-            },
-          });
-      });
-	</script>
-
+		</table><!--
+	
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-outline-warning"
 			data-bs-toggle="modal" data-bs-target="#writeModal">글 추가</button>
@@ -101,5 +84,49 @@
 		</div>
 	</div>
 
+<script>
+	//$("#deletelist").click((e) => {
+      //const no = $(e.target).data('no');
+        
+        $("#deletelist").click((e) => {
+            const check = $(e.target).val();
+            if (check == null) {
+                alert('삭제할 글을 선택해주세요.');
+                return;
+            }
+            if (!confirm('선택된 글을 정말 삭제하시겠습니까?')) {
+                return;
+            }
+        $.ajax({
+            type: "post",
+            url: "/delete",
+            data: "no=" + no,
+            success: function (result) {
+                if (result && result.success) {
+                    alert('글이 성공적으로 삭제되었습니다.');
+                    location.reload();
+                } else {
+                    alert('글 삭제에 실패했습니다: ' + (result ? result.message : '알 수 없는 오류'));
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('삭제 중 오류가 발생했습니다: ' + error);
+                console.error("AJAX Error: ", status, error, xhr.responseText);
+            }
+        });
+        
+        //$.ajax({
+            // 요청
+            //type: "post",
+            //url: "/delete",
+            //data: "no=" + no,
+            // 응답
+            //success: function (result) {
+				//location.reload();
+            //},
+          //});
+      });
+</script>
+	
 </body>
 </html>

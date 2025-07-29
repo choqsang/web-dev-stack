@@ -15,4 +15,5 @@ public interface BoardMapper {
 	void update(Board vo);
 	void delete(int no);
 	void write(BoardDTO dto);
+	List<Board> view(int no);
 }

@@ -71,7 +71,8 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public String selectAll(Model model) {
-		List<Board> list = service.selectAll();
+		//List<Board> list = service.selectAll();
+		List<BoardDTO> list = service.selectAll();
 		model.addAttribute("list", list);
 		return "list";
 	}
@@ -82,20 +83,56 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
+//	public String write(String title, String content, MultipartFile file) {
 	public String write(BoardDTO dto) {
+		System.out.println(dto.getTitle());
+		System.out.println(dto.getContent());
+		System.out.println(dto.getFile());
+		
+		// 이미지 업로드 추가	
 		String fileName = fileUpload(dto.getFile());
-		MultipartFile file = dto.getFile();
-		dto.setUrl(file.getOriginalFilename());
-		service.write(dto);
-		return "redirect:/list";
+		
+		// board 테이블에 데이터 추가
+		Board vo = new Board();
+		vo.setTitle(dto.getTitle());
+		vo.setContent(dto.getContent());
+		vo.setUrl(fileName);
+		service.insert(vo);
+		
+		System.out.println(vo);
+		
+		return "redirect:/view?no=" + vo.getNo();
 	}
+	
+//	@PostMapping("/write")
+//	public String write(BoardDTO dto) {
+//		MultipartFile file = dto.getFile();
+//		fileUpload(file);
+//		dto.setUrl(file.getOriginalFilename());
+//		service.write(dto);
+//		return "redirect:/list";
+//	}
 	
 	@PostMapping("/delete")
 	public String delete(int no) {
 		service.delete(no);
-		return "redirect:/";
+		return "redirect:/list";
 	}
 	
+	@GetMapping("/view")
+	public String view(int no, Model model) {
+		Board board = service.select(no);
+		model.addAttribute("board", board);
+		return "view";
+	}
 	
+	@PostMapping("/update")
+	public String update(Board vo, int no, Model model) {
+		System.out.println(vo);
+		service.update(vo);
+		Board view = service.select(no);
+		model.addAttribute("list", view);
+		return "view";
+	}
 	
 }
