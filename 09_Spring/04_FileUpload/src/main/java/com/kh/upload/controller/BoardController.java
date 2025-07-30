@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.upload.model.dto.PagingDTO;
 import com.kh.upload.model.dto.BoardDTO;
 import com.kh.upload.model.vo.Board;
 import com.kh.upload.service.BoardService;
@@ -19,6 +20,7 @@ import com.kh.upload.service.BoardService;
 @Controller
 public class BoardController {
 
+	private String path = "\\\\192.168.0.35\\upload\\";
     private final CustomErrorController customErrorController;
 
     BoardController(CustomErrorController customErrorController) {
@@ -40,13 +42,13 @@ public class BoardController {
 		// System.out.println(uuid.toString());
 		String fileName = uuid.toString() + "_" + file.getOriginalFilename();
 		System.out.println(file.getOriginalFilename());
-		File copyFile = new File("\\\\192.168.0.35\\upload\\" + fileName);
+		File copyFile = new File(path + fileName);
 		try {
 			file.transferTo(copyFile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return fileName;
 	}
 	
 	@PostMapping("/upload")
@@ -70,17 +72,18 @@ public class BoardController {
 	private BoardService service;
 	
 	@GetMapping("/list")
-	public String selectAll(Model model) {
+	public String showBoard(Model model, PagingDTO paging) {
 		//List<Board> list = service.selectAll();
-		List<BoardDTO> list = service.selectAll();
+		List<BoardDTO> list = service.showBoard(paging);
 		model.addAttribute("list", list);
+		model.addAttribute("paging", new PagingDTO(paging.getPage(), service.total()));
 		return "list";
 	}
 	
-	@PostMapping("/insert")
-	public String insert(Board vo) {
-		return "redirect:/";
-	}
+//	@PostMapping("/insert")
+//	public String insert(Board vo) {
+//		return "redirect:/";
+//	}
 	
 	@PostMapping("/write")
 //	public String write(String title, String content, MultipartFile file) {
@@ -91,6 +94,7 @@ public class BoardController {
 		
 		// 이미지 업로드 추가	
 		String fileName = fileUpload(dto.getFile());
+		System.out.println(fileName);
 		
 		// board 테이블에 데이터 추가
 		Board vo = new Board();
@@ -113,8 +117,16 @@ public class BoardController {
 //		return "redirect:/list";
 //	}
 	
-	@PostMapping("/delete")
+	@GetMapping("/delete")
 	public String delete(int no) {
+		// 이미지가 있는 경우 삭제를 해야하지 않을까?
+		// -> 기존 url 컬럼에 값이 필요하지 않을까?
+		// -> no로 하나 정보 가지고 오는 기능 만들어 놓았나?
+		
+		Board b = service.select(no);
+		File file = new File(path + b.getUrl());
+		file.delete();
+		
 		service.delete(no);
 		return "redirect:/list";
 	}
@@ -133,6 +145,28 @@ public class BoardController {
 		Board view = service.select(no);
 		model.addAttribute("list", view);
 		return "view";
+	}
+	
+	@PostMapping("/update2")
+	public String update2(BoardDTO dto) {
+		// System.out.println(dto);
+		// 새로운 파일로 수정 -> 기존 파일은 삭제하고 해당 파일을 업로드 하고 DB URL을 수정
+		
+		// System.out.println(dto.getFile().isEmpty());
+		if(!dto.getFile().isEmpty()) {
+			// 1. 파일이 비어있지 않다면 기존 파일 삭제
+			File file = new File(path + dto.getUrl());
+			file.delete();
+			
+			// 2. 해당 파일 업로드 -> 새로운 파일의 url 파일명
+			String url = fileUpload(dto.getFile());
+			dto.setUrl(url);
+		}
+		
+		// 3. 해당 no에 따른 데이터들 수정
+		service.update2(dto);
+		
+		return "redirect:/view?no=" + dto.getNo();
 	}
 	
 }

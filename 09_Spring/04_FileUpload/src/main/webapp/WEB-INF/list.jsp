@@ -10,10 +10,18 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/list.css"></link>
 </head>
 <body>
 	<div class="container">
+		<div id="header">
 		<h1>List Page</h1>
+		<div>
+		<input type="text" name="search" value="${keyword}">
+		<a class="btn btn-dark" href="/view?no=${board.no}">검색</a>
+		</div>
+		</div>
+		
 		<table class="table">
 			<thead>
 				<th>번호</th>
@@ -31,7 +39,7 @@
 							<td><a href="/view?no=${board.no}">${board.title}</a></td>
 							<td>${board.content}</td>
 							<!-- <td>${board.url}</td>  -->
-							<td><fmt:formatDate value="${board.formatDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+							<td><fmt:formatDate value="${board.formatDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td>
 							<div class="form-check">
                                 <input class="form-check-input delete-checkbox" type="checkbox" value="${board.no}">
@@ -46,8 +54,8 @@
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-outline-warning"
 			data-bs-toggle="modal" data-bs-target="#writeModal">글 추가</button>
-		<button type="button" class="btn btn-danger" id="deletelist">글 삭제</button>
-
+		<button type="button" class="btn btn-outline-danger" id="deletelist">글 삭제</button>
+			
 		<!-- Modal -->
 		<div class="modal fade" id="writeModal" tabindex="-1"
 			aria-labelledby="writeModalLabel" aria-hidden="true">
@@ -85,9 +93,7 @@
 	</div>
 
 <script>
-	//$("#deletelist").click((e) => {
-      //const no = $(e.target).data('no');
-        
+	
         $("#deletelist").click((e) => {
             const check = $(e.target).val();
             if (check == null) {
@@ -114,19 +120,26 @@
                 console.error("AJAX Error: ", status, error, xhr.responseText);
             }
         });
-        
-        //$.ajax({
-            // 요청
-            //type: "post",
-            //url: "/delete",
-            //data: "no=" + no,
-            // 응답
-            //success: function (result) {
-				//location.reload();
-            //},
-          //});
+       
       });
 </script>
-	
+
+	<nav>
+		<ul class="pagination">
+			<li class="page-item ${paging.prev ? '' : 'disabled'}"><a
+				class="page-link" href="/list?page=${paging.startPage - 1}">Previous</a></li>
+
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}"
+				var="page">
+				<li class="page-item"><a
+					class="page-link ${paging.page == page ? 'active' : ''}"
+					href="/list?page=${page}">${page}</a></li>
+			</c:forEach>
+
+			<li class="page-item ${paging.next ? '' : 'disabled'}"><a
+				class="page-link" href="/list?page=${paging.endPage + 1}">Next</a></li>
+		</ul>
+	</nav>
+
 </body>
 </html>
