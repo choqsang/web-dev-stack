@@ -76,7 +76,7 @@ public class BoardController {
 		//List<Board> list = service.selectAll();
 		List<BoardDTO> list = service.showBoard(paging);
 		model.addAttribute("list", list);
-		model.addAttribute("paging", new PagingDTO(paging.getPage(), service.total()));
+		model.addAttribute("paging", new PagingDTO(paging.getPage(), service.total(paging)));
 		return "list";
 	}
 	

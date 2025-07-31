@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor
 public class PagingDTO {
 	
+	private String keyword; // 검색 키워드
+	
 	private int offset = 0; // 시작위치
 	private int limit = 10; // 개수
 	

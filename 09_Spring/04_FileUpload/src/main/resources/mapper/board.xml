@@ -23,11 +23,11 @@
 	</insert>  -->
 	
 	<select id="selectAll" resultMap="boardMap">
-		SELECT * FROM board 
+		SELECT * FROM board
 	</select>
 	
 	<select id="select" parameterType="int" resultMap="boardMap">
-		SELECT * FROM board WHERE no = #{no}
+		SELECT * FROM board no= #{no}
 	</select>
 	
 	<select id="view" parameterType="Board" resultMap="boardMap">
@@ -47,11 +47,22 @@
 	</delete>
 	
 	<select id="showBoard" parameterType="PagingDTO" resultMap="boardMap">
-		SELECT * FROM board LIMIT #{offset}, #{limit}
+		SELECT * FROM board 
+		<where>
+		<if test="keyword != null">
+			title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		</where>
+		LIMIT #{offset}, #{limit}
 	</select>
 	
-	<select id="total" resultType="int">
-		SELECT count(*) FROM board
+	<select id="total" parameterType="PagingDTO" resultType="int">
+		SELECT count(title) FROM board
+		<where>
+		<if test="keyword != null">
+			title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		</where>
 	</select>
 
 </mapper>

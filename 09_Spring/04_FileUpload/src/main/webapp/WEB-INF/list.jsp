@@ -17,8 +17,11 @@
 		<div id="header">
 		<h1>List Page</h1>
 		<div>
-		<input type="text" name="search" value="${keyword}">
-		<a class="btn btn-dark" href="/view?no=${board.no}">검색</a>
+		<form action="/list" method="get">
+		<input type="text" name="keyword" value="${param.keyword}">
+		<input type="submit" value="검색" class="btn btn-dark">
+		<!-- <a class="btn btn-dark" href="redirect:/list">검색</a> -->
+		</form>
 		</div>
 		</div>
 		
@@ -90,6 +93,24 @@
 				</div>
 			</div>
 		</div>
+		
+		<nav>
+		<ul class="pagination">
+			<li class="page-item ${paging.prev ? '' : 'disabled'}"><a
+				class="page-link" href="/list?page=${paging.startPage - 1}&keyword=${param.keyword}">Previous</a></li>
+
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}"
+				var="page">
+				<li class="page-item"><a
+					class="page-link ${paging.page == page ? 'active' : ''}"
+					href="/list?page=${page}&keyword=${param.keyword}">${page}</a></li>
+			</c:forEach>
+
+			<li class="page-item ${paging.next ? '' : 'disabled'}"><a
+				class="page-link" href="/list?page=${paging.endPage + 1}&keyword=${param.keyword}">Next</a></li>
+		</ul>
+	</nav>
+	
 	</div>
 
 <script>
@@ -123,23 +144,6 @@
        
       });
 </script>
-
-	<nav>
-		<ul class="pagination">
-			<li class="page-item ${paging.prev ? '' : 'disabled'}"><a
-				class="page-link" href="/list?page=${paging.startPage - 1}">Previous</a></li>
-
-			<c:forEach begin="${paging.startPage}" end="${paging.endPage}"
-				var="page">
-				<li class="page-item"><a
-					class="page-link ${paging.page == page ? 'active' : ''}"
-					href="/list?page=${page}">${page}</a></li>
-			</c:forEach>
-
-			<li class="page-item ${paging.next ? '' : 'disabled'}"><a
-				class="page-link" href="/list?page=${paging.endPage + 1}">Next</a></li>
-		</ul>
-	</nav>
 
 </body>
 </html>

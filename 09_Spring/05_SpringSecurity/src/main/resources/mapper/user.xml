@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.security.mapper.UserMapper">
+	
+	<resultMap id="UserMap" type="User">
+    <id property="id" column="id"/>
+    <result property="pwd" column="pwd"/>
+    <result property="name" column="name"/>
+    <result property="role" column="role"/> 
+    </resultMap>
+    
+	<insert id="register" parameterType="User">
+		INSERT INTO user VALUES(#{id}, #{pwd}, #{name}, #{role})
+	</insert>
+	
+	<select id="login" parameterType="String" resultType="User">
+		SELECT * FROM user WHERE id=#{id}
+	</select>
+	
+	<select id="selectAll" resultMap="UserMap">
+		SELECT * FROM user
+	</select>
+	
+	<select id="select" parameterType="User" resultMap="UserMap">
+		SELECT * FROM user id= #{id}
+	</select>
+
+	<update id="update" parameterType="User">
+		UPDATE user SET pwd= #{pwd}, name= #{name}, role= #{role} WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="User">
+		DELETE FROM user WHERE id= #{id}
+	</delete>
+	
+</mapper>

@@ -18,6 +18,6 @@ public interface BoardMapper {
 	//void write(BoardDTO dto);
 	//List<Board> view(int no);
 	void update2(BoardDTO dto);
-	int total();
+	int total(PagingDTO paging);
 	List<Board> showBoard(PagingDTO paging);
 }

@@ -80,8 +80,8 @@ public class BoardService {
 		return dtoList;
 	}
 	
-	public int total() {
-		return mapper.total();
+	public int total(PagingDTO paging) {
+		return mapper.total(paging);
 	}
 	
 }
