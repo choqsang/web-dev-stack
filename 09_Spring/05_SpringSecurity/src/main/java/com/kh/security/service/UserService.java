@@ -3,6 +3,9 @@ package com.kh.security.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -11,7 +14,7 @@ import com.kh.security.mapper.UserMapper;
 import com.kh.security.model.vo.User;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserMapper mapper;
@@ -19,6 +22,14 @@ public class UserService {
 	private BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 	
 	public void register(User vo) {
+		System.out.println("암호화 전 : " + vo.getPwd());
+		System.out.println("암호화 후 : " + bcpe.encode(vo.getPwd()));
+		vo.setPwd(bcpe.encode(vo.getPwd()));
+		if(vo.getId().equals("admin")) {
+			vo.setRole("ROLE_ADMIN");
+		} else {
+			vo.setRole("ROLE_USER");
+		}
 		mapper.register(vo);
 	}
 
@@ -40,6 +51,13 @@ public class UserService {
 	
 	public void delete(List<String> idList) {
 		mapper.delete(idList);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		User user = mapper.login(id);
+		System.out.println(user);
+		return user;
 	}
 
 	

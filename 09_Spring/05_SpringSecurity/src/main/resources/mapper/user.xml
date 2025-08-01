@@ -28,8 +28,11 @@
 		UPDATE user SET pwd= #{pwd}, name= #{name}, role= #{role} WHERE id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="User">
-		DELETE FROM user WHERE id= #{id}
+	<delete id="delete" parameterType="ArrayList">
+		DELETE FROM user WHERE id IN
+		<foreach collection="idList" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
 	</delete>
 	
 </mapper>

@@ -3,10 +3,13 @@ package com.kh.security.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.security.model.vo.User;
 import com.kh.security.service.UserService;
@@ -28,12 +31,25 @@ public class UserController {
 	
 	@GetMapping("/register")
 	public String register() {
-		return "/mypage/register";
+		return "/register";
 	}
 	
 	@GetMapping("/login")
 	public String login() {
-		return "/mypage/login";
+		return "/login";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "/mypage";
+	}
+	
+	@GetMapping("/admin")
+	public String admin() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		System.out.println(user);
+		return "/admin";
 	}
 	
 	@PostMapping("/login")
@@ -67,8 +83,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/delete")
-	public String delete(List<String> idList) {
-		service.delete(idList);
+	public String delete(@RequestParam(name="idList", required=false) List<String> idList) {
+		System.out.println(idList);
+		if(idList!=null) service.delete(idList);
 		return "redirect:/";
 	}
 	

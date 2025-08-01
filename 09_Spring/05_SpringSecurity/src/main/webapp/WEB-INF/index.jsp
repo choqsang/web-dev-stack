@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<title>메인화면</title>
+<title>index</title>
 
 <style>
 	body {
@@ -20,37 +22,40 @@
 	a {
 	border: 1px solid black;
 	color: white;
-	background: black;
+	background: grey;
 	}
 	
 	h1{
 	color: brown;
+	}
+	
+	table{
+	max-width: 600px;
+	}
+	
+	table th{
+	min-width: 3em;
 	}
 }
 </style>
 </head>
 
 <body>
-	<h1>홈페이지</h1>
-	<c:choose>
-		<c:when test="${not empty user}">
-		<h3>${user.name}님이 로그인 하셨습니다.</h3>
-		
-		<!-- 로그인 유저 정보 수정 -->
-		<form action="/update" method="post">
-			비밀번호 : <input type="password" name="pwd" value="${user.pwd}"><br>
-			이름 : <input type="text" name="name" value="${user.name}"><br>
-			나이 : <input type="text" name="role" value="${user.role}"><br>
-			<input type="submit" value="회원정보 수정">
-		</form>
-		<a href="/logout"><b>로그아웃</b></a>
-	</c:when>
+<h1>KH 정보교육원</h1>
+
+	<sec:authorize access="isAnonymous()">
+	<a href="/register">회원가입</a>
+	<a href="/login">로그인</a>
+	</sec:authorize>
 	
-	<c:otherwise> 	
-	<a href="/register">회원가입</a><br>
-	<a href="/login">로그인</a><br><br>
-	</c:otherwise>
-	</c:choose>
+	<sec:authorize access="isAuthenticated()">
+	<a href="/logout">로그아웃</a><br>
+	<a href="/mypage">마이 페이지</a>
+	</sec:authorize>
+	
+	<sec:authorize access="hasRole('ADMIN')">
+	<a href="/admin">관리자 페이지</a>
+	</sec:authorize>
 	
 	<!-- <form action="/select">
 		<select name="select">
