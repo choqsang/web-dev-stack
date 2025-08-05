@@ -34,4 +34,6 @@ public class PageController {
 		User user = (User) auth.getPrincipal();
 		System.out.println(user);
 	}
+	
+	
 }

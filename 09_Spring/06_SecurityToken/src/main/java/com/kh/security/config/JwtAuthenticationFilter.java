@@ -3,6 +3,10 @@ package com.kh.security.config;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -28,7 +32,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		if(token!=null && !token.equalsIgnoreCase("null")) {
 			User user = tokenProvider.validate(token);
-			System.out.println(user);
+			
+			// 추출된 인증 정보를 필터링해서 사용할 수 있도록 SecurityContext에 등록 (유저 정보, 비밀번호, 권한 순서로)
+			AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()); // 이미 인증이 끝난 이후로 비밀번호는 null처리 가능!
+			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 		
 		filterChain.doFilter(request, response);
@@ -43,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		return null;
 	}
 	
-//	Authorization
-//	Bearer 
+//	Authorization => 이 형태로 토큰이 전달된다
+//	Bearer (한 칸 띄어씀)
 //	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 }

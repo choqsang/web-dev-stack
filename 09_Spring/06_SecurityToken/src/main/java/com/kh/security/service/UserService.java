@@ -39,7 +39,7 @@ public class UserService {
 		
 		if(user!=null && bcpe.matches(vo.getPwd(), user.getPwd())) {
 			System.out.println("로그인 성공!");
-			System.out.println(vo);
+			//System.out.println(vo);
 			return user;
 		}
 		return null;
