@@ -80,3 +80,76 @@ node_modules 폴더가 용량이 크기 때문에,
 
 npm install => 터미널에 해당 명령어 입력하여 재설치
 npm start => 리액트 시작
+
+## 리액트 수업 2일차 : 2025/09/16/TUE
+
+div "className" 호환성 때문에 쓰임
+
+## useState() 함수 사용을 익숙하게!
+
+리액트 문법 : { A && ()} : A가 있어야 괄호 안의 동작 수행
+(ex) selected에 값이 있을 때만 div를 생성
+
+{selected && (
+
+  <div>
+  <h3>{selected.title}</h3>
+  <p>{selected.description}</p>
+  </div>
+)}
+
+<form onSubmit={}> // submit을 했을 때 발생 + 새로고침
+<input type="text" name="title" placeholder="input title"></input>
+</form> // name => submit 할 때 전달되는 속성의 이름
+
+<!-- id 숫자로 받아올 때 String으로 받아오는 것 조심할 것
+    Number()로 묶거나 '===' 값 비교 지양할 것! -->
+
+<!-- 계산기 만들기 -->
+
+<!-- moodChange 함수에서 feel 값이 한 번씩 밀리는 이유는 React의 비동기적 상태 업데이트 때문입니다.
+
+문제의 원인 🔍
+React의 useState 훅을 사용해 상태를 업데이트하는 함수(setFeel 등)는 비동기적으로 작동합니다. 즉, setFeel(e.target.value)를 호출하더라도, 해당 줄이 실행된 직후에 feel 변수가 즉시 변경되는 것이 아닙니다. React는 여러 상태 업데이트를 모아서 한 번에 처리해 성능을 최적화합니다.
+
+따라서 moodChange 함수 내부에서는 다음과 같은 순서로 코드가 실행됩니다.
+
+setFeel(e.target.value);
+
+feel 상태를 업데이트하도록 요청합니다.
+
+console.log(e.target.value);
+
+현재 선택된 값 (행복, 슬픔 등)이 올바르게 출력됩니다.
+
+console.log(feel);
+
+setFeel 요청이 아직 반영되지 않았기 때문에, feel 변수에는 업데이트되기 이전의 값이 남아있습니다. 이 때문에 feel 값이 한 번씩 밀려서 출력됩니다.
+
+if (feel == "행복") ...
+
+이 조건문도 업데이트되기 전의 feel 값을 사용하므로, 실제 선택한 기분과 다른 이모티콘이 표시됩니다.
+
+해결 방법 💡
+이 문제를 해결하려면, setFeel 함수가 아닌 e.target.value (사용자가 선택한 현재 값)를 직접 사용해서 조건문을 처리해야 합니다.
+
+아래는 수정된 moodChange 함수입니다.
+
+JavaScript
+
+function moodChange(e) {
+  const selectedValue = e.target.value; // 현재 선택된 값을 변수에 저장
+  setFeel(selectedValue); // 상태를 업데이트합니다.
+
+  // 업데이트된 상태(selectedValue)를 사용하여 즉시 로직을 처리합니다.
+  if (selectedValue === "행복") {
+    setEmotion("😊");
+  } else if (selectedValue === "슬픔") {
+    setEmotion("😭");
+  } else if (selectedValue === "화남") {
+    setEmotion("😡");
+  } else {
+    setEmotion(""); // '기분을 선택하세요' 옵션을 위한 처리
+  }
+}
+이제 selectedValue 변수가 setFeel 호출과 관계없이 즉시 현재 값을 가지므로, 올바른 이모티콘을 표시할 수 있습니다. 😃 -->
