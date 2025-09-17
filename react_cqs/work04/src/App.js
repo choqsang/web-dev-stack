@@ -18,11 +18,11 @@ function App() {
     // console.log(e.target.value);
     // console.log(feel);
     if (mood == "행복") {
-      setEmotion("😊");
+      setEmotion("😊룰루♬");
     } else if (mood == "슬픔") {
-      setEmotion("😭");
+      setEmotion("😭흑흑");
     } else if (mood == "화남") {
-      setEmotion("😡");
+      setEmotion("😡ㅂㄷㅂㄷ");
     }
   }
 
@@ -38,22 +38,24 @@ function App() {
         <input type="submit" value="인사하기"></input>
       </form>
       <h3>{greet}</h3>
-      <MyMood moodChange={moodChange} emotion={emotion}></MyMood>
+      <MyMood mood={moodChange}></MyMood>
+      <h3>{emotion}</h3>
     </div>
   );
 }
 
-function MyMood(props) {
+function MyMood({ mood }) {
+  // props.mood로 받지 않더라도 parameter를 {} 형태로 보낼 수 있다
   return (
     /* 기분을 선택하는 select 태그 */
     <div>
-      <select onChange={props.moodChange}>
+      <select onChange={mood}>
+        {/* 위에 받은 파라미터대로 받아올 수 있음 */}
         <option value="">기분을 선택하세요</option>
         <option value="행복">행복</option>
         <option value="슬픔">슬픔</option>
         <option value="화남">화남</option>
       </select>
-      <h3>{props.emotion}</h3>
     </div>
   );
 }

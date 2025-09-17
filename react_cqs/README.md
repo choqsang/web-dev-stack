@@ -78,6 +78,7 @@ props (parameter) <= tag에서 명명한 값
 node_modules 폴더가 용량이 크기 때문에,
 파일을 주고 받을 경우 지우고 전달하면 된다.
 
+ctrl + c => 종료
 npm install => 터미널에 해당 명령어 입력하여 재설치
 npm start => 리액트 시작
 
@@ -86,6 +87,10 @@ npm start => 리액트 시작
 div "className" 호환성 때문에 쓰임
 
 ## useState() 함수 사용을 익숙하게!
+
+import 필수!
+[a,b] 리스트 형태로 묶어
+b 상태를 변경 시 a값에 반영될 수 있도록
 
 리액트 문법 : { A && ()} : A가 있어야 괄호 안의 동작 수행
 (ex) selected에 값이 있을 때만 div를 생성
@@ -153,3 +158,112 @@ function moodChange(e) {
   }
 }
 이제 selectedValue 변수가 setFeel 호출과 관계없이 즉시 현재 값을 가지므로, 올바른 이모티콘을 표시할 수 있습니다. 😃 -->
+
+## 리액트 수업 3일차 : 2025/09/17/WED
+
+function App() {
+// useState 활용하여 배열을 추가하는 예제
+let [fruit, setFruit] = useState([]); // 안에 대괄호를 넣으면 배열로 초기값 설정됨
+let [inputVal, setInputVal] = useState("");
+
+function addFruit() {
+if (inputVal.trim()) {
+setFruit([...fruit, inputVal]); // 기존 배열값을 복사 후 입력값을 추가함
+// inputVal 자리에 여러 개의 데이터를 json 형태로 보낼 수 있음
+// setFruit([...fruit, {name, age}]);
+setInputVal("");
+}
+}
+
+## Map의 활용
+
+용례 :
+{fruit.map((f) => (
+
+<li>{f}</li>
+))}
+}
+
+map에서 값을 들고 올때는,
+변수 이름이 아니라 배열의 요소 이름을 가져와야 한다
+fruitName (X)
+f.name (O)
+
+{user.map((u, index) => (
+
+<tr>
+<td>{u.name}</td>
+<td>{u.age}</td>
+<td>
+<input
+                  type="button"
+                  value="삭제"
+                  onClick={delUser(index)}
+                ></input>
+</td>
+
+index 값을 별도로 가져올 수 있음
+(status와 유사)
+
+## filter 함수
+
+function delUser(index) {
+
+- filter는(내장 메서드) 배열을 순회하면서 조건에 맞는 요소만 골라서 새로운 배열을 만드는 함수
+
+- 최대 두 개의 인자를 가지는데,
+
+* 첫 번째 인자 res는 배열의 i번째 요소 : 사용하지 않는다면 언더바로 지정
+* 두 번째 인자 i는 배열의 인덱스값(을 자동 추적하여 순회한다)
+
+  let newUser = user.filter((res, i) => i !== index); // result, index 요소
+  setUser(newUser);
+
+}
+
+const removeMovie = (id) => {
+setMovies(
+movies.filter((m) => {
+return m.id != id;
+}));};
+
+// id를 받아와서 배열 중에 id와 다를 경우 filter 메서드를 통해 새롭게 배열 생성
+
+## JSX란?
+
+.jsx는 JSX(JavaScript XML) 문법으로 작성된 파일을 나타내는 파일 확장자입니다.
+
+JSX는 자바스크립트의 확장 문법으로, HTML과 유사한 마크업을 자바스크립트 코드 내부에 작성할 수 있게 해줍니다. 리액트(React)에서 컴포넌트의 UI를 정의할 때 주로 사용됩니다.
+
+HTML과 유사한 구조: <와 >로 둘러싸인 태그 형태를 사용합니다.
+
+자바스크립트 표현식 포함 가능: 중괄호 {}를 사용하여 자바스크립트 변수나 표현식을 태그 내에 삽입할 수 있습니다.
+
+컴파일 과정 필요: 브라우저는 JSX를 직접 해석하지 못하기 때문에, 바벨(Babel)과 같은 트랜스파일러를 통해 일반 자바스크립트 코드로 변환하는 과정이 필요합니다.
+
+.jsx 파일은 보통 리액트 컴포넌트를 정의하는 데 사용되며, 파일 이름을 통해 해당 파일이 JSX 문법을 포함하고 있음을 개발자에게 알려주는 역할을 합니다. 최근에는 .js 확장자를 사용하면서도 JSX 문법을 사용하는 경우가 많아졌지만, .jsx는 여전히 JSX 전용 파일임을 명시적으로 나타내는 좋은 방법입니다.
+
+/public/index.html
+: 해당 페이지 내 부트스트랩 등 CSS 라이브러리 CDN 추가 가능함
+
+npm install react-router-dom
+: 명령어를 통해 설치
+
+react-router-dom의 역할
+웹사이트에서 '홈', '소개', '문의'와 같은 메뉴를 클릭했을 때 페이지가 전환되는 것을 보셨을 겁니다. 이처럼 싱글 페이지 애플리케이션(SPA)에서 페이지 이동 기능을 구현할 때 react-router-dom이 사용됩니다.
+
+이 패키지를 설치하면 다음과 같은 기능들을 사용할 수 있습니다.
+
+<BrowserRouter>: HTML5 History API를 사용하여 URL을 동적으로 관리합니다.
+
+<Routes>: 여러 라우트(경로)를 감싸는 컨테이너 역할을 합니다.
+
+<Route>: 특정 URL 경로와 연결될 컴포넌트를 정의합니다.
+
+<Link>: 클릭하면 페이지를 다시 로드하지 않고 다른 경로로 이동시켜주는 링크를 만듭니다.
+
+<Router> 안에 <Routes>로 감싼다.
+<Routes> 안에 <Route>로 감싼다.
+
+<Link> 안에 to="#" 로 이동할 수 있다.
+  ( = a 태그 안에 href="#" 와 동일)

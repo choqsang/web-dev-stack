@@ -1,10 +1,5 @@
 .App {
   padding: 60px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(3, 2fr);
-  grid-template-rows: repeat(4, 2fr);
-  gap: 10px;
 }
 
 .App-logo {
@@ -40,4 +35,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+button,
+input[type="button"] {
+  background-color: #eee7;
+  border: none;
+  border-radius: 5px;
+}
+
+button :hover,
+input[type="button"] :hover {
+  background-color: black;
+}
+
+.numpad {
+  width: 200px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(4, 2fr);
+  gap: 10px;
+}
+
+.numpad button,
+.numpad input {
+  width: 70px;
+  height: 30px;
+}
+
+.ctrlpad {
+  width: 150px;
+  margin-top: 20px;
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  grid-template-rows: repeat(3, 2fr);
+}
+.ctrlpad button {
+  height: 30px;
 }
