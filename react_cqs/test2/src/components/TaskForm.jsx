@@ -6,8 +6,9 @@ const TaskForm = ({ addTask }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTask({ id: Date.now(), name: taskName, date: dueDate });
-    alert("name : " + taskName + "\ndate : " + dueDate);
+    // addTask({ id: Date.now(), name: taskName, date: dueDate });
+    addTask({ name: taskName, date: dueDate });
+    // alert("name : " + taskName + "\ndate : " + dueDate);
     setTaskName("");
     setDueDate("");
   };

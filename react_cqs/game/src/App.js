@@ -14,7 +14,7 @@ export default function App({ index, onClick, isClicked, isTarget }) {
 
   let content = isClicked ? "" : "❔";
   if (isTarget && isClicked) {
-    content = "🎉";
+    content = "💣";
   }
 
   return (

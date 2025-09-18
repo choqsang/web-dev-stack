@@ -4,16 +4,20 @@ import TaskForm from "./components/TaskForm";
 import TaskTable from "./components/TaskTable";
 
 function App() {
-  const [tasks, setTask] = useState([]);
+  const [taskArr, setTask] = useState([]);
   const addTask = (task) => {
     if (task.name.trim() && task.date.trim()) {
-      setTask([...tasks, task]);
+      setTask([...taskArr, task]);
     }
   };
-  const delTask = (id) => {
-    let newTask = tasks.filter((t) => {
-      return t.id != id;
-    });
+  // const delTask = (id) => {
+  //   let newTask = taskArr.filter((t) => {
+  //     return t.id != id;
+  //   });
+  //   setTask(newTask);
+  // };
+  const delTask = (index) => {
+    let newTask = taskArr.filter((_, i) => i !== index);
     setTask(newTask);
   };
 
@@ -22,7 +26,7 @@ function App() {
       <h1>할 일 목록</h1>
       <TaskForm addTask={addTask} />
       <hr />
-      <TaskTable t={tasks} delTask={delTask} />
+      <TaskTable t={taskArr} delTask={delTask} />
     </div>
   );
 }

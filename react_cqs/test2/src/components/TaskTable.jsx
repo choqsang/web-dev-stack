@@ -11,7 +11,8 @@ function TaskTable({ t, delTask }) {
         </tr>
       </thead>
       <tbody>
-        {t.map((t) => (
+        {/* {t.map((t) => ( */}
+        {t.map((t, index) => (
           <tr>
             <td>{t.name}</td>
             <td>{t.date}</td>
@@ -20,7 +21,8 @@ function TaskTable({ t, delTask }) {
                 type="button"
                 value="삭제"
                 onClick={() => {
-                  delTask(t.id);
+                  // delTask(t.id);
+                  delTask(index);
                 }}
               ></input>
             </td>

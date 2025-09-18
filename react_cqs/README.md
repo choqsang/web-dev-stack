@@ -182,7 +182,6 @@ setInputVal("");
 
 <li>{f}</li>
 ))}
-}
 
 map에서 값을 들고 올때는,
 변수 이름이 아니라 배열의 요소 이름을 가져와야 한다
@@ -267,3 +266,64 @@ react-router-dom의 역할
 
 <Link> 안에 to="#" 로 이동할 수 있다.
   ( = a 태그 안에 href="#" 와 동일)
+
+## 리액트 수업 4일차 : 2025/09/18/THU
+
+npm i axios
+: 엑시오스 설치 (install = i 로 축약 가능)
+
+## 엑시오스의 역할
+
+Axios는 브라우저와 Node.js 환경에서 모두 사용 가능한 강력한 HTTP 클라이언트 라이브러리입니다. 웹 애플리케이션이나 서버가 외부 API와 통신할 때 데이터를 주고받기 위한 비동기 요청을 손쉽게 처리하는 역할을 합니다.
+
+API 요청: GET, POST, PUT, DELETE 등 다양한 HTTP 요청 메서드를 사용하여 서버에 데이터를 요청하거나 보냅니다.
+
+비동기 통신: Promise 기반으로 작동하여 비동기 요청을 간결하게 처리할 수 있습니다. async/await 문법과 함께 사용하면 코드를 더 읽기 쉽게 만들 수 있습니다.
+
+데이터 변환: 서버에서 받은 JSON 데이터를 자동으로 JavaScript 객체로 변환해 주거나, 요청을 보낼 때 JavaScript 객체를 JSON 형식으로 변환해 주는 등 데이터 형식을 편리하게 다룹니다.
+
+오류 처리: 네트워크 오류나 서버 응답 오류가 발생했을 때 이를 체계적으로 처리할 수 있는 기능을 제공합니다.
+
+요청/응답 인터셉터: 모든 요청이나 응답이 보내지거나 도착하기 전에 공통적인 작업을 수행할 수 있도록 해줍니다. 예를 들어, 모든 요청 헤더에 인증 토큰을 자동으로 추가하거나, 오류 로그를 기록하는 등의 작업을 할 수 있습니다.
+
+요약하자면, axios는 복잡한 HTTP 통신을 단순화하여 개발자가 API와의 상호작용을 효율적으로 구현할 수 있게 돕는 유용한 도구입니다.
+
+<Route path="/users" element={<Users />}></Route>
+페이지 구성 후 element에 붙이는 방식으로 불러옴 (import 필수)
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+(dependency 추가)
+
+## useEffect() - axios 활용
+
+.get
+("https://jsonplaceholder.typicode.com/users");
+
+- 비동기 구조를 axios를 통해 가져와 현재 페이지에 갱신
+- json 형태 정보가 response에 data로 담겨 있음
+- data를 변수에 담아 페이지에 출력 가능
+
+.then((response) => {
+setUsers(response.data); // users 배열에 동기화
+setLoading(false); // 로드 종료 시 false로 spinner 비활성화
+});
+
+컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정합니다. 사이드 이펙트(side effect), 즉 데이터 가져오기(fetching), 구독(subscription) 설정, DOM 직접 조작 등의 작업을 처리할 때 사용합니다.
+
+두 번째 인자인 의존성 배열(dependency array)을 통해 실행 시점을 제어할 수 있습니다.
+
+[] (빈 배열): 컴포넌트가 마운트될 때(처음 렌더링될 때) 한 번만 실행.
+
+[변수명] (배열 안에 변수): 배열 안의 변수 값이 변경될 때마다 실행.
+
+의존성 배열이 없는 경우: 렌더링될 때마다 매번 실행.
+
+## useParams()
+
+: 특정 파라미터값을 받기 위한 hook
+
+const { id } = useParams();
+.get("https://jsonplaceholder.typicode.com/users/" + id)
+와 같은 형태로 파라미터를 함께 보낸다
+
