@@ -272,7 +272,7 @@ react-router-dom의 역할
 npm i axios
 : 엑시오스 설치 (install = i 로 축약 가능)
 
-## 엑시오스의 역할
+### 엑시오스의 역할
 
 Axios는 브라우저와 Node.js 환경에서 모두 사용 가능한 강력한 HTTP 클라이언트 라이브러리입니다. 웹 애플리케이션이나 서버가 외부 API와 통신할 때 데이터를 주고받기 위한 비동기 요청을 손쉽게 처리하는 역할을 합니다.
 
@@ -295,7 +295,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 (dependency 추가)
 
-## useEffect() - axios 활용
+### useEffect() - axios 활용
 
 .get
 ("https://jsonplaceholder.typicode.com/users");
@@ -319,7 +319,7 @@ setLoading(false); // 로드 종료 시 false로 spinner 비활성화
 
 의존성 배열이 없는 경우: 렌더링될 때마다 매번 실행.
 
-## useParams()
+### useParams()
 
 : 특정 파라미터값을 받기 위한 hook
 
@@ -327,3 +327,123 @@ const { id } = useParams();
 .get("https://jsonplaceholder.typicode.com/users/" + id)
 와 같은 형태로 파라미터를 함께 보낸다
 
+## 리액트 수업 5일차 : 2025/09/19/FRI
+
+https://www.bootstrapcdn.com/
+
+// import가 필요한 Hook
+
+### useParams
+
+: URL의 경로에 포함된 값을 가져옴
+
+useParams는 URL의 **경로 매개변수(Path Parameters)**를 객체 형태로 추출합니다. 경로 매개변수는 URL 경로에 동적으로 변하는 값을 포함할 때 사용됩니다.
+const { title } = useParams();는 URL 경로에 :title이라는 매개변수가 있을 때 해당 값을 가져오는 코드
+
+### useLocation
+
+: URL에 노출되지 않는 추가 데이터(state)를 가져옴
+
+useLocation은 현재 URL에 대한 위치(Location) 객체를 반환합니다. 이 객체는 URL에 대한 다양한 정보를 포함하며, 특히 **상태(State)**를 전달할 때 유용합니다.
+const { state } = useLocation();는 페이지 이동 시 state 객체에 담아 보낸 데이터를 받아오는 코드
+
+### useNavigate
+
+<Link> 컴포넌트처럼 클릭 이벤트가 아닌, 특정 로직이나 조건에 따라 프로그래밍 방식으로 페이지를 이동시킬 때 주로 사용됩니다.
+
+조건에 따라 동적으로 페이지 이동을 제어해야 할 때 매우 유용합니다. 예를 들어, 사용자가 폼을 제출하고 유효성 검사를 통과했을 때만 다음 페이지로 이동시키고 싶다면 useNavigate를 사용해야 합니다.
+
+// 이전 페이지로 돌아가기 (브라우저의 '뒤로가기'와 동일)
+navigate(-1);
+// 다음 페이지로 이동
+navigate(1);
+
+`/product/123` 경로로 이동하면서 `{ item: 'apple' }` 상태를 전달
+navigate('/product/123', { state: { item: 'apple' } });
+
+### Backend와 Frontend 그리고 서버 분리
+
+: 작업하는 폴더 별로 각각의 모듈 설치
+
+- 백엔드에 설치
+  npm init -y
+  npm i mysql express cors nodemon
+  npm i mysql2 (추가)
+
+- 프론트엔드에 설치
+  npx create-react-app .
+  서버를 실행할 때는 프론트엔드에서!
+  npm i react-router-dom (혹은 최상위 공통 경로에 설치)
+  npm i axios
+
+### XAMPP Control Panel
+
+https://www.apachefriends.org/download.html
+PHP 8.2.12 Download (64 bit) : 149Mb
+설치 후, Apache > Admin > 'phpmyadmin'
+==> 실행 오류로 MySQL로 진행하였음
+
+- backend 폴더에 server.js 파일 생성 이후 하단 내용 기입
+
+const express = require("express");
+const mysql = require("mysql2"); // 2로 변경
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// DB 연결 정보
+const db = mysql.createConnection({
+host: "localhost", // 호스트명
+user: "root", // 유저명
+password: "qwer1234", // 비밀번호
+database: "signup", // 스키마 이름
+});
+
+app.listen(3000, () => {
+console.log("listening");
+});
+
+- package.json 에서
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node server.js"
+  }
+  => "start" 스크립트 추가
+
+- setting 끝나면 terminal에서 경로 cd backend 지정
+- npm start 시 위에 설정한 "listening"이 콘솔에 출력되면 세팅 완료
+
+### DB 연동 오류 해결
+
+"mysql" ==> "mysql2"
+
+mysql 라이브러리가 제대로 작동하지 않았던 것은
+대부분 root 계정의 인증 방식이 caching_sha2_password로 설정되어 있었기 때문입니다. (구 버전은 mysql_native_password 방식만 지원)
+
+mysql2는 이 인증 방식을 기본적으로 인식하고 처리하므로 별도의 설정 없이 바로 연결에 성공하게 된 것입니다.
+
+따라서 최신 버전의 MySQL을 사용한다면, mysql보다 mysql2를 사용하는 것이 훨씬 안정적이고 편리합니다.
+
+### DB 접속 및 쿼리 요청
+
+: 회원 가입 처리 예시
+
+app.post("/signup", (req, res) => {
+// 요청 처리 객체(request)와 응답 처리 객체(response)를 사용
+
+const sql = "INSERT INTO login (`name`, `email`, `password`) VALUES (?)";
+// 변수 backtick으로 묶어서 받아야 한다 (템플릿 리터럴)
+
+const values = [req.body.name, req.body.email, req.body.password];
+// 리퀘스트 body에 저장된 데이터를 쿼리문에 담기 위한 세팅
+
+db.query(sql, values, (err, data) => {
+// 수행하고자 하는 쿼리문과 값 입력
+if (err) {
+return res.json("Error"); // 문제 발생 시 에러 출력
+}
+return res.json(data); // 정상적으로 수행 시 data 값을 가지고 나옴
+});
+});

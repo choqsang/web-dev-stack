@@ -12,6 +12,14 @@ export default function Login() {
         <MainPage email={email} />
       ) : (
         <LoginForm setLogin={setLogin} setEmail={setEmail} />
+        // <LoginForm email={email}
+        //   handleEmail={handleEmail}
+        //   emailValid={emailValid}
+        //   pw={pw}
+        //   handlePw={handlePw}
+        //   pwValid={pwValid}
+        //   clickConfirm={clickConfirm}
+        // />
       )}
     </div>
   );

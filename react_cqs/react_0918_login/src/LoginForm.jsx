@@ -1,6 +1,8 @@
 import react, { useState } from "react";
 
 export default function LoginForm({ setEmail, setLogin }) {
+  //export default function LoginForm({ email, handleEmail, pw, handlePw, pwValid, clickConfirm }) {
+
   const [userMail, setUserMail] = useState("");
   const [pw, setPw] = useState("");
   const [emailValid, setEmailValid] = useState(false);

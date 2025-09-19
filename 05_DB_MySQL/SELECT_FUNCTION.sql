@@ -24,7 +24,7 @@ SELECT CONCAT(title, description, special_features) FROM film;
     CURTIME(), CURRENT_TIME() : 현재 시간 반환
 */
 SELECT NOW(), CURRENT_TIMESTAMP,
-	CURDATE(), CURRENT_DATE(),
+	CURDATE(), CURRENmembermemberT_DATE(),
     CURTIME(), CURRENT_TIME();
 
 /*
@@ -63,3 +63,10 @@ SELECT address,
     IF(address LIKE '1%', '해당 값 True', 'False')
     FROM address;
     
+    CREATE TABLE board (
+    no INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    content TEXT,
+    url VARCHAR(100),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
