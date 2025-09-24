@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script>
+		function send(f){
+			// 유효성 체크
+			let dname = f.dname.value;
+			if(dname == ''){
+				alert("부서명을 입력하세요");
+				return;
+			}
+			f.action = "d_update.do";
+			f.submit();
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<table border="1">
+			<tr>
+				<th>부서번호</th>	
+				<th>부서이름</th>
+				<th>위치</th>	
+				<th>비고</th>
+			</tr>
+			<c:forEach var="vo" items="${list}">
+			<tr>
+				<td>${vo.deptno}</td>
+				<td><input type="text" name="dname" value="${vo.dname}"></td>	
+				<td><input type="text" name="loc" value="${vo.loc}"></td>
+				<td>
+					<input type="button" value="수정" onclick="send(this.form);">
+				</td>
+			</tr>
+		</c:forEach>
+		</table>
+	</form>
+</body>
+</html>

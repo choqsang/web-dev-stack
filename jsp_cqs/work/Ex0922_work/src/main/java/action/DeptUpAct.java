@@ -1,0 +1,39 @@
+package action;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.DeptDAO;
+import vo.DeptVO;
+
+@WebServlet("/d_update.do")
+public class DeptUpAct extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	int deptno = 0;
+	String dname = null;
+	String loc = null;
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DeptVO vo = new DeptVO();
+		
+		deptno = Integer.parseInt(request.getParameter("deptno"));
+		dname = request.getParameter("dname");
+		loc = request.getParameter("loc");
+		
+		vo.setDeptno(deptno);
+		vo.setDname(dname);
+		vo.setLoc(loc);
+		
+		System.out.println(deptno);
+		System.out.println(dname);
+		System.out.println(loc);
+		
+		DeptDAO.getInstance().update(vo);
+		response.sendRedirect("list.do"); 
+	}
+}

@@ -1,0 +1,9 @@
+INDEX VERSION 1.134
+D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2595501605.index
+\Ex0923\src\main\java
+D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3531938511.index
+\Ex0924_session\src\main\java
+D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2913369885.index
+\Ex0922_work\src\main\java
+D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3808107478.index
+\Ex0922_DB\src\main\java

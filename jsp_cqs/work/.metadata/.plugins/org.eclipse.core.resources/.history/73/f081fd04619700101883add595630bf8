@@ -1,0 +1,20 @@
+package dao;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class SjDAO {
+
+	SqlSessionFactory factory;
+	
+	// single-ton pattern: 
+	// 객체1개만생성해서 지속적으로 서비스하자
+	static SjDAO single = null;
+
+	public static SjDAO getInstance() {
+		//생성되지 않았으면 생성
+		if (single == null)
+			single = new SjDAO();
+		//생성된 객체정보를 반환
+		return single;
+	}
+}

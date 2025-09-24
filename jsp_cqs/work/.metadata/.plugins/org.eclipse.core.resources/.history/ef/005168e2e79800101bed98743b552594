@@ -1,0 +1,86 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import service.MyBatisConnector;
+import vo.Member;
+
+public class MemberDAO {
+	
+	SqlSessionFactory factory;
+	
+	// single-ton pattern: 
+	// 객체1개만생성해서 지속적으로 서비스하자
+	static MemberDAO single = null;
+
+	public static MemberDAO getInstance() {
+		//생성되지 않았으면 생성
+		if (single == null)
+			single = new MemberDAO();
+		//생성된 객체정보를 반환
+		return single;
+	}
+
+	public MemberDAO() {
+		factory = MyBatisConnector.getInstance().getFactory();
+	}
+	
+	// 전체 회원 조회
+	public List<Member> select() {
+		SqlSession sqlSession = factory.openSession(); // select는 오토커 밋 필요없음
+		List<Member> list = sqlSession.selectList("m.member_select");
+		sqlSession.close();
+		
+		return list;
+	}
+	
+	// 회원 등록
+	public int register(Member vo) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		int res = sqlSession.insert("m.member_register", vo);
+		sqlSession.close();
+		
+		return res;
+	}
+	
+	// 회원 삭제
+	public int delete(int idx) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		int res = sqlSession.insert("m.member_delete", idx);
+		sqlSession.close();
+		
+		return res;
+	}
+	
+	// 회원 수정
+	public Member modify(int idx) {
+		
+		SqlSession sqlSession = factory.openSession();
+		Member res = sqlSession.selectOne("m.member_select_one", idx);
+		sqlSession.close();
+		
+		return res;
+	}
+	
+	// 회원 수정 fin
+	public int modifyFin(Member vo) {
+		
+		SqlSession sqlSession = factory.openSession(true);
+		int res = sqlSession.update("m.member_modify", vo);
+		sqlSession.close();
+		
+		return res;
+	}
+	
+	// 아이디 중복체크
+	public Member selectOne(String id) {
+		sqlSession sqlSession = factory.openSession();
+		
+	}
+
+}

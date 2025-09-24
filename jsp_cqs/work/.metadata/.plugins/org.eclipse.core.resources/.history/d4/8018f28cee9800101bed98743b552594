@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		
+		<script src="js/httpRequest.js" ></script>
+		<script>
+		// 아이디 중복여부 체크
+		let b_idCheck = false;
+		
+			function modify(f){
+				let name = f.name.value;
+				let id = f.id.value;
+				let pwd = f.pwd.value;
+				let email = f.email.value;
+				let addr = f.addr.value;
+				
+				if( name == '' ){
+					alert('이름을 입력하지 않았습니다');
+					return;
+				}
+				
+				if( id == '' ){
+					alert('아이디를 입력하지 않았습니다');
+					return;
+				}
+				
+				if( pwd == '' ){
+					alert('비밀번호를 입력하지 않았습니다');
+					return;
+				}
+				
+				if( email == '' ){
+					alert('이메일을 입력하지 않았습니다');
+					return;
+				}
+				
+				if( addr == '' ){
+					alert('주소를 입력하지 않았습니다');
+					return;
+				}
+				// 아이디 중복체크 여부 확인
+				if(!b_idCheck){ // false일 때, (= 중복이거나 아직 체크하지 않았을 경우)
+					alert("아이디 중복체크를 해주세요")
+					return; // 다시 처음으로 되돌아간다
+				}
+				
+				f.action = 'member_modify_fin';
+				f.method = 'post';
+				f.submit();
+				
+			}
+		</script>
+	</head>
+	
+	<body>
+		회원 정보 수정
+		<form>
+			<input type="hidden" name="idx" value="${vo.idx}" />
+			<table border="1">
+				<tr>
+					<td>이름</td>
+					<td><input name="name" value="${vo.name}" placeholder="이름을 입력하세요" /></td>
+				</tr>
+				
+				<tr>
+					<td>아이디</td>
+					<td><input name="id" value="${vo.id}" placeholder="아이디를 입력하세요" /></td>
+				</tr>
+				
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password"  name="pwd" value="${vo.pwd}" placeholder="비밀번호를 입력하세요" /></td>
+				</tr>
+				
+				<tr>
+					<td>이메일</td>
+					<td><input name="email" value="${vo.email}" placeholder="이메일을 입력하세요" /></td>
+				</tr>
+				
+				<tr>
+					<td>주소</td>
+					<td><input name="addr" value="${vo.addr}" placeholder="주소를 입력하세요"  /></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<input type="button" value="수정"
+							   onclick="modify(this.form)" />
+						<input type="button" value="뒤로"
+							   onclick="history.back()" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import service.MyBatisConnector;
+import vo.DeptVO;
+
+public class DeptDAO {
+	
+	SqlSessionFactory factory;
+	// single-ton pattern: 
+	// 객체 1개만 생성해서 지속적으로 서비스하자
+	static DeptDAO single = null;
+
+	public static DeptDAO getInstance() {
+		//생성되지 않았으면 생성
+		if (single == null)
+			single = new DeptDAO();
+		//생성된 객체정보를 반환
+		return single;
+	}
+	public DeptDAO() {
+		factory = MyBatisConnector.getInstance().getFactory();
+	}
+	
+	// 부서목록 가져오기
+	public List<DeptVO> select(){
+		SqlSession sqlSession = factory.openSession();
+		List<DeptVO> list = sqlSession.selectList("d.dept_list");
+		sqlSession.close(); 
+		return list;
+	}
+		
+	// 부서정보 등록
+	public int register(DeptVO vo) {
+		SqlSession sqlSession = factory.openSession(true);
+		int res = sqlSession.insert("d.dept_insert", vo); 
+		sqlSession.commit();
+		sqlSession.close();
+		return res;
+	}
+	
+	// 부서정보 삭제
+	public int delete(int no) {
+		SqlSession sqlSession = factory.openSession(true);
+		int res = sqlSession.delete("d.dept_del", no);
+		sqlSession.close();
+		return res;
+	}
+	
+	// 부서정보 수정
+	public List<DeptVO> update(DeptVO vo){
+		SqlSession sqlSession = factory.openSession();
+		int res = sqlSession.update("d.dept_update", vo);
+		sqlSession.close(); 
+		return res;
+	}
+}

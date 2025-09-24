@@ -1,0 +1,35 @@
+package action;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.MemberDAO;
+import vo.Member;
+
+@WebServlet("/check_id.do")
+public class IdCheckAct extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// check_id.do?id=one
+		
+		String id = request.getParameter("id");
+		Member vo = MemberDAO.getInstance().selectOne(id); // 중복 id가 없으면 null, vo의 값을 대조하여 판단
+		String res = "no";
+		if(vo == null) { // 가입이 가능한 id인 경우
+			res = "yes";
+		}
+		// 결과를 callback 메서드로 전달
+		response.setContentType("text/plain;charset=UTF-8");
+		String resultStr = String.format("[{'result':'%s','id':'%s'}]", res, id); 
+		// json 형태로 전달 => 구조 예시: [{result:yes, id:three}]
+		
+		response.getWriter().println(resultStr);
+		// DB 사용을 마친 최종 결과를 콜백 메서드로 전달
+	}
+
+}
