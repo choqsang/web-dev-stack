@@ -8,6 +8,8 @@ const User = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  // useParams();는 URL의 경로에 포함된 값을 가져옴
+  // useLocation();는 URL에 노출되지 않는 추가 데이터(state)를 가져옴
 
   useEffect(() => {
     axios

@@ -33,6 +33,8 @@ function App() {
       <ul>
         {fruit.map((f) => (
           <li>{f}</li>
+          // map에서 값을 들고 올때는, 변수 이름이 아니라 배열의 요소 이름을 가져와야 한다
+          // fruitName (X) f.name (O)
         ))}
       </ul>
     </div>

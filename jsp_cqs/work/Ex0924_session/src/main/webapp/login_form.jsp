@@ -8,9 +8,33 @@
 
 <script src="js/httpRequest.js"></script>
 <script>
-	function send(){
+	function send(f){
+		let id = f.id.value.trim();
+		let pwd = f.pwd.value.trim();
 		
+		let url = "login.do";
+		let param = "id=" + id + "&pwd=" + encodeURIComponent(pwd); // login.do로 id와 pwd의 파라미터값을 보낸다
+		
+		sendRequest(url, param, resultFn, "post");		
 	}
+	
+	function resultFn(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			// data = "[{param : no_id}]" alert("존재하지 않는 아이디입니다");
+			let data = xhr.responseText;
+			let json = eval(data);
+			
+			if(json[0].param == "no_id"){
+				alert("존재하지 않는 아이디입니다");
+			} else if (json[0].param == "no_pwd"){
+				alert("비밀번호가 일치하지 않습니다");
+			} else {
+				// 로그인 성공
+				location.href = "main_content.jsp";
+				}
+			}
+		}	
+	
 </script>
 </head>
 <body>

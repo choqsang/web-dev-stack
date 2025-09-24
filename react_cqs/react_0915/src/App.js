@@ -12,6 +12,8 @@ function App() {
   ];
 
   return (
+    // 리턴 안에 반드시 1개의 부모 태그로 영역을 감싸야 한다 (2개 X)
+
     <div className="App">
       <Header
         title="React"
@@ -98,3 +100,5 @@ function Child(props) {
 }
 
 export default App;
+// 별도 js 파일을 만들어 import 할 수도 있다
+// (export default 이름; 을 통해 다른 js에서 import 가능)

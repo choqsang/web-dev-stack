@@ -165,6 +165,7 @@ function App() {
 // useState 활용하여 배열을 추가하는 예제
 let [fruit, setFruit] = useState([]); // 안에 대괄호를 넣으면 배열로 초기값 설정됨
 let [inputVal, setInputVal] = useState("");
+}
 
 function addFruit() {
 if (inputVal.trim()) {
@@ -172,8 +173,7 @@ setFruit([...fruit, inputVal]); // 기존 배열값을 복사 후 입력값을 �
 // inputVal 자리에 여러 개의 데이터를 json 형태로 보낼 수 있음
 // setFruit([...fruit, {name, age}]);
 setInputVal("");
-}
-}
+}}
 
 ## Map의 활용
 

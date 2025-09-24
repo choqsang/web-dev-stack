@@ -8,6 +8,9 @@
 </head>
 <body>
 	<jsp:include page="check_login.jsp" />
-	로그인 된 유저만 접속할 페이지
+	${ sessionScope.user.name }님 환영합니다 
+
+	<br>
+	<input type="button" value="로그아웃" onClick="location.href='logout.do'">
 </body>
 </html>

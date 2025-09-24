@@ -1,0 +1,53 @@
+package action;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.MemberDAO;
+import vo.Member;
+
+@WebServlet("/login.do")
+public class LogoutAct extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// login.do?id=one&pwd=1111
+		
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		
+		Member vo = MemberDAO.getInstance().selectOne(id);
+		
+		String param = "";
+		String resultStr = "";
+		
+		if(vo == null) { // id부터 일치하지 않을 경우
+			param = "no_id";
+			resultStr = String.format("[{'param':'%s'}]", param);
+			response.getWriter().println(resultStr);
+			return; // 다음 단계로 갈 필요가 없음
+		}
+		
+		if(!vo.getPwd().equals(pwd)) { // id 있으나 비밀번호 불일치
+			param = "no_pwd";
+			resultStr = String.format("[{'param':'%s'}]", param);
+			response.getWriter().println(resultStr);
+			return;
+		}
+		
+		// id와 비밀번호 모두 일치할 경우, (= 로그인이 가능한 경우)
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("user", vo);
+		
+		param = "clear";
+		resultStr = String.format("[{'param':'%s'}]", param);
+		response.getWriter().println(resultStr);
+	}	
+
+}

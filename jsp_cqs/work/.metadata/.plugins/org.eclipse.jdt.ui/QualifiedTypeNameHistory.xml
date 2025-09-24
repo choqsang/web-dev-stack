@@ -13,8 +13,8 @@
     <fullyQualifiedTypeName name="vo.DeptVo"/>
     <fullyQualifiedTypeName name="vo.DeptVO"/>
     <fullyQualifiedTypeName name="dao.DeptDAO"/>
-    <fullyQualifiedTypeName name="dao.MemberDAO"/>
-    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Member"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="dao.MemberDAO"/>
     <fullyQualifiedTypeName name="vo.Member"/>
 </qualifiedTypeNameHistroy>
