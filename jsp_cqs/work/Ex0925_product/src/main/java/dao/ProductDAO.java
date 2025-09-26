@@ -48,14 +48,14 @@ public class ProductDAO {
 		return res;
 	}
 	
-	// 수정할 상품 정보
-	public int selectOne( int idx ){
+	// 상세보기를 위한 상품 조회
+	public ProductVO selectOne( int idx ){
 		
 		SqlSession sqlSession = factory.openSession(true);
-		int res = sqlSession.selectOne("p.product_update", idx);
+		ProductVO vo = sqlSession.selectOne("p.product_detail", idx);
 		sqlSession.close();
 		
-		return res;
+		return vo;
 	}
 
 }

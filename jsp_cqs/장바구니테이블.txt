@@ -1,0 +1,26 @@
+create sequence seq_cart_idx;
+
+create table cart(
+	c_idx number(3) primary key, -- 장바구니 일련번호
+	c_cnt number(3), -- 수량
+	idx number(3), -- 상품번호
+	m_idx number(3) -- 회원번호
+);
+
+alter table cart
+add constraint fk_cart foreign key( idx )
+references product( idx );
+
+--  장바구니에 임시로 제품 추가
+insert into cart values( seq_cart_idx.nextVal, 1, 1, 1);
+insert into cart values( seq_cart_idx.nextVal, 1, 4, 1);
+insert into cart values( seq_cart_idx.nextVal, 1, 5, 1);
+commit;
+
+-- 장바구니 조회용 view
+-- 수량과 가격을 곱한 값을 amount로 지정
+
+create or replace view cart_view AS
+select p.idx, c_idx, p_num, p_name, p_price, p_saleprice, c_cnt, m_idx, c_cnt * p_saleprice amount
+from product p, cart c
+where p.idx = c.idx;

@@ -7,5 +7,9 @@ D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3531938511
 \Ex0924_session\src\main\java
 D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2913369885.index
 \Ex0922_work\src\main\java
+D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3612762220.index
+\Ex0925_api\src\main\java
 D:\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3808107478.index
 \Ex0922_DB\src\main\java
+D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2057814313.index
+\Ex0925_product\src\main\java

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- sqlMapConfig.xml에 추가할 것 -->
+<mapper namespace="c">
+
+	<!-- 회원별 장바구니 목록 조회 / 미리 만들어놓은 view 활용 -->
+	<select id="cart_list" parameterType="int" resultType="cart">
+		select * 
+		from cart_view
+		where m_idx = #{m_idx}
+	</select>
+	
+	<!-- 회원별 장바구니 상품들의 총 합계 / 그룹 함수 활용 / null 일 경우, 0으로 세팅 -->
+	<select id="cart_total_amount" parameterType="int" resultType="int">
+		select nvl( sum( amount ), 0 )
+		from cart_view
+		where m_idx = #{m_idx} 
+	</select>
+	
+	<!-- 중복상품인지 조회 -->
+	<select id="cart_one" parameterType="cart" resultType="cart">
+		select *
+		from cart_view
+		where m_idx= #{m_idx} and idx= #{idx}
+	</select>
+	
+	<!-- 장바구니 상품 추가 -->
+	<insert id="cart_insert" parameterType="cart">
+		insert into cart values(seq_cart_idx.nextVal, 1, #{idx}, #{m_idx})
+	</insert>
+	
+	<!--
+	<delete id="cart_delete" parameterType="int">
+		delete from cart_view where idx = #{idx}
+	</delete>
+	
+	<update>
+		update cart_view set c_cnt = #{c_cnt} where idx = #{idx}
+	</update>
+	 -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
