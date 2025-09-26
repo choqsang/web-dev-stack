@@ -1,0 +1,36 @@
+-- 학생 정보관리 테이블
+create sequence seq_sungtb_no;
+
+create table sungtb(
+	no number(3) primary key,
+	name varchar2(50),
+	kor number(3),
+	eng number(3),
+	mat number(3)
+);
+
+-- 샘플데이터 
+insert into sungtb values(
+	seq_sungtb_no.nextVal,
+	'일길동',
+	77,
+	88,
+	99
+);
+
+create sequence seq_dept_no;
+
+create table dept(
+	deptno number(2) primary key,
+	dname varchar2(20),
+	loc varchar2(20)
+);
+
+insert into dept values(
+	seq_dept_no.nextVal,
+	'일길동',
+	'시흥'
+);
+
+
+commit;

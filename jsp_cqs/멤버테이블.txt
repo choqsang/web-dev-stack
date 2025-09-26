@@ -1,0 +1,22 @@
+-- 일련번호 관리객체
+create sequence seq_member_idx;
+
+create table member(
+	idx number(3) primary key,
+	name varchar2(50),
+	id varchar2(50),
+	pwd varchar2(50),
+	email varchar2(100),
+	addr varchar2(200)
+);
+
+insert into member values(
+	seq_member_idx.nextVal,
+	'홍길동',
+	'one',
+	'1234',
+	'one@korea.com',
+	'서울시 은평구'
+);
+
+commit;
