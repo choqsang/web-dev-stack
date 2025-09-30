@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 1,2를 제외한 3.dao쪽만 초기화 -->
+	<!-- MemberDAO member_dao = new MemberDAO(); -->	
+	<bean id="member_dao" class="dao.MemberDAO">
+		<constructor-arg ref="sqlSessionBean"/>
+	</bean>
+
+</beans>

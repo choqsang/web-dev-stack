@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="m">
+<!-- jsp와 달리 spring 환경에서는 mapper namespace 설정이 필수적이다! -->
+	
+	<select id="member_list" resultType="member">
+		SELECT * FROM member
+	</select>
+	
+	<select id="id_check" parameterType="String" resultType="member">
+		SELECT * FROM member 
+		where id= #{id}
+	</select>
+	
+	<select id="member_select" parameterType="int" resultType="member">
+		SELECT * FROM member 
+		where idx= #{idx}
+	</select>
+	
+	<insert id="member_insert" parameterType="member">
+		INSERT INTO member VALUES (seq_member_idx.nextVal, #{name}, #{id}, #{pwd}, #{email}, #{addr})
+	</insert>
+	
+	<update id="member_update" parameterType="member">
+		UPDATE member SET name= #{name}, id= #{id}, pwd= #{pwd}, email= #{email}, addr= #{addr} 
+		where idx= #{idx}
+	</update>
+	
+	<delete id="member_delete" parameterType="int">
+		DELETE FROM member
+		where idx= #{idx}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
