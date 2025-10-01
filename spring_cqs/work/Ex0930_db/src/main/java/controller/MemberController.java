@@ -50,7 +50,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/modify.do")
-	public String modifyform(Model model, int idx) {
+	public String modifyForm(Model model, int idx) {
 		MemberVO vo = member_dao.selectOne(idx);
 		model.addAttribute("vo", vo);
 		return "member/modify_form";

@@ -8,12 +8,54 @@
 <title>Insert title here</title>
 
 <script>
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 검색 결과 항목을 클릭했을 때 실행할 코드
+	            
+	            // 우편번호와 기본 주소를 추출
+	            var fullAddr = ''; // 최종 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+
+	            // (1) 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 도로명 주소를 선택했을 경우
+	                fullAddr = data.roadAddress;
+	            } else { // 지번 주소를 선택했을 경우(J)
+	                fullAddr = data.jibunAddress;
+	            }
+
+	            // (2) 건물명이 있을 경우 참고항목에 추가한다.
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraAddr += data.bname;
+	            }
+	            // (3) 공동주택(아파트, 빌라 등)일 경우
+	            if(data.buildingName !== '' && data.apartment === 'Y'){
+	                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            // (4) 참고항목 문자열이 있는 경우 괄호로 묶어 최종 주소에 추가
+	            if(extraAddr !== ''){
+	                fullAddr += ' (' + extraAddr + ')';
+	            }
+
+	            // (5) 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('postcode').value = data.zonecode; // 5자리 새 우편번호
+	            document.getElementById('address').value = fullAddr;
+	        }
+	    }).open(); // 팝업 창 열기
+	}
+	
 	function send(f) {
+		
+		if(f.pwd.value.trim() == ""){
+			alert("비밀번호는 필수 입력값입니다");
+			return;
+		}
 		f.action="modify_fin.do?idx=" + f.idx.value;
 		f.method="post"
 		f.submit();
 	}
 </script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body>
@@ -44,7 +86,11 @@
 			
 			<tr>
 			<th>주소</th>
-			<td><input name="addr" value=${vo.addr}></td>
+			<td>
+				<input size="5" type="text" id="postcode" placeholder="우편번호">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" name="addr" id="address" value="${vo.addr}">
+			</td>
 			</tr>
 			
 			<tr>

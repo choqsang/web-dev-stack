@@ -12,7 +12,6 @@
 		location.href="modify.do?idx=" + idx;
 	}
 	
-	
 	function del(idx){
 		if(!confirm("정말 삭제하시겠습니까?")){
 			return;
@@ -37,16 +36,25 @@
 		}
 	}
 </script>
+
+<style>
+	.member-table tr td:nth-child(3) {
+		max-width: 300px;
+		overflow: hidden;
+	}
+</style>
+
 </head>
 <body>
 	 
-	<h1>${sessionScope.login_name}님, 리스트입니다!</h1>
+	<!-- <h1>${sessionScope.login_name}님, 안녕하세요!</h1> -->
+	<h1>멤버 목록</h1>
 	
-	<table border="1">
+	<table border="1" class="member-table">
 		<tr>
 			<th>이름</th>
 			<th>아이디</th>
-			<th style="max-width: 200px;">비밀번호</th>
+			<th>비밀번호</th>
 			<th>이메일</th>
 			<th>주소</th>
 			<th>비고</th>

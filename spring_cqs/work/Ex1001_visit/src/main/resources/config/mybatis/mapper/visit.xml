@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="v">
+<!-- jsp와 달리 spring 환경에서는 mapper namespace 설정이 필수적이다! -->
+
+	<select id="visit_list" resultType="visit">
+		SELECT * FROM visit
+	</select>
+	
+	<insert id="visit_insert" parameterType="visit">
+		INSERT INTO visit VALUES (seq_visit_idx.nextVal, #{name}, #{content}, #{pwd}, #{ip}, sysdate)
+	</insert>
+	
+	<delete id="visit_delete" parameterType="int">
+		DELETE FROM visit WHERE idx= #{idx}
+	</delete>
+	
+	<select id="visit_select" parameterType="int" resultType="visit">
+		SELECT * FROM visit WHERE idx= #{idx}
+	</select>
+	
+	<update id="visit_update" parameterType="visit">
+		UPDATE visit SET name= #{name}, content= #{content}, pwd= #{pwd} WHERE idx= #{idx}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

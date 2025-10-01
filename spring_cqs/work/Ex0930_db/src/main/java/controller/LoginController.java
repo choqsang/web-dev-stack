@@ -19,7 +19,7 @@ public class LoginController {
 		this.member_dao = member_dao;
 	}
 
-	// 첫 페이지로 지정하는 경우 (경로 없음 또는 login.do에서 실행 / 동일한 주소 매핑 불가)
+	// 첫 페이지로 지정하는 경우 ('/' 또는 login.do에서 실행 / 동일 프로젝트 내에서는 중복 매핑 불가)
 	@RequestMapping(value={"/", "login.do"})
 	public String loginForm() {
 		return "login/login_form";
