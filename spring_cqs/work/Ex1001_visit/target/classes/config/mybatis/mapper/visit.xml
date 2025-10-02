@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="visit_insert" parameterType="visit">
-		INSERT INTO visit VALUES (seq_visit_idx.nextVal, #{name}, #{content}, #{pwd}, #{ip}, sysdate)
+		INSERT INTO visit VALUES (seq_visit_idx.nextVal, #{name}, #{content}, #{pwd}, #{ip}, sysdate, #{title}, #{filename})
 	</insert>
 	
 	<delete id="visit_delete" parameterType="int">
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="visit_update" parameterType="visit">
-		UPDATE visit SET name= #{name}, content= #{content}, pwd= #{pwd} WHERE idx= #{idx}
+		UPDATE visit SET name= #{name}, content= #{content}, pwd= #{pwd}, title= #{title}, filename= #{filename} WHERE idx= #{idx}
 	</update>
 </mapper>
 

@@ -2,6 +2,8 @@ package vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class VisitVO {
 	private int idx;
 	private String name;
@@ -9,6 +11,11 @@ public class VisitVO {
 	private String pwd;
 	private String ip;
 	private Date regdate;
+	
+	private String title;
+	private String filename;
+	private MultipartFile photo;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -44,6 +51,24 @@ public class VisitVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public MultipartFile getPhoto() {
+		return photo;
+	}
+	public void setPhoto(MultipartFile photo) {
+		this.photo = photo;
 	}
 	
 	

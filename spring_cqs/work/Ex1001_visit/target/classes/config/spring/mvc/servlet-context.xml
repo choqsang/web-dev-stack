@@ -21,6 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Autowired(자동주입)를 사용 가능하게 해주는 속성 -->
+	<context:annotation-config/>
+	
 	<!-- <context:component-scan base-package="com.kh.visit" /> -->
 	<beans:bean class="controller.VisitController">
 		<beans:constructor-arg ref="visit_daoBean"/>
