@@ -20,7 +20,7 @@
 			return;
 		}
 
-		if(!confirm("정말루?")){
+		if(!confirm("삭제하시겠습니까?")){
 			return;
 		}
 		
@@ -38,7 +38,8 @@
 				return;
 			} else {
 				alert("삭제 성공");
-				location.href="list.do";
+				//location.href="list.do";
+				location.reload();
 			}
 		}
 	}
@@ -75,7 +76,9 @@
 				<div class="type_regdate">작성일자 : <fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
 				<div class="type_photo">제목 : ${vo.title}</div>
 				<div>
-					<img src="resources/upload/${vo.filename}" width="300px" onerror="this.style.display='none';"/>
+					<c:if test="${vo.filename ne 'no_file'}">
+					<img src="resources/upload/${vo.filename}" width="200px" height="200px" onerror="this.style.display='none';"/>
+					</c:if>
 				</div>
 				<div>
 					<form>

@@ -86,6 +86,7 @@ public class VisitController {
 			
 			try {
 				photo.transferTo(saveFile);
+				// Multipart resolver의 역할 => 실제 업로드된 파일을 물리적으로 생성함
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -105,10 +106,28 @@ public class VisitController {
 	@RequestMapping("/visit_del.do")
 	@ResponseBody
 	public String delList(int idx) {
+		
 		int res = visit_dao.del(idx);
+		
+		// 경로에 있는 파일 물리적인 삭제 필요
+		VisitVO vo = visit_dao.modify(idx);
+		
 		String result = "no";
 		if(res == 1) {
 			result = "yes";
+			
+			if(!vo.getFilename().equals("no_file")) { // 이름이 등록된 파일이 있을 경우, 
+				String webPath = "/resources/upload/";		// 상대경로
+				String savePath = app.getRealPath(webPath); // 절대경로
+				
+				// resources/upload/aaa.png = 절대 경로에 있는 파일명 체크
+				String filename = savePath + vo.getFilename();
+				// 경로에 이름이 일치하는 파일이 있을 경우 삭제
+				File file = new File(filename);
+				if (file.exists()) {
+					file.delete();
+				}
+			}
 		}
 		// callback
 		return result;
