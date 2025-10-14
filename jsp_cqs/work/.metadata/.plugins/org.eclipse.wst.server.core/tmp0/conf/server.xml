@@ -162,17 +162,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ex0924_session" path="/Ex0924_session" reloadable="true" source="org.eclipse.jst.jee.server:Ex0924_session">
-	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" maxWait="1" name="jdbc/oracle_test" password="qwer1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="system"/>
-      		<!-- maxActive: 최대연결수
-      			 최대 접속자 수를 지정하여 대기시간을 효율적으로 사용할 수 있도록 하는 개념
-      			 ( DBCP: database connection pool ) -->
-</Context><Context docBase="D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ex0925_product" path="/Ex0925_product" reloadable="true" source="org.eclipse.jst.jee.server:Ex0925_product">
-	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" maxWait="1" name="jdbc/oracle_test" password="qwer1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="system"/>
-      		<!-- maxActive: 최대연결수
-      			 최대 접속자 수를 지정하여 대기시간을 효율적으로 사용할 수 있도록 하는 개념
-      			 ( DBCP: database connection pool ) -->
-</Context></Host>
+      <Context docBase="D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\web-dev-stack\jsp_cqs\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ex0925_api" path="/Ex0925_api" reloadable="true" source="org.eclipse.jst.jee.server:Ex0925_api"/></Host>
     </Engine>
   </Service>
 </Server>

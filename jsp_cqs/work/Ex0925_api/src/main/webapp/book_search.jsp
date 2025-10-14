@@ -54,7 +54,7 @@
 			<input name="search_txt" />
 			<input type="button" value="검색"
 				   onclick="m_send(this.form)" />
-				   
+
 			<table id="resTable" border="1"></table>
 		</form>
 	</body>

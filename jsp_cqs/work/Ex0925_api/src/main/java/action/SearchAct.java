@@ -29,10 +29,10 @@ public class SearchAct extends HttpServlet {
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		// 발급받은 id
-		conn.setRequestProperty("X-Naver-Client-Id", "Z8pfjfe6KfvElelPv49S");
+		conn.setRequestProperty("X-Naver-Client-Id", "yxpLp0K1AzhnfTvv_gOn");
 		
 		// 발급받은 secret
-		conn.setRequestProperty("X-Naver-Client-Secret", "34d_zw8XyJ");
+		conn.setRequestProperty("X-Naver-Client-Secret", "Cv1PzcSIiO");
 		
 		
 		BufferedReader br = new BufferedReader( new InputStreamReader( conn.getInputStream() ) );

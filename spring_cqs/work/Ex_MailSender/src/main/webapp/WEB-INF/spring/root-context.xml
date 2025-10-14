@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 기존 main/resources에 context를 만드는 형태가 아닌 root에 직접 세팅 -->
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 네이버 메일 SMTP 서버명, 포트 정보, 인코딩, 실제 네이버 아이디 및 2단계 인증 비밀번호 입력 -->
+		<property name="host" value="smtp.naver.com" />
+		<property name="port" value="465" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="username" value="chks1" />
+		<property name="password" value="87SQ1SK4VMER" />
+		
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="mss" class="service.MailSendService">
+		<!-- 위에 만들어 놓은 메일 센더를 참조하게끔 세팅 -->
+		<constructor-arg ref="mailSender" />
+	</bean>
+	
+</beans>
