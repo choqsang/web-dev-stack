@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 타임리프에서는 location.href 작동하지 않음 -->
+    <!-- /member 매핑 -->
+    <a href="member.html" th:href="@{/member}">회원정보1</a><br>
+    <!-- /member?id=1 : 쿼리형식의 파라미터 전달 -->
+    <a href="member.html" th:href="@{/member(id=${id})}">회원정보2</a><br>
+    <!-- /member/1 : path형식의 파라미터 전달 / 위 방식과 mapping을 분리해야함 -->
+    <a href="member.html" th:href="@{/member/{id}(id=${id})}">회원정보3</a>
+</body>
+</html>

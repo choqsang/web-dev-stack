@@ -1,7 +1,0 @@
-package vo;
-
-public class SjVO {
-	private int no;
-	private String name;
-	private int kor, eng, mat;
-}
