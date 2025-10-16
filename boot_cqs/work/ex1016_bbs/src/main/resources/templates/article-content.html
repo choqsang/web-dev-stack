@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/content_css.css}"/>
+    <script>
+        function del(id){
+            if(!confirm("삭제하시겠습니까?")){
+                return;
+            }
+            location.href="/article/delete?id=" + id;
+        }
+    </script>
+</head>
+<body>
+    <section class="container">
+        <h1>상세보기</h1>
+        <table>
+            <tr>
+                <th>#</th>
+                <td th:text="${article.id}"></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td th:text="${article.title}"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td th:text="${article.description}" style="white-space:pre"></td> <!-- 공백/줄 바꿈 표시를 위한 스타일 추가 -->
+            </tr>
+            <tr>
+                <th>작성일</th>
+                <td th:text="${#dates.format(article.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr>
+                <th>수정일</th>
+                <td th:text="${#dates.format(article.updated, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </table>
+        <div class="btn-group">
+        <input type="button" value="목록으로" th:onclick="|location.href='@{/article/list}'|">
+        <input type="button" value="수정" th:onclick="|location.href='@{/article/edit(id=${article.id})}'|">
+        <input type="button" value="삭제" th:onclick="|del(${article.id})|">
+        <!-- |location.href='@{/article/delete(id=${article.id})}'| -->
+        </div>
+    </section>
+</body>
+</html>

@@ -35,7 +35,7 @@
 						row.innerHTML = 
 							"<td><img src='" + item.image + "' width='100' /></td>" +
 							"<td><span>" + item.title + "</span>" + 
-							"<br>저자: " + item.aothor + 
+							"<br>저자: " + item.author + 
 							"<br>가격: " + item.discount +  
 							"</td>"
 							
@@ -53,12 +53,15 @@
 	
 	<body>
 		<form align="center">
-			<div>
-			<input id="search_bar" name="search_txt" />
-			<input id="search_btn" type="button" value="검색"
-				   onclick="m_send(this.form)" />
+			<div class="header">
+				<h2 style="color: #dc3545; font-size: 3rem; margin:5px;">Book</h2>
+				<input id="search_bar" name="search_txt" />
+				<input id="search_btn" type="button" value="검색"
+					   onclick="m_send(this.form)" />
 			</div>
+			<div class="result_table">
 			<table id="resTable" border="1" align="center"></table>
+			</div>
 		</form>
 	</body>
 </html>
