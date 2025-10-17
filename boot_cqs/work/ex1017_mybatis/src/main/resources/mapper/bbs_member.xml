@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ArticleDAO"> <!-- 실제 매핑 경로 설정 -->
+
+    <!-- 전체 게시글 조회 -->
+    <select id="selectAll" resultType="avo"> <!-- com.example.demo.vo.ArticleVO 를 어노테이션으로 별칭 지정 -->
+        SELECT * FROM article
+    </select>
+
+    <!-- 특정 게시글 조회 -->
+    <select id="selectOne" parameterType="Integer" resultType="avo">
+        SELECT * FROM article WHERE id= #{id}
+    </select>
+
+    <!-- 게시글 추가 -->
+    <insert id="addArticle" parameterType="avo">
+        INSERT INTO article(title, description, created, updated, member_id) VALUES(#{title}, #{description}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{member_id})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateArticle" parameterType="avo">
+        UPDATE article SET title= #{title}, description= #{description}, updated= NOW() WHERE id= #{id}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteArticle" parameterType="Integer">
+        DELETE FROM article WHERE id= #{id}
+    </delete>
+
+</mapper>
